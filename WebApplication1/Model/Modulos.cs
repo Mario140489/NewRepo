@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Model
 {
-    public class Usuario
+    public class Modulos
     {
         [Key]
-        public int IdUsuario { get; set; }
+        public int Id_Modulos { get; set; }
         public string Nome { get; set; }
-        public string Login { get; set; }
-        public string Senha { get; set; }
-        //public DateTime ?DtUpdate { get; set; }
-        //public DateTime ?DtCadastro { get; set; }
-        public bool Inativo { get; set; }
+        public string icon { get; set; }
         [ForeignKey("GrupoUsuario")]
-        public int ?Id_GrupoUsuario { get; set; }
+        public int Id_GrupoUsuario { get; set; }
         public virtual GrupoUsuario GrupoUsuario { get; set; }
     }
 }
