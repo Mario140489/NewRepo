@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
-            if (id != usuario.IdUsuario)
+            if (id != usuario.id_usuario)
             {
                 return BadRequest();
             }
@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
             _context.Usuario.Add(usuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.IdUsuario }, usuario);
+            return CreatedAtAction("GetUsuario", new { id = usuario.id_usuario }, usuario);
         }
 
         // DELETE: api/Usuarios/5
@@ -105,7 +105,7 @@ namespace WebApplication1.Controllers
 
         private bool UsuarioExists(int id)
         {
-            return _context.Usuario.Any(e => e.IdUsuario == id);
+            return _context.Usuario.Any(e => e.id_usuario == id);
         }
     }
 }

@@ -10,15 +10,11 @@ namespace WebApplication1.Model
     public class Usuario
     {
         [Key]
-        public int IdUsuario { get; set; }
-        public string Nome { get; set; }
-        public string Login { get; set; }
-        public string Senha { get; set; }
+        public int id_usuario { get; set; }
+        public string ds_nome { get; set; }
+        public string ds_senha { get; set; }
         //public DateTime ?DtUpdate { get; set; }
         //public DateTime ?DtCadastro { get; set; }
-        public bool Inativo { get; set; }
-        [ForeignKey("GrupoUsuario")]
-        public int ?Id_GrupoUsuario { get; set; }
-        public virtual GrupoUsuario GrupoUsuario { get; set; }
+
     }
 }
