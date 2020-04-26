@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CS0168: A variável foi declarada, mas nunca foi usada
+dotnet_diagnostic.CS0168.severity = silent
+
+# CA1707: Identificadores não devem conter sublinhados
+dotnet_diagnostic.CA1707.severity = none

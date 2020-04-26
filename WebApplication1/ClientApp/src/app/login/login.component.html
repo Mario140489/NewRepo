@@ -1,1 +1,43 @@
-<p>login works!</p>
+<div class="row" align="center" >
+    <div class="col-sm-12 fadeIn first bg-secondary text-ligth text-light" >
+      <h1 class="fadeIn second">SyS</h1>
+      <label class="fadeIn third">Facilitando sua Vida</label>
+   </div> 
+   <div class="col-sm-12">
+   <div class="col-sm-3 col-md-4"></div>
+   <div align="center" class="col-sm-6 col-md-4 mt-5" >
+   <div class=" bloco col-sm-12 fadeInDown">
+      <ngb-alert class="fadeIn first" *ngIf="error" type="danger" (close)="error = false" >
+        <strong>{{MsgPrincipal}}</strong>{{MsgDescritiva}}
+      </ngb-alert>
+   <form>
+     <h2 class="text-secondary fadeIn first">Login</h2>
+   <hr>
+   <div class="form-group fadeIn second">
+    <div class="input-group mb-3">
+     <div class="input-group-prepend">
+       <span class="input-group-text" ><i class="fas fa-user icon"></i></span>
+     </div>
+     <input [(ngModel)]="usuario.ds_login" name="ds_login" required type="email" autocomplete="off" minlength="3" maxlength="200"
+      class="form-control form-control-lg " placeholder="Usuario" />
+   </div>
+   </div>
+   <div class="form-group fadeIn third">
+    <div class="input-group mb-3">
+     <div class="input-group-prepend">
+       <span class="input-group-text" ><i class="fas fa-key"></i></span>
+     </div>
+     <input [(ngModel)]="usuario.ds_senha" name="ds_senha" required  type="password" autocomplete="off" minlength="6" maxlength="20" 
+     class="form-control form-control-lg " placeholder="Senha" />
+   </div>
+   </div>
+   <div>
+     <button type="submit" class="fadeIn fourth btn btn-primary btn-lg " (click)="FazerLogin()" ><i class="fas fa-sign-in-alt"></i> Logar</button>
+   </div>
+     </form>
+   </div>
+   </div>
+   <div class="col-sm-3 col-md-4"></div>
+     </div>
+   </div>
+   

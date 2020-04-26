@@ -1,0 +1,52 @@
+
+<div class="bloco mt-1 text-secondary">
+    <h3>Serviços</h3>
+    <hr/>
+    <form>
+        <div class="form-group form-inline">
+            Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+            <span class="ml-3" *ngIf="service.loading$ | async">Carregando...</span>
+        </div>
+      
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" sortable="name" (sort)="onSort($event)">Descrição</th>
+            <th scope="col" sortable="area" (sort)="onSort($event)">Valor</th>
+            <th scope="col" sortable="population" (sort)="onSort($event)">Ativo</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let country of countries$ | async">
+            <th scope="row">{{ country.id }}</th>
+            <td>
+              <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+              <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight>
+            </td>
+            <td><ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight></td>
+            <td><ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight></td>
+          </tr>
+          </tbody>
+        </table>
+      
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination
+            [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+          </ngb-pagination>
+      
+          <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+            <option [ngValue]="2">1 item por pagina</option>
+          </select>
+        </div>
+      
+      </form>
+      
+    <!--form>
+        <div>
+            Descrição
+         <input class="form-control form-control-sm" type="text" />
+        </div>
+    </form-->
+</div>
+

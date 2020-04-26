@@ -13,8 +13,7 @@ namespace WebApplication1.Model
         public int id_usuario { get; set; }
         public string ds_nome { get; set; }
         public string ds_senha { get; set; }
-        //public DateTime ?DtUpdate { get; set; }
-        //public DateTime ?DtCadastro { get; set; }
-
+        public string ds_login { get; set; }
+        public string ds_imagem { get; set; }
     }
 }

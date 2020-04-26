@@ -1,44 +1,39 @@
-<header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3"
-  >
-    <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="['/']">SyS</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link " [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link " [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link " [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
+<div class="modal fade left " id="sidebar-left" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-content">
+    <nav class="navbar navbar-dark bg-secondary ">
+      <a class="navbar-brand" href="#">{{sidebar}}</a>
+    </nav>
+    <div class="row">
+      <div class="col-12">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a [routerLink]="['/Serviços']" class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Serviços
+          <span class="spanicon" ><i class="fas fa-angle-right"></i></span> </a>
+          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+        </div>
       </div>
     </div>
-  </nav>
-</header>
+  </div>
+  </div>
+  </div>
+
+    <nav class="navbar navbar-dark bg-secondary">
+      <div class="row btn-group">
+        &nbsp;
+      <a href="#" style="font-size: 25px;" class="text-light mr-1  ml-2"  ngbTooltip="Menu"
+      data-toggle="modal" data-target="#sidebar-left"><span><i class="fas fa-bars"></i></span></a>
+      &nbsp;<a class="navbar-brand "> SyS</a>
+    </div>
+      <div class="btn-group">
+        <!--a href="#" ngbTooltip="Aplicativos" style="font-size: 25px;" class="text-light mr-1"><span><i  class="fab fa-buromobelexperte"></i></span></a-->
+        <a href="#"  class=" nav-link text-light">
+          <span><i class="far fa-user"></i> </span> <label class="ocultar ml-1">{{usuario}}</label> 
+        </a>
+      </div>
+    </nav>
+    
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>

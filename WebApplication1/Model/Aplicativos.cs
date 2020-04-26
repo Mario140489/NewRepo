@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Model
 {
-    public class GrupoUsuario
+    public class Aplicativos
     {
-      [Key]
-      public int  idGrupoUsuario { get; set; }
-      public string ds_GrupoUsuario { get; set; }
-      public bool Inativo { get; set; }
+        [Key]
+        public int id_aplicativo { get; set; }
+        public string ds_app { get; set; }
+        public string ds_icone { get; set; }
     }
 }

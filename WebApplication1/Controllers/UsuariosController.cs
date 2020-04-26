@@ -26,8 +26,10 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
         {
-            return await _context.Usuario.ToListAsync();
+            return await _context.Usuario.ToListAsync().ConfigureAwait(true);
         }
+
+
 
         // GET: api/Usuarios/5
         [HttpGet("{id}")]
@@ -43,13 +45,28 @@ namespace WebApplication1.Controllers
             return usuario;
         }
 
+        [HttpPost("Login")]
+        public async Task<ActionResult> LoginAsync(Usuario usuario)
+        {
+            List<Usuario> user = await _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToListAsync().ConfigureAwait(true);
+
+            if (user.Count == 0)
+            {
+                return null;
+            }
+            
+            return Ok(user);
+
+
+        }
+
         // PUT: api/Usuarios/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
-            if (id != usuario.id_usuario)
+            if (usuario != null && id != usuario.id_usuario)
             {
                 return BadRequest();
             }
@@ -58,7 +75,7 @@ namespace WebApplication1.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync().ConfigureAwait(true);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -82,7 +99,7 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
             _context.Usuario.Add(usuario);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(true);
 
             return CreatedAtAction("GetUsuario", new { id = usuario.id_usuario }, usuario);
         }
@@ -98,7 +115,7 @@ namespace WebApplication1.Controllers
             }
 
             _context.Usuario.Remove(usuario);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(true);
 
             return usuario;
         }
