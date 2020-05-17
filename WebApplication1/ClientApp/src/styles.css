@@ -48,6 +48,14 @@ select{
   border-radius: 0 !important;
   box-shadow: 0 0 0 0 !important;
 }
+select:focus{
+  border-radius: 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+select::selection{
+  border-radius: 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
 
 .list-group-item:first-child{
   border-radius: 0;
@@ -57,6 +65,9 @@ select{
 }
 .modal-content{
   border-radius: 0;
+}
+input:focus{
+  box-shadow: 0 0 0 0 !important;
 }
 .spiner{
   position: absolute;

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import $ from "jquery";
 import { ModalUsuarioComponent } from '../modal-usuario/modal-usuario.component';
 
 @Component({
@@ -20,7 +19,7 @@ export class NavMenuComponent {
   OpenClose(){
   this.toggled = !this.toggled;
   $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+  (<any>$('[data-toggle="tooltip"]')).tooltip()
    })
   }
   SelectList(){

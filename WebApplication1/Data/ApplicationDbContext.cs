@@ -18,5 +18,6 @@ namespace WebApplication1.Data
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Aplicativos> Aplicativos { get; set; }
         public DbSet<UsuarioXAplicativo> UsuarioXAplicativos { get; set; }
+        public DbSet<Servicos> Servicos { get; set; }
     }
 }

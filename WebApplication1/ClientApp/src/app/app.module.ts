@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { DataTablesModule } from 'angular-datatables';
 import {registerLocaleData} from '@angular/common';
 import localept from '@angular/common/locales/pt';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { SpinerComponent } from './spiner/spiner.component';
 import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
 import { IncioagendamentoComponent } from './incioagendamento/incioagendamento.component';
 import { CadServicosComponent } from './cad-servicos/cad-servicos.component';
+
 
 registerLocaleData(localept, 'pt-BR');
 
@@ -44,7 +46,8 @@ registerLocaleData(localept, 'pt-BR');
       { path: '',component: HomeComponent, pathMatch: 'full' },
       { path: 'Serviços',component: CadServicosComponent,  },
       { path: 'fetch-data',  component: FetchDataComponent },
-    ])
+    ]),
+    DataTablesModule
   ],
   providers: [AuthService,uteis],
   bootstrap: [AppComponent]
