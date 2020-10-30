@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Model
 {
-    public class UsuarioXAplicativo
+    public class crm_appvsusuario
     {   
         [Key]
-        public int id_usuarioxaplicativo { get; set; }
+        public int id_appvsusu { get; set; }
         public int id_usuario { get; set; }
         public virtual Usuario Usuario { get; set; }
         public int id_aplicativo { get; set; }

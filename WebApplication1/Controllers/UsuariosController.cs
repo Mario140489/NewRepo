@@ -48,6 +48,7 @@ namespace WebApplication1.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult> LoginAsync(Usuario usuario)
         {
+
             List<Usuario> user = await _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToListAsync().ConfigureAwait(true);
 
             if (user.Count == 0)

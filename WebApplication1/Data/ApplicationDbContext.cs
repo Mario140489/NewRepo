@@ -17,7 +17,7 @@ namespace WebApplication1.Data
         //public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Aplicativos> Aplicativos { get; set; }
-        public DbSet<UsuarioXAplicativo> UsuarioXAplicativos { get; set; }
+        public DbSet<crm_appvsusuario> crm_appvsusuario { get; set; }
         public DbSet<Servicos> Servicos { get; set; }
     }
 }

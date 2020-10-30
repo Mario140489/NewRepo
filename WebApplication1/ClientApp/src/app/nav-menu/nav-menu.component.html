@@ -18,7 +18,22 @@
   </div>
   </div>
   </div>
+  <div class="modal" id="menuprincipal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modulos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
 
+      </div>
+    </div>
+  </div>
     <nav class="navbar navbar-dark bg-secondary">
       <div class="row btn-group">
         &nbsp;
@@ -27,13 +42,16 @@
       &nbsp;<a class="navbar-brand "> SyS</a>
     </div>
       <div class="btn-group">
-        <!--a href="#" ngbTooltip="Aplicativos" style="font-size: 25px;" class="text-light mr-1"><span><i  class="fab fa-buromobelexperte"></i></span></a-->
+        <a href="#"  class="nav-link text-light" ngbTooltip="Menu Principal" data-toggle="modal" data-target="#menuprincipal">
+          <span ><i class="fas fa-grip-horizontal"></i></span>
+        </a>
         <a href="#"  class=" nav-link text-light">
-          <span><i class="far fa-user"></i> </span> <label class="ocultar ml-1">{{usuario}}</label> 
+
+          <span><i class="far fa-user"></i> </span> <label class="ocultar ml-1">{{usuario}}</label>
         </a>
       </div>
     </nav>
-    
+
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div>
