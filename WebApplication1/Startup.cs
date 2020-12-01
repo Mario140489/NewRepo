@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
@@ -33,6 +33,9 @@ namespace WebApplication1
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<WebApplication1Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("WebApplication1Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

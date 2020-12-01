@@ -50,7 +50,8 @@ namespace WebApplication1.Controllers
         {
 
             List<Usuario> user = await _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToListAsync().ConfigureAwait(true);
-
+            user[0].ds_senha = "";
+            user[0].ds_login = "";
             if (user.Count == 0)
             {
                 return null;
