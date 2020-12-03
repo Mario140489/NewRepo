@@ -14,12 +14,13 @@ export class AuthService {
   constructor(private router: Router, private service: LoginService) { }
 
    async fazerlogin(usuario: Usuario){
-     debugger;
       let user:any;
      await this.service.Login(usuario).toPromise().then( (result:any) =>{
-      if (result.length > 0) {
+       debugger;
+      if (result) {
         user = true;
-        sessionStorage.setItem('user', JSON.stringify(result));
+        sessionStorage.setItem('user', result['ds_nome']);
+        sessionStorage.setItem('chv', result['key']);
         this.usuarioAutenticado = true;
         this.Menu.emit(true);
         this.router.navigate(['/']);
