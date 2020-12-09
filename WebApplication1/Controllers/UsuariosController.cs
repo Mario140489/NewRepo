@@ -58,16 +58,6 @@ namespace WebApplication1.Controllers
 
             //string json = JsonSerializer.Serialize(user[0]);
 
-
-
-            string  key = Services.Criptografia.Cripitografar(user[0].ToString());
-
-            Login UsuairioLogado = new Login();
-            UsuairioLogado.ds_nome = user[0].ds_nome;
-            UsuairioLogado.key = key;
-
-            
-
             //JObject json = JObject.Parse("{nome:" +user[0].ds_nome+", key:"+key+"}");
 
 
@@ -75,7 +65,12 @@ namespace WebApplication1.Controllers
             {
                 return null;
             }
-            
+            string key = Services.Criptografia.Cripitografar(user[0].ToString());
+
+            Login UsuairioLogado = new Login();
+            UsuairioLogado.ds_nome = user[0].ds_nome;
+            UsuairioLogado.key = key;
+
             return Ok(UsuairioLogado);
 
 
