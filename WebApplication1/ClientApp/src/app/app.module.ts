@@ -20,6 +20,7 @@ import { SpinerComponent } from './spiner/spiner.component';
 import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
 import { IncioagendamentoComponent } from './incioagendamento/incioagendamento.component';
 import { CadServicosComponent } from './cad-servicos/cad-servicos.component';
+import { AplicativosComponent } from './aplicativos/aplicativos.component';
 
 
 registerLocaleData(localept, 'pt-BR');
@@ -36,6 +37,7 @@ registerLocaleData(localept, 'pt-BR');
     ModalUsuarioComponent,
     IncioagendamentoComponent,
     CadServicosComponent,
+    AplicativosComponent,
 
   ],
   imports: [NgbModule,

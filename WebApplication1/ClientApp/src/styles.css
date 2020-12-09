@@ -4,6 +4,12 @@ body {
   overflow-x: hidden;
   height: 100% !important;
 }
+
+.tremetreme{
+  animation: tremer .2s;
+  animation-iteration-count: 4;
+}
+
 .modal-cem{
   height: 100%;
 }
@@ -269,7 +275,7 @@ input:read-only{
   display: inline;
 }
 
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
   .ocultar{
     display: none;
   }

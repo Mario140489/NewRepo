@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using WebApplication1;
 using WebApplication1.Data;
 using WebApplication1.Model;
+using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
 {
@@ -16,6 +19,7 @@ namespace WebApplication1.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        
 
         public UsuariosController(ApplicationDbContext context)
         {
@@ -49,15 +53,30 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> LoginAsync(Usuario usuario)
         {
 
-            List<Usuario> user = await _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToListAsync().ConfigureAwait(true);
-            user[0].ds_senha = "";
-            user[0].ds_login = "";
-            if (user.Count == 0)
+            // string   user = JsonSerializer.Serialize(_context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList());
+            var user = _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList();
+
+            //string json = JsonSerializer.Serialize(user[0]);
+
+
+
+            string  key = Services.Criptografia.Cripitografar(user[0].ToString());
+
+            Login UsuairioLogado = new Login();
+            UsuairioLogado.ds_nome = user[0].ds_nome;
+            UsuairioLogado.key = key;
+
+            
+
+            //JObject json = JObject.Parse("{nome:" +user[0].ds_nome+", key:"+key+"}");
+
+
+            if (user.Count  == 0)
             {
                 return null;
             }
             
-            return Ok(user);
+            return Ok(UsuairioLogado);
 
 
         }
