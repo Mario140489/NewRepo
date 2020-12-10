@@ -70,7 +70,6 @@ namespace WebApplication1.Controllers
             //Listaapk listapp = new Listaapk();
             
             Login UsuairioLogado = new Login();
-            UsuairioLogado.apps = Services.Listaapk.App(user[0].id_usuario); //listapp.App(user[0].id_usuario);
             UsuairioLogado.ds_nome = user[0].ds_nome;
             UsuairioLogado.key = key;
             

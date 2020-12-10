@@ -10,8 +10,7 @@ using WebApplication1.Model;
 
 namespace WebApplication1.Services
 {
-
-    public class Listaapk : ControllerBase
+    public class Listaapk
     {
         private static ApplicationDbContext _context;
 
@@ -22,15 +21,9 @@ namespace WebApplication1.Services
         {
             _context = context;
         }
-
-
-
-        public static object  App(int parans)
+        public  object  App(int parans)
         {
-
- 
-
-                var list_id_app = _context.crm_appvsusuario.Where(b => b.id_usuario == parans).ToList();
+            var  list_id_app = _context.crm_appvsusuario.Find(parans).tolist();
 
             if (list_id_app == null)
             {
