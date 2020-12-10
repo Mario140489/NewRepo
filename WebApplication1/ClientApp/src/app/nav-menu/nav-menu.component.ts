@@ -9,8 +9,7 @@ import { ModalUsuarioComponent } from '../modal-usuario/modal-usuario.component'
 export class NavMenuComponent {
   toggled = false;
   usuario = "";
-  sidebar ="Menu";
-  modulo = false;
+  sidebar ="Menu"
 
   ngOnInit() {
    this.usuario =  sessionStorage.getItem('user');
