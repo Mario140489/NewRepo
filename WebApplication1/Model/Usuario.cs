@@ -16,6 +16,6 @@ namespace WebApplication1.Model
         public string ds_login { get; set; }
         public string ds_imagem { get; set; }
         
-        public ICollection<crm_appvsusuario> app { get; }
+        
     }
 }

@@ -55,6 +55,7 @@ namespace WebApplication1.Controllers
 
             // string   user = JsonSerializer.Serialize(_context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList());
             var user = _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList();
+            //var list_id_app = _context.crm_appvsusuario.Where(b => b.id_usuario == user[0].id_usuario).ToList();
 
             //string json = JsonSerializer.Serialize(user[0]);
 
@@ -66,11 +67,13 @@ namespace WebApplication1.Controllers
                 return null;
             }
             string key = Services.Criptografia.Cripitografar(user[0].ToString());
-
+            //Listaapk listapp = new Listaapk();
+            
             Login UsuairioLogado = new Login();
+            UsuairioLogado.apps = Services.Listaapk.App(user[0].id_usuario); //listapp.App(user[0].id_usuario);
             UsuairioLogado.ds_nome = user[0].ds_nome;
             UsuairioLogado.key = key;
-
+            
             return Ok(UsuairioLogado);
 
 
