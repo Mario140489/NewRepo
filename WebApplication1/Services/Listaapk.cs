@@ -23,7 +23,7 @@ namespace WebApplication1.Services
         }
         public  object  App(int parans)
         {
-            var  list_id_app = _context.crm_appvsusuario.Find(parans).tolist();
+            var list_id_app = _context.crm_appvsusuario.Where(b => b.id_usuario == parans).ToList();
 
             if (list_id_app == null)
             {
@@ -31,6 +31,7 @@ namespace WebApplication1.Services
             }
 
             List<Aplicativos> ListAPP = new List<Aplicativos>();
+            
             list_id_app.ForEach(delegate (crm_appvsusuario value)
             {
                 var app = _context.Aplicativos.Find(value.id_aplicativo);

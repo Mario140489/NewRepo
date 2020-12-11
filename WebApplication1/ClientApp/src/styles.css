@@ -5,6 +5,13 @@ body {
   height: 100% !important;
 }
 
+.mg-10{
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .tremetreme{
   animation: tremer .2s;
   animation-iteration-count: 4;

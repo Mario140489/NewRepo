@@ -67,12 +67,13 @@ namespace WebApplication1.Controllers
                 return null;
             }
             string key = Services.Criptografia.Cripitografar(user[0].ToString());
-            Listaapk listapp = new Listaapk();
+            Listaapk listapp = new Listaapk(_context);
             
             Login UsuairioLogado = new Login();
             UsuairioLogado.ds_nome = user[0].ds_nome;
             UsuairioLogado.key = key;
-            
+            UsuairioLogado.apps = listapp.App(user[0].id_usuario);
+
             return Ok(UsuairioLogado);
 
 

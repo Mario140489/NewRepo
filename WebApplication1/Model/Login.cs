@@ -10,6 +10,6 @@ namespace WebApplication1.Model
         public string ds_nome { get; set; }
         public string key { get; set; }
 
-        public object apps;
+        public object apps { get; set; }
     }
 }
