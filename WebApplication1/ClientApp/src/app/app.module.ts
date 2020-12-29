@@ -21,6 +21,8 @@ import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
 import { IncioagendamentoComponent } from './incioagendamento/incioagendamento.component';
 import { CadServicosComponent } from './cad-servicos/cad-servicos.component';
 import { AplicativosComponent } from './aplicativos/aplicativos.component';
+import { ProcessosComponent } from './processos/processos.component';
+import { TableEspecComponent } from './table-espec/table-espec.component';
 
 
 registerLocaleData(localept, 'pt-BR');
@@ -38,6 +40,8 @@ registerLocaleData(localept, 'pt-BR');
     IncioagendamentoComponent,
     CadServicosComponent,
     AplicativosComponent,
+    ProcessosComponent,
+    TableEspecComponent,
 
   ],
   imports: [NgbModule,
@@ -45,7 +49,7 @@ registerLocaleData(localept, 'pt-BR');
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '',component: HomeComponent, pathMatch: 'full' },
+      { path: '',component: ProcessosComponent, pathMatch: 'full' },
       { path: 'Serviços',component: CadServicosComponent,  },
       { path: 'fetch-data',  component: FetchDataComponent },
     ]),
