@@ -1,0 +1,25 @@
+li{
+  cursor: pointer ;
+}
+a{
+  cursor: pointer  ;
+}
+.active{
+  background-color: #6c757d !important;
+}
+.page-link {
+  color:#6c757d ;
+}
+.page-item.active .page-link {
+  background-color: #6c757d ;
+  border-color: #6c757d ;
+}
+.page-item.disabled .page-link{
+  background-color: #dee2e6 !important;
+  cursor:none !important;
+}
+.direita{
+  text-align: right;
+}
+
+
