@@ -12,5 +12,6 @@ namespace WebApplication1.Model
         public int id_appvsusu { get; set; }
         public int id_usuario { get; set; }
         public int id_aplicativo { get; set; }
+        
     }
 }

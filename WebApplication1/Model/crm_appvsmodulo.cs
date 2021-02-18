@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Model
 {
-    public class crm_modulo
-
+    public class crm_appvsmodulo
     {
         [Key]
+        public int id_appvsmodulo { get; set; }
         public int id_modulo { get; set; }
-        public string ds_modulo { get; set; }
+        public int id_app { get; set; }
     }
 }

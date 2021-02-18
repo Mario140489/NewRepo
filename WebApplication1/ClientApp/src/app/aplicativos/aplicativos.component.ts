@@ -1,4 +1,6 @@
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import {ModuloService} from '../services/modulo.service'
 
 @Component({
   selector: 'app-aplicativos',
@@ -6,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aplicativos.component.css']
 })
 export class AplicativosComponent implements OnInit {
-  apps:any =[];
-  constructor() { }
+  apps:any;
+  modules:any;
+  constructor( private moduleservice: ModuloService) { }
 
   ngOnInit(): void {
 
@@ -17,7 +20,20 @@ export class AplicativosComponent implements OnInit {
 
   monta_apps(){
     debugger;
-    this.apps = sessionStorage.getItem('modulos');
+    let appppp:any = sessionStorage.getItem('modulos');
+    appppp = JSON.parse(appppp);
+    this.apps = appppp;
+     // appppp.forEach(function(value){
+      // this.apps.push(value);
+    //});
+
     console.log(JSON.stringify(this.apps));
+  }
+
+  moduloselect(parans){
+    debugger;
+    this.moduleservice.getmodulo(parans).subscribe(result =>{
+      this.modules = result;
+    })
   }
 }
