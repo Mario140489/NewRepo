@@ -30,21 +30,21 @@ namespace WebApplication1.Controllers
 
         // GET: api/crm_appvsmodulo/5
         [HttpGet("{id}")]
-        public  ActionResult Getcrm_appvsmodulo(int id)
+        public async Task<ActionResult<IEnumerable<crm_appvsmodulo>>> Getcrm_appvsmodulo(int id)
         {
             //var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
-            var crm_appvsmodulo =  (from appvcmodulo in _context.crm_appvsmodulo
+            var crm_appvsmodulo = await (from appvcmodulo in _context.crm_appvsmodulo
                                    join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo
-                                   select new { appvcmodulo, modulo });
-            //crm_appvsmodulo = crm_appvsmodulo.ToList();
+                                         select new { modulo }).ToListAsync();
+
 ;
             if (crm_appvsmodulo == null)
             {
                 return NotFound();
             }
 
-            //var lists = crm_appvsmodulo;
-            return (ActionResult)crm_appvsmodulo;
+
+            return Ok(crm_appvsmodulo);
         }
 
         // PUT: api/crm_appvsmodulo/5
