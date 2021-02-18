@@ -1,18 +1,10 @@
 <div class="col col-12">
 <div class="row">
-<div align="center" class="bloco col-3 mg-10">
-  <i class="fa fa-desktop" style="font-size: 50px;" aria-hidden="true"></i>
-  <label class="label_centralizado" >Administrador</label>
-</div>
-
-<div class="bloco col-3 mg-10">
-  teste
- </div>
- <div class="bloco col-3 mg-10">
-  teste
- </div>
- <div class="bloco col-3 mg-10">
-  teste
- </div>
+  <div *ngFor="let aplicativos of this.apps" align="center" class="list-group col-4 p-1 ">
+    <a  class="col-12 list-group-item list-group-item-action idselect"  (click)="moduloselect(this.aplicativos.id_aplicativo)">
+      <i class="col-12 {{aplicativos.ds_icone}}" style="font-size: 50px;" aria-hidden="true"></i>
+      <label class="col-12">{{aplicativos.ds_app}}</label>
+    </a>
+  </div>
 </div>
 </div>

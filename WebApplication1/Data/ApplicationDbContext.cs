@@ -21,7 +21,7 @@ namespace WebApplication1.Data
         public DbSet<Servicos> Servicos { get; set; }
         //public DbSet<crm_appvsusuario> crm_appvsusuario { get; set; }
         public DbSet<crm_appvsusuario> crm_appvsusuario { get; set; }
-
+        public DbSet<crm_appvsmodulo> crm_appvsmodulo { get; set; }
         public DbSet<crm_modulo> crm_modulo { get; set; }
         public DbSet<crm_usuario> crm_usuario { get; set; }
 

@@ -21,7 +21,7 @@ export class AuthService {
         user = true;
         sessionStorage.setItem('user', result['ds_nome']);
         sessionStorage.setItem('chv', result['key']);
-        sessionStorage.setItem('modulos',result['apps'])
+        sessionStorage.setItem('modulos',JSON.stringify(result['apps']))
         this.usuarioAutenticado = true;
         this.Menu.emit(true);
         this.router.navigate(['/']);

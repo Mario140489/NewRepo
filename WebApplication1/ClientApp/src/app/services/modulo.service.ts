@@ -1,17 +1,18 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable,Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class ModuloService {
   rootURL:string;
   constructor(private http:HttpClient, @Inject('BASE_URL')baseUrl:string) {
     this.rootURL= baseUrl;
   }
 
-   Login(data){
-   return   this.http.post(this.rootURL + 'api/Usuarios/Login',data).pipe();
+  getmodulo(parans){
+    debugger;
+    return this.http.get(this.rootURL + 'api/crm_appvsmodulo/'+parans);
   }
 
 }

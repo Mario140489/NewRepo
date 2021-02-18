@@ -23,7 +23,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Modulos</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" style="color: white;" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -37,15 +37,15 @@
     <nav class="navbar navbar-dark bg-secondary">
       <div class="row btn-group">
         &nbsp;
-      <a href="#" style="font-size: 25px;" class="text-light mr-1  ml-2"  ngbTooltip="Menu"
+      <a href="#" *ngIf="menu.length > 0" style="font-size: 25px;" class="text-light mr-1  ml-2"  ngbTooltip="Menu"
       data-toggle="modal" data-target="#sidebar-left"><span><i class="fas fa-bars"></i></span></a>
       &nbsp;<a class="navbar-brand "> SyS</a>
     </div>
       <div class="btn-group">
-        <a href="#"  class="nav-link text-light" ngbTooltip="Menu Principal" data-toggle="modal" data-target="#menuprincipal">
+        <a href="#"  class="nav-link text-light pointer" ngbTooltip="Menu Principal"  data-toggle="modal" data-target="#menuprincipal">
           <span ><i class="fas fa-grip-horizontal"></i></span>
         </a>
-        <a href="#"  class=" nav-link text-light tremetreme">
+        <a href="#"  class=" nav-link text-light tremetreme ">
 
           <span><i class="far fa-user"></i> </span> <label class="ocultar ml-1">{{usuario}}</label>
         </a>
