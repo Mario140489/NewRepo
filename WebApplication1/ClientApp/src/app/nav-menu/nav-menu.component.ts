@@ -10,6 +10,7 @@ export class NavMenuComponent {
   toggled = false;
   usuario = "";
   sidebar ="Menu";
+  modulos;
   menu:any=[];
 
   ngOnInit() {

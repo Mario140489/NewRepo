@@ -1,6 +1,7 @@
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import {ModuloService} from '../services/modulo.service'
+import {ModuloService} from '../services/modulo.service';
+import { NavMenuComponent } from '../nav-menu/nav-menu.component'
 
 @Component({
   selector: 'app-aplicativos',
@@ -10,7 +11,7 @@ import {ModuloService} from '../services/modulo.service'
 export class AplicativosComponent implements OnInit {
   apps:any;
   modules:any;
-  constructor( private moduleservice: ModuloService) { }
+  constructor( private moduleservice: ModuloService, private nav: NavMenuComponent) { }
 
   ngOnInit(): void {
 
@@ -33,7 +34,14 @@ export class AplicativosComponent implements OnInit {
   moduloselect(parans){
     debugger;
     this.moduleservice.getmodulo(parans).subscribe(result =>{
-      this.modules = result;
+      if(result){
+        this.nav.modulos = result;
+        this.nav.toggled = true;
+        document.getElementById('menuprincipal').click();
+      }
     })
   }
+
+
+
 }

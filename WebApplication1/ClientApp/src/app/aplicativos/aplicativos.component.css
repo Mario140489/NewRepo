@@ -2,3 +2,6 @@
   border: 2px solid gray !important;
   cursor: pointer;
 }
+label{
+  margin-bottom:0% !important;
+}
