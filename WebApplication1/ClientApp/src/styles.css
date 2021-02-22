@@ -59,7 +59,9 @@ body {
   border-radius: 0;
 }
 .spanicon{
-  margin-left: 64%;
+  position: relative !important;
+  top: 2px  !important;
+  right: -95% !important;
 }
 
 select{

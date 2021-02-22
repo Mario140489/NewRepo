@@ -35,6 +35,7 @@ namespace WebApplication1.Controllers
             //var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
             var crm_appvsmodulo = await (from appvcmodulo in _context.crm_appvsmodulo
                                    join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo
+                                         where appvcmodulo.id_app == id
                                          select new { modulo }).ToListAsync();
 
 ;
