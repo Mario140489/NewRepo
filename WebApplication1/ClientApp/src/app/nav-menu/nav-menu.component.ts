@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalUsuarioComponent } from '../modal-usuario/modal-usuario.component';
+import {MemoryModulesService} from '../services/memory-modules.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -12,11 +12,16 @@ export class NavMenuComponent {
   sidebar ="Menu";
   modulos;
   menu:any=[];
-
+  constructor(  private memorymodules: MemoryModulesService) { }
   ngOnInit() {
+    debugger;
    this.usuario =  sessionStorage.getItem('user');
-   this.usuario = JSON.parse(this.usuario);
-   this.usuario = this.usuario[0]['ds_nome'];
+   this.modulos = JSON.parse(sessionStorage.getItem('modulos'));
+    if(sessionStorage.getItem('sidebar') == 'true'){
+      this.toggled = true;
+    }else{
+      this.toggled = false;
+    }
   }
   OpenClose(){
   this.toggled = !this.toggled;
@@ -24,12 +29,13 @@ export class NavMenuComponent {
   (<any>$('[data-toggle="tooltip"]')).tooltip()
    })
   }
-  SelectList(){
+  /*SelectList(){
+    alert('teste')
     $('.list-group-item').click(function(){
     $('.list-group-item').removeClass('ltbranco');
     $(this).addClass('ltbranco');
 })
-  }
+  }*/
 
 
 

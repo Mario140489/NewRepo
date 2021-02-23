@@ -1,7 +1,7 @@
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {ModuloService} from '../services/modulo.service';
-import { NavMenuComponent } from '../nav-menu/nav-menu.component'
+import { MemoryModulesService } from '../services/memory-modules.service'
 
 @Component({
   selector: 'app-aplicativos',
@@ -11,7 +11,7 @@ import { NavMenuComponent } from '../nav-menu/nav-menu.component'
 export class AplicativosComponent implements OnInit {
   apps:any;
   modules:any;
-  constructor( private moduleservice: ModuloService, private nav: NavMenuComponent) { }
+  constructor( private moduleservice: ModuloService, private memorymodules: MemoryModulesService) { }
 
   ngOnInit(): void {
 
@@ -21,7 +21,7 @@ export class AplicativosComponent implements OnInit {
 
   monta_apps(){
     debugger;
-    let appppp:any = sessionStorage.getItem('modulos');
+    let appppp:any = sessionStorage.getItem('apps');
     appppp = JSON.parse(appppp);
     this.apps = appppp;
      // appppp.forEach(function(value){
@@ -32,11 +32,12 @@ export class AplicativosComponent implements OnInit {
   }
 
   moduloselect(parans){
-    debugger;
     this.moduleservice.getmodulo(parans).subscribe(result =>{
       if(result){
-        this.nav.modulos = result;
-        this.nav.toggled = true;
+        debugger;
+        sessionStorage.setItem('modulos', JSON.stringify(result));
+        sessionStorage.setItem('sidebar','true')
+        //this.memorymodules.btn_sidebar = true;
         document.getElementById('menuprincipal').click();
       }
     })
