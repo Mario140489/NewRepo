@@ -8,6 +8,7 @@ import {MemoryModulesService} from '../services/memory-modules.service';
 })
 export class NavMenuComponent {
   toggled = false;
+  //listicon = false;
   usuario = "";
   sidebar ="Menu";
   modulos;
@@ -16,12 +17,12 @@ export class NavMenuComponent {
   ngOnInit() {
     debugger;
    this.usuario =  sessionStorage.getItem('user');
-   this.modulos = JSON.parse(sessionStorage.getItem('modulos'));
-    if(sessionStorage.getItem('sidebar') == 'true'){
-      this.toggled = true;
-    }else{
-      this.toggled = false;
-    }
+  // this.modulos = JSON.parse(sessionStorage.getItem('modulos'));
+    //if(sessionStorage.getItem('sidebar') == 'true'){
+     // this.toggled = true;
+    //}else{
+      //this.toggled = false;
+    //}
   }
   OpenClose(){
   this.toggled = !this.toggled;
@@ -29,13 +30,25 @@ export class NavMenuComponent {
   (<any>$('[data-toggle="tooltip"]')).tooltip()
    })
   }
-  /*SelectList(){
-    alert('teste')
-    $('.list-group-item').click(function(){
-    $('.list-group-item').removeClass('ltbranco');
-    $(this).addClass('ltbranco');
-})
-  }*/
+  SelectList(e){
+    debugger;
+    let id:string = "#"+e+" span i";
+    let mudarclasse = document.querySelector(id);
+    let class1 = mudarclasse.className;
+    if(class1 == "fas fa-angle-down")
+    {
+      mudarclasse.classList.replace("fa-angle-down","fa-angle-up")
+    }else if(class1 == "fas fa-angle-up"){
+      mudarclasse.classList.replace("fa-angle-up","fa-angle-down")
+    }
+    console.log(mudarclasse);
+
+
+    //$('.list-group-item').click(function(){
+    //$('.list-group-item').removeClass('ltbranco');
+    //$(this).addClass('ltbranco');
+
+  }
 
 
 

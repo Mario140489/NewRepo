@@ -1,7 +1,7 @@
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {ModuloService} from '../services/modulo.service';
-import { MemoryModulesService } from '../services/memory-modules.service'
+import { MemoryModulesService } from '../services/memory-modules.service';
+import {NavMenuComponent} from '../nav-menu/nav-menu.component'
 
 @Component({
   selector: 'app-aplicativos',
@@ -11,7 +11,8 @@ import { MemoryModulesService } from '../services/memory-modules.service'
 export class AplicativosComponent implements OnInit {
   apps:any;
   modules:any;
-  constructor( private moduleservice: ModuloService, private memorymodules: MemoryModulesService) { }
+  constructor( private moduleservice: ModuloService, private memorymodules: MemoryModulesService,
+    private nav:NavMenuComponent) { }
 
   ngOnInit(): void {
 
@@ -35,8 +36,10 @@ export class AplicativosComponent implements OnInit {
     this.moduleservice.getmodulo(parans).subscribe(result =>{
       if(result){
         debugger;
-        sessionStorage.setItem('modulos', JSON.stringify(result));
-        sessionStorage.setItem('sidebar','true')
+        //sessionStorage.setItem('modulos', JSON.stringify(result));
+        //sessionStorage.setItem('sidebar','true')
+        this.nav.modulos = result;
+        this.nav.toggled = true;
         //this.memorymodules.btn_sidebar = true;
         document.getElementById('menuprincipal').click();
       }

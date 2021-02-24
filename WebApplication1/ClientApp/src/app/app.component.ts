@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,11 @@ export class AppComponent {
   user:boolean = false;
   spiner:boolean = false;
   usuario ="";
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService, private router:Router){
 
   }
     ngOnInit() {
+      this.router.navigate(['/']);
       this.usuario =  sessionStorage.getItem('user');
       if(this.usuario){
     this.user = true;
