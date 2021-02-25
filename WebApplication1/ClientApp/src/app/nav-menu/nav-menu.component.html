@@ -1,23 +1,17 @@
 <div class="modal fade left " id="sidebar-left" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-sm" role="document">
-  <div class="modal-content">
-    <nav class="navbar navbar-dark bg-secondary ">
-      <a class="navbar-brand" href="#">{{sidebar}}</a>
+  <div class="modal-content   bg-secondary ">
+    <nav class="navbar navbar-dark  " >
+      <a class="navbar-brand">{{sidebar}}</a>
+     <a href="#" data-toggle="modal" ngbTooltip="Esconder" data-target="#sidebar-left"> <span class="navbar-brand"  ><i class="fas fa-angle-double-left"></i></span></a>
     </nav>
     <div class="row">
       <div class="col-12">
         <div class="list-group" id="list-tab" role="tablist">
 
           <a *ngFor="let  mod of modulos" id="id_modulo{{mod.modulo.id_modulo}}" (click)="SelectList('id_modulo'+mod.modulo.id_modulo)"
-           class="list-group-item list-group-item-action" ><a style="position: absolute;">{{mod.modulo.ds_modulo}}</a>
-            <span class="spanicon"><i class="fas fa-angle-down"></i></span>
-            <ul *ngIf="true"  class="list-group">
-              <li class="list-group-item disabled" aria-disabled="true">A disabled item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-              <li class="list-group-item">A fourth item</li>
-              <li class="list-group-item">And a fifth one</li>
-            </ul>
+           class="list-group-item list-group-item-action navbar-dark bg-secondary " ><a style="position: absolute; color:white">{{mod.modulo.ds_modulo}}</a>
+            <span class="spanicon" style="color: white;"><i class="fas fa-angle-down"></i></span>
           </a>
           <a [routerLink]="['/Serviços']" class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Serviços
           <span class="spanicon" ><i class="fas fa-angle-right"></i></span> </a>

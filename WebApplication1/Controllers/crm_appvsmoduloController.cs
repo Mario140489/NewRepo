@@ -37,7 +37,7 @@ namespace WebApplication1.Controllers
                                    join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo
                                          where appvcmodulo.id_app == id
                                          select new { modulo }).ToListAsync();
-
+            
 ;
             if (crm_appvsmodulo == null)
             {

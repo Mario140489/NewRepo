@@ -23,12 +23,13 @@ import { CadServicosComponent } from './cad-servicos/cad-servicos.component';
 import { AplicativosComponent } from './aplicativos/aplicativos.component';
 import { ProcessosComponent } from './processos/processos.component';
 import { TableEspecComponent } from './table-espec/table-espec.component';
+import { SubmoduloComponent } from './submodulo/submodulo.component';
 
 
 registerLocaleData(localept, 'pt-BR');
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -42,8 +43,8 @@ registerLocaleData(localept, 'pt-BR');
     AplicativosComponent,
     ProcessosComponent,
     TableEspecComponent,
-
-  ],
+      SubmoduloComponent
+   ],
   imports: [NgbModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

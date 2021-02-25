@@ -1,7 +1,7 @@
 <div class="col col-12">
 <div class="row">
   <div *ngFor="let aplicativos of this.apps" align="center" class="list-group col-4 p-1 ">
-    <a  class="col-12 list-group-item list-group-item-action idselect" (click)="moduloselect(this.aplicativos.id_aplicativo)">
+    <a  class="col-12 list-group-item list-group-item-action idselect" (click)="moduloselect(this.aplicativos.id_aplicativo,this.aplicativos.ds_app)">
       <i class="col-12 {{aplicativos.ds_icone}}" style="font-size: 50px;" aria-hidden="true"></i>
       <label class="col-12">{{aplicativos.ds_app}}</label>
     </a>

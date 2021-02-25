@@ -32,12 +32,12 @@ export class AplicativosComponent implements OnInit {
     console.log(JSON.stringify(this.apps));
   }
 
-  moduloselect(parans){
+  moduloselect(parans,parans2){
     this.moduleservice.getmodulo(parans).subscribe(result =>{
       if(result){
-        debugger;
         //sessionStorage.setItem('modulos', JSON.stringify(result));
         //sessionStorage.setItem('sidebar','true')
+        this.nav.sidebar = parans2;
         this.nav.modulos = result;
         this.nav.toggled = true;
         //this.memorymodules.btn_sidebar = true;
