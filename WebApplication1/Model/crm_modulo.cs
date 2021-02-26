@@ -12,5 +12,8 @@ namespace WebApplication1.Model
         [Key]
         public int id_modulo { get; set; }
         public string ds_modulo { get; set; }
+        
+        public virtual ICollection<>
     }
+
 }
