@@ -34,11 +34,16 @@ namespace WebApplication1.Controllers
         {
             //var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
             var crm_appvsmodulo = await (from appvcmodulo in _context.crm_appvsmodulo
-                                   join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo
+                                   join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo 
+                                   join submodulo in _context.crm_submodulos on modulo.id_modulo equals submodulo.id_modulo
                                          where appvcmodulo.id_app == id
-                                         select new { modulo }).ToListAsync();
-           
-            
+                                         select new {modulo}).ToListAsync();
+
+            for (var i = 0; i < crm_appvsmodulo.Count; i++)
+            {
+               
+            }
+
 ;
             if (crm_appvsmodulo == null)
             {

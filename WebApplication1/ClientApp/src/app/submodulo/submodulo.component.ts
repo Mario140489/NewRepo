@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-submodulo',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./submodulo.component.scss']
 })
 export class SubmoduloComponent implements OnInit {
-
+  @Input() submodulo:any;
   constructor() { }
 
   ngOnInit() {
