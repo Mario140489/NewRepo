@@ -16,14 +16,14 @@ export class LoginComponent implements OnInit {
 MsgPrincipal:string ="";
 MsgDescritiva:string="";
 error:boolean = false;
-private usuario: Usuario = new Usuario();
+public usuario: Usuario = new Usuario();
 
   constructor(private authservice:AuthService, private spiner:AppComponent) { }
 
   ngOnInit() {
 
   }
-   
+
   async FazerLogin(){
 
     this.spiner.spiner = true;
@@ -35,11 +35,11 @@ private usuario: Usuario = new Usuario();
        }
        else{
         this.spiner.spiner = false;
-        this.MsgPrincipal = "Atenção! "; this.MsgDescritiva = " Nenhum usuario encontrado"; 
+        this.MsgPrincipal = "Atenção! "; this.MsgDescritiva = " Nenhum usuario encontrado";
         this.error = true;
         setTimeout(() => this.error = false, 20000);
        }
-      
+
     }
     else{
       this.MsgPrincipal = "Atenção! "; this.MsgDescritiva = " Digite um Email Valido"
@@ -47,7 +47,7 @@ private usuario: Usuario = new Usuario();
       setTimeout(() => this.error = false, 20000);
       this.spiner.spiner = false;
     }
-    
+
   }
 
 

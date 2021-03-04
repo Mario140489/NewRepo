@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Model
+namespace WebApplication1.ModelRetorno
 {
-    public class crm_modulo
-
+    public class RetornoModulo
     {
-        [Key]
         public int id_modulo { get; set; }
         public string ds_modulo { get; set; }
+        public object submodulos { get; set; }
     }
-
 }

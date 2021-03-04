@@ -15,7 +15,7 @@ namespace WebApplication1.Model
         public string ds_senha { get; set; }
         public string ds_login { get; set; }
         public string ds_imagem { get; set; }
-        
+        public char do_inactive { get; set; }
         
     }
 }

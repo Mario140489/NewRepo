@@ -24,12 +24,13 @@ import { AplicativosComponent } from './aplicativos/aplicativos.component';
 import { ProcessosComponent } from './processos/processos.component';
 import { TableEspecComponent } from './table-espec/table-espec.component';
 import { SubmoduloComponent } from './submodulo/submodulo.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 
 registerLocaleData(localept, 'pt-BR');
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -43,7 +44,8 @@ registerLocaleData(localept, 'pt-BR');
     AplicativosComponent,
     ProcessosComponent,
     TableEspecComponent,
-      SubmoduloComponent
+      SubmoduloComponent,
+      UsuarioComponent
    ],
   imports: [NgbModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -51,7 +53,7 @@ registerLocaleData(localept, 'pt-BR');
     FormsModule,
     RouterModule.forRoot([
       { path: '',component: ProcessosComponent, pathMatch: 'full' },
-      { path: 'Serviços',component: CadServicosComponent,  },
+      { path: 'usuario',component: UsuarioComponent,  },
       { path: 'fetch-data',  component: FetchDataComponent },
     ]),
     DataTablesModule

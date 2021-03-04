@@ -36,6 +36,7 @@ export class TableEspecComponent implements OnInit {
   constructor(private sanitized: DomSanitizer,private elRef: ElementRef) { }
 
   ngOnInit(): void {
+    debugger;
     //this.DataPaginada();
     this.MontarTable();
 
@@ -46,35 +47,43 @@ export class TableEspecComponent implements OnInit {
   }
 
   DataPaginada(){
-    this.MontarPaginacao();
-    let i = 0;
-    let Rows = this.RowsSelected;
-      for(let idx = 0; idx < this.datapaginada.length; idx++){
+    if( this.data && this.data.length > 0){
 
-          for(i; i < Rows; i++){
-          this.datapaginada[idx].push(this.data[i])
-      }
-       Rows = Rows + this.RowsSelected;
-      }
-      this.PopularTabela();
+      this.MontarPaginacao();
+      let i = 0;
+      let Rows = this.RowsSelected;
+        for(let idx = 0; idx < this.datapaginada.length; idx++){
+
+            for(i; i < Rows; i++){
+            this.datapaginada[idx].push(this.data[i])
+        }
+         Rows = Rows + this.RowsSelected;
+        }
+        this.PopularTabela();
+
+    }
+
   }
 
-  EventoRows(){
+    EventoRows(){
     this.MontarTable();
   }
 
   PopularTabela(){
-
-    this.Table = [];
-    for(let idx = 0 ;idx < this.datapaginada[this.PaginaAtiva-1].length; idx++){
-      let DadosTable:any = [];
-      this.dados.forEach(element=> {
-        DadosTable.push(this.datapaginada[this.PaginaAtiva-1][idx][element]);
-       });
-       this.Table.push(DadosTable);
-       this.views = idx +1;
+    debugger;
+    if(this.data &&  this.data.length > 0){
+      this.Table = [];
+      for(let idx = 0 ;idx < this.datapaginada[this.PaginaAtiva-1].length; idx++){
+        let DadosTable:any = [];
+        this.dados.forEach(element=> {
+          DadosTable.push(this.datapaginada[this.PaginaAtiva-1][idx][element]);
+         });
+         this.Table.push(DadosTable);
+         this.views = idx +1;
+      }
+      this.MostrarRowsViewsTotal();
     }
-    this.MostrarRowsViewsTotal();
+
   }
 
   teste(e){
@@ -83,10 +92,13 @@ export class TableEspecComponent implements OnInit {
   }
 
   MontarPaginacao(){
-    let idx = 0;
+
+    if(this.data &&  this.data.length > 0){
+
+      let idx = 0;
     let i = 1;
     let pg = 0;
-    let contador:number = this.data.length;
+    let contador:number = this.data.length
     //if(this.data.length > this.MaximoPaginas){contador = this.MaximoPaginas;}
     while(idx < contador ){
       if(i < this.RowsSelected){this.paginas.push(pg++);}
@@ -95,6 +107,8 @@ export class TableEspecComponent implements OnInit {
       idx = idx + this.RowsSelected;
       //let count = this.data.length - this.RowsSelected;
       this.UltimaPagina = i++;
+    }
+
     }
 
   }

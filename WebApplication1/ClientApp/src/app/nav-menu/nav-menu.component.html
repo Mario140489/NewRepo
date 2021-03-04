@@ -1,24 +1,21 @@
 <div class="modal fade left " id="sidebar-left" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-sm" role="document">
-  <div class="modal-content   bg-secondary ">
-    <nav class="navbar navbar-dark  " >
+  <div class="modal-content">
+    <nav class="navbar navbar-dark bg-secondary" >
       <a class="navbar-brand">{{sidebar}}</a>
      <a href="#" data-toggle="modal" ngbTooltip="Esconder" data-target="#sidebar-left"> <span class="navbar-brand"  ><i class="fas fa-angle-double-left"></i></span></a>
     </nav>
     <div class="row">
       <div class="col-12">
         <div class="list-group" id="list-tab" role="tablist">
-
-          <a *ngFor="let  mod of modulos" id="id_modulo{{mod.modulo.id_modulo}}" (click)="SelectList('id_modulo'+mod.modulo.id_modulo)"
-           class="list-group-item list-group-item-action navbar-dark bg-secondary " ><a style="position: absolute; color:white">{{mod.modulo.ds_modulo}}</a>
-            <span class="spanicon" style="color: white;"><i class="fas fa-angle-down"></i></span>
+          <div *ngFor="let  mod of modulos, let i = index" >
+          <a id="id_modulo{{mod.id_modulo}}" (click)="SelectList('id_modulo'+mod.id_modulo);submenu[i]=!submenu[i]" [ngValue]="false"
+           class="list-group-item list-group-item-action" ><a style="position: absolute;">{{mod.ds_modulo}}</a>
+            <span class="spanicon" ><i class="fas fa-angle-down"></i></span>
           </a>
-          <app-submodulo ></app-submodulo>
-          <app- [routerLink]="['/Serviços']" class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Serviços
-          <span class="spanicon" ><i class="fas fa-angle-right"></i></span> </app->
-          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+          <app-submodulo  *ngIf="submenu[i]"   [submodulo] = mod.submodulos ></app-submodulo>
+        </div>
+
         </div>
       </div>
     </div>
@@ -44,9 +41,9 @@
     <nav class="navbar navbar-dark bg-secondary">
       <div class="row btn-group">
         &nbsp;
-      <a href="#" *ngIf="toggled" style="font-size: 25px;" class="text-light mr-1  ml-2"  ngbTooltip="Menu"
-      data-toggle="modal" data-target="#sidebar-left"><span><i class="fas fa-bars"></i></span></a>
-      &nbsp;<a class="navbar-brand "> SyS</a>
+      <btn href="#" *ngIf="toggled" style="font-size: 25px;" id="btnsidebar" class="text-light mr-1  ml-2"  ngbTooltip="Menu"
+      data-toggle="modal" data-target="#sidebar-left"><span><i class="fas fa-bars"></i></span></btn>
+      &nbsp;<a class="navbar-brand ">SyS</a>
     </div>
       <div class="btn-group">
         <a href="#"  class="nav-link text-light pointer" ngbTooltip="Menu Principal"  data-toggle="modal" data-target="#menuprincipal">
