@@ -25,12 +25,13 @@ import { ProcessosComponent } from './processos/processos.component';
 import { TableEspecComponent } from './table-espec/table-espec.component';
 import { SubmoduloComponent } from './submodulo/submodulo.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { MessagensComponent } from './messagens/messagens.component';
 
 
 registerLocaleData(localept, 'pt-BR');
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -45,7 +46,8 @@ registerLocaleData(localept, 'pt-BR');
     ProcessosComponent,
     TableEspecComponent,
       SubmoduloComponent,
-      UsuarioComponent
+      UsuarioComponent,
+      MessagensComponent
    ],
   imports: [NgbModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

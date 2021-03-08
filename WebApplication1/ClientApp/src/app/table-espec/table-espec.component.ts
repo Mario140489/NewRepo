@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef ,OnChanges} from '@angular/core';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { DomSanitizer } from '@angular/platform-browser';
 import { data } from 'jquery';
@@ -15,7 +15,7 @@ import { data } from 'jquery';
 export class TableEspecComponent implements OnInit {
   @Output() DadosRow:EventEmitter<any> = new EventEmitter<any>();
   @Input() header:any = [];
-  @Input() data:any = [];
+  @Input() data:any = [] ;
   @Input() dados:any = [];
   dataold:any =[];
   datapaginada:any=[];
@@ -42,6 +42,17 @@ export class TableEspecComponent implements OnInit {
 
   }
 
+  ngOnChanges(changes): void {
+    debugger;
+    if(changes.data){
+      this.MontarTable();
+    }
+    //this.MontarTable();
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+
+  }
+
   MostrarRowsViewsTotal(){
    this.total = this.data.length;
   }
@@ -51,7 +62,8 @@ export class TableEspecComponent implements OnInit {
 
       this.MontarPaginacao();
       let i = 0;
-      let Rows = this.RowsSelected;
+      let Rows= 0;
+       if(this.data.length > 5) {Rows = this.RowsSelected}else{ Rows =  this.data.length} ;
         for(let idx = 0; idx < this.datapaginada.length; idx++){
 
             for(i; i < Rows; i++){

@@ -6,6 +6,10 @@ body {
   font-size: 14px !important;
 }
 
+.btn-direita{
+  text-align: right !important;
+}
+
 .mg-10{
   margin-left: 18px;
   margin-right: 18px;

@@ -1,7 +1,12 @@
+
 <p></p>
 <div class="bloco">
 <div>
-  <h4 class="text-secondary">Usuário</h4>
+  <div class="row">
+    <div class="col-sm-3">  <h4 class="text-secondary">Usuário</h4>
+      </div>
+      <div  class="col-sm-9 btn-direita"><button type="button" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Novo</button></div>
+  </div>
   <hr>
   <div class="card">
     <div class="card-header bg-secundary">
@@ -14,7 +19,8 @@
           <input type="text" [(ngModel)]="usuario.ds_nome" name='ds_nome' class="form-control form-control-sm">
          </div>
          <div class="col-sm-2">
-          <button type="submit" (click)="BuscarUsuario()" class="btn btn-sm btn-primary" style="margin-top: 30px"> <i class="fas fa-search"></i>  Buscar</button>
+          <button type="submit" (click)="BuscarUsuario()" class="btn btn-sm btn-primary" style="margin-top: 30px">  <span *ngIf="loaduser"  class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span *ngIf="loaduser"  class="visually-hidden"> Carregando...</span><span *ngIf="loaduser == false" ><i  class="fas fa-search"></i> Buscar</span> </button>
          </div>
        </div>
        <p></p>
@@ -23,3 +29,6 @@
   </div>
 </div>
 </div>
+
+<app-messagens></app-messagens>
+

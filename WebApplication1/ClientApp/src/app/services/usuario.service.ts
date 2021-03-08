@@ -12,8 +12,9 @@ constructor(private http:HttpClient, @Inject('BASE_URL')baseUrl:string) {
  }
 
  GetUsuario(parans){
-   debugger
-   return this.http.get(this.rootURL + "api/Usuarios/",parans).pipe();
+   debugger;
+   let nome:string = parans;
+   return this.http.get(this.rootURL + "api/Usuarios/" + nome);
  }
 
 }
