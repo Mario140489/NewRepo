@@ -12,6 +12,6 @@ namespace WebApplication1.Model
         public int id_appvsmodulo { get; set; }
         public int id_modulo { get; set; }
         public int id_app { get; set; }
-        public object submodulo { get; set; }
+       
     }
 }

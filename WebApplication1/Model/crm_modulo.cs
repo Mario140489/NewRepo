@@ -13,7 +13,7 @@ namespace WebApplication1.Model
         public int id_modulo { get; set; }
         public string ds_modulo { get; set; }
         
-        public virtual ICollection<>
+        public virtual ICollection<crm_submodulos> crm_submodulos { get; set; }
     }
 
 }

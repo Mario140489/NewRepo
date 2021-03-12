@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySqlConnector;
 using WebApplication1.Data;
 
 namespace WebApplication1
@@ -23,9 +24,9 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseMySql(
-            Configuration.GetConnectionString("DefaultConnection")));
+          services.AddDbContext<ApplicationDbContext>(options =>
+              options.UseMySql(
+              Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

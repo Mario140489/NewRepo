@@ -23,9 +23,9 @@ namespace WebApplication1.Controllers
 
         // GET: api/crm_appvsmodulo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<crm_appvsmodulo>>> Getcrm_appvsmodulo()
+        public async Task<ActionResult<IEnumerable<crm_modulo>>> Getcrm_appvsmodulo()
         {
-            return await _context.crm_appvsmodulo.ToListAsync();
+            return _context.crm_modulo.Include("crm_submodulos").ToList();
         }
 
         // GET: api/crm_appvsmodulo/5
@@ -35,9 +35,9 @@ namespace WebApplication1.Controllers
             //var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
             var crm_appvsmodulo = await (from appvcmodulo in _context.crm_appvsmodulo
                                    join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo 
-                                   join submodulo in _context.crm_submodulos on modulo.id_modulo equals submodulo.id_modulo
                                          where appvcmodulo.id_app == id
                                          select new {modulo}).ToListAsync();
+            //var teste = _context.crm_modulo.Include(crm_submodulos);
 
             for (var i = 0; i < crm_appvsmodulo.Count; i++)
             {
