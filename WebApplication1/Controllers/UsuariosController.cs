@@ -36,17 +36,19 @@ namespace WebApplication1.Controllers
 
 
         // GET: api/Usuarios/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(int id)
+        [HttpGet("{nome}")]
+        public async Task<ActionResult<Usuario>> GetUsuario(string nome)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
+
+                
+            var usuario = await _context.Usuario.Where(b => b.ds_nome.Contains(nome) && b.do_inactive == 'N').ToListAsync().ConfigureAwait(false);
 
             if (usuario == null)
             {
                 return NotFound();
             }
 
-            return usuario;
+            return Ok(usuario);
         }
 
         [HttpPost("Login")]

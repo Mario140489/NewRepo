@@ -1,5 +1,5 @@
-<a *ngFor="let  smod of submodulo" id="id_modulo{{smod.modulo.id_submodulos}}"
-class="list-group-item list-group-item-action navbar-dark bg-secondary " >
-<a style="position: absolute; color:white">{{mod.modulo.ds_modulo}}</a>
-<span class="spanicon" style="color: white;"><i class="fas fa-angle-down"></i></span>
-</a>
+<div class="list-group" id="list-tab" role="tablist">
+<a *ngFor="let sub of submodulo" [routerLink]="'/'+[sub.ds_caminho]"
+ class="list-group-item list-group-item-action" ><i class="fas fa-caret-right">
+ </i> {{sub.ds_nome}}</a>
+</div>

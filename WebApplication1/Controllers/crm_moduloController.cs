@@ -25,9 +25,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<crm_modulo>>> Getcrm_modulo()
         {
-            var list = await _context.crm_modulo.Include("crm_usuario").ToListAsync().ConfigureAwait(false);
-
-            return list;
+            return await _context.crm_modulo.ToListAsync();
         }
 
         // GET: api/crm_modulo/5

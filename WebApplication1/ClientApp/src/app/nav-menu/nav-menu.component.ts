@@ -13,22 +13,16 @@ export class NavMenuComponent {
   sidebar ="Menu";
   modulos;
   menu:any=[];
+  submenu:any=[];
+
   constructor(  private memorymodules: MemoryModulesService) { }
   ngOnInit() {
     debugger;
    this.usuario =  sessionStorage.getItem('user');
-  // this.modulos = JSON.parse(sessionStorage.getItem('modulos'));
-    //if(sessionStorage.getItem('sidebar') == 'true'){
-     // this.toggled = true;
-    //}else{
-      //this.toggled = false;
-    //}
+   this.muntavariaveldinamica()
   }
   OpenClose(){
-  this.toggled = !this.toggled;
-  $(function () {
-  (<any>$('[data-toggle="tooltip"]')).tooltip()
-   })
+
   }
   SelectList(e){
     debugger;
@@ -43,11 +37,12 @@ export class NavMenuComponent {
     }
     console.log(mudarclasse);
 
+  }
 
-    //$('.list-group-item').click(function(){
-    //$('.list-group-item').removeClass('ltbranco');
-    //$(this).addClass('ltbranco');
-
+  muntavariaveldinamica(){
+    this.modulos.array.forEach(element => {
+      this.submenu.add(false);
+    });
   }
 
 

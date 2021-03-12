@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Model;
+using WebApplication1.ModelRetorno;
 
 namespace WebApplication1.Controllers
 {
@@ -25,33 +26,38 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<crm_modulo>>> Getcrm_appvsmodulo()
         {
-            return _context.crm_modulo.Include("crm_submodulos").ToList();
+            return await _context.crm_modulo.ToListAsync();
         }
 
         // GET: api/crm_appvsmodulo/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<crm_appvsmodulo>>> Getcrm_appvsmodulo(int id)
+        public async Task<ActionResult<IEnumerable<crm_modulo>>> Getcrm_appvsmodulo(int id)
         {
             //var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
-            var crm_appvsmodulo = await (from appvcmodulo in _context.crm_appvsmodulo
+            var crm_modulo =  (from appvcmodulo in _context.crm_appvsmodulo
                                    join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo 
                                          where appvcmodulo.id_app == id
-                                         select new {modulo}).ToListAsync();
-            //var teste = _context.crm_modulo.Include(crm_submodulos);
-
-            for (var i = 0; i < crm_appvsmodulo.Count; i++)
+                                         select new {modulo}).ToList();
+            var modulos = new List<RetornoModulo>();
+            int i = 0;
+            foreach (var sspmod in crm_modulo)
             {
-               
+                //crm_modulo[i].modulo.crm_submodulos = _context.crm_submodulos.Where(b => b.id_modulo == sspmod.modulo.id_modulo).ToList();
+                modulos.Add(new RetornoModulo()
+                {
+                    id_modulo = sspmod.modulo.id_modulo,
+                    ds_modulo = sspmod.modulo.ds_modulo,
+                    submodulos = _context.crm_submodulos.Where(b => b.id_modulo == sspmod.modulo.id_modulo).ToList()
+            });
             }
 
-;
-            if (crm_appvsmodulo == null)
+            if (modulos == null)
             {
                 return NotFound();
             }
 
 
-            return Ok(crm_appvsmodulo);
+            return Ok(modulos);
         }
 
         // PUT: api/crm_appvsmodulo/5
