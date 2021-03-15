@@ -120,6 +120,10 @@ input:focus{
   color: #0d0d0d;
 }
 
+hr{
+  margin-top: 5px !important;
+  margin-bottom: 5px  !important;
+}
 .underlineHover:hover:after{
   width: 100%;
 }
@@ -149,14 +153,20 @@ button.close:focus{
 }
 input {
   border-radius: 0px !important;
-  border: 1px solid ghostwhite !important;
-  background-color: ghostwhite !important;
+  border: 1px solid gainsboro !important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
   border-bottom: 1px solid #9e9e9e !important;
  -webkit-transition: all 0.3s ease-in-out !important;
   -moz-transition: all 0.3s ease-in-out !important;
   -ms-transition: all 0.3s ease-in-out !important;
   -o-transition: all 0.3s ease-in-out !important;
   transition: all 0.3s ease-in-out !important;
+}
+
+.card-header{
+  background-color: #6c757d !important;
+  color: white !important;
+  border-color: #6c757d !important;
 }
 
 input:focus {
@@ -234,7 +244,10 @@ input:read-only{
   animation-fill-mode: both;
 }
 
-
+.diverror {
+  font-size: 12px;
+  font-weight: bold;
+}
 
 @-webkit-keyframes fadeInDown {
   0% {

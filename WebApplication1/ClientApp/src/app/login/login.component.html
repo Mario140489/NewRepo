@@ -2,7 +2,7 @@
     <div class="col-sm-12 fadeIn first bg-secondary text-ligth text-light" >
       <h1 class="fadeIn second">SyS</h1>
       <label class="fadeIn third">Facilitando sua Vida</label>
-   </div> 
+   </div>
    <div class="col-sm-12">
    <div class="col-sm-3 col-md-4"></div>
    <div align="center" class="col-sm-6 col-md-4 mt-5" >
@@ -18,18 +18,24 @@
      <div class="input-group-prepend">
        <span class="input-group-text" ><i class="fas fa-user icon"></i></span>
      </div>
-     <input [(ngModel)]="usuario.ds_login" name="ds_login" required type="email" autocomplete="off" minlength="3" maxlength="200"
-      class="form-control form-control-lg " placeholder="Usuario" />
+     <input [(ngModel)]="usuario.ds_login" name="ds_login" required type="text" minlength="1" maxlength="150" autocomplete="off"
+      class="form-control form-control-lg " placeholder="Usuário" />
    </div>
+   </div>
+   <div class="diverror" *ngIf="usuario.ds_login.length ==0">
+    <label   class="text-danger">*Campo de Usuário não pode ser vazio.</label>
    </div>
    <div class="form-group fadeIn third">
     <div class="input-group mb-3">
      <div class="input-group-prepend">
        <span class="input-group-text" ><i class="fas fa-key"></i></span>
      </div>
-     <input [(ngModel)]="usuario.ds_senha" name="ds_senha" required  type="password" autocomplete="off" minlength="6" maxlength="20" 
+     <input [(ngModel)]="usuario.ds_senha" name="ds_senha" required minlength="1"  type="password" autocomplete="off"
      class="form-control form-control-lg " placeholder="Senha" />
    </div>
+   </div>
+   <div class="diverror" *ngIf="usuario.ds_senha.length==0 ">
+    <label   class="text-danger">*Campo de senha Não pode ser vazio.</label>
    </div>
    <div>
      <button type="submit" class="fadeIn fourth btn btn-primary btn-lg " (click)="FazerLogin()" ><i class="fas fa-sign-in-alt"></i> Logar</button>
@@ -40,4 +46,3 @@
    <div class="col-sm-3 col-md-4"></div>
      </div>
    </div>
-   

@@ -116,7 +116,7 @@ namespace WebApplication1.Controllers
         // POST: api/Usuarios
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
+        [HttpPost("adicionar")]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
             _context.Usuario.Add(usuario);

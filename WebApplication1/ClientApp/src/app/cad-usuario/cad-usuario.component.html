@@ -1,0 +1,81 @@
+<form   autocomplete="off"  (ngSubmit)="onSubmit()" >
+<div class="bloco mt-2">
+<div>
+  <div class="row">
+    <div class="col-sm-3">  <h4 class="text-secondary">Usuário</h4>
+      </div>
+      <div  class="col-sm-9 btn-direita"><button  type="submit" [disabled]="" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Salvar</button></div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-header bg-secundary">
+      Cadastrar usuário
+    </div>
+    <div class="card-body">
+       <div class='row'>
+        <div class="col-12">
+          <div class="row">
+          <div class=" form-group col-sm-2">
+            <label>Id</label>
+            <input [(ngModel)]="usuario.id_usuario" name="id_usuario" class="form-control form-control-sm" type="number" disabled/>
+          </div>
+          <div class=" col-sm-10 d-flex justify-content-end">
+            <div class="form-check">
+              <input class="form-check-input" [(ngModel)]="usuario.do_inactive" name="do_inactive" type="checkbox" id="gridCheck">
+              <label class="form-check-label" for="gridCheck">
+                Inativo
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" form-group col-sm-4">
+            <label>Nome</label>
+            <input [(ngModel)]="usuario.ds_nome" name="ds_nome" class="form-control form-control-sm" required minlength="3" maxlength="200" type="text" />
+            <div class="diverror" *ngIf="usuario.ds_nome.length<3">
+              <label   class="text-danger">*Campo de nome tem que ter um nome valido.</label>
+             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" form-group col-sm-4">
+            <label>Login</label>
+            <input [(ngModel)]="usuario.ds_login" name="ds_login" class="form-control form-control-sm" required minlength="5" maxlength="50" type="text" />
+            <div class="diverror" *ngIf="usuario.ds_login.length<5">
+              <label   class="text-danger">*Campo de Login tem que ter mais de 5 caracteres.</label>
+            </div>
+            <div class="diverror" *ngIf="usuario.ds_login.length>50">
+              <label   class="text-danger">*Campo de Login tem que ter menos de 50 caracteres.</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" form-group col-sm-3">
+            <label>Senha</label>
+            <input [(ngModel)]="usuario.ds_senha" name="ds_login" class="form-control form-control-sm" required minlength="6" maxlength="20" type="password" />
+            <div class="diverror" *ngIf="usuario.ds_senha.length<6">
+              <label   class="text-danger">*Campo de Login tem que ter mais de 6 caracteres.</label>
+            </div>
+            <div class="diverror" *ngIf="usuario.ds_senha.length>20">
+              <label   class="text-danger">*Campo de Login tem que ter menos de 5 caracteres.</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" form-group col-sm-3">
+            <label>Cofirmar senha</label>
+            <input [(ngModel)]="confsernha" name="confsernha" class="form-control form-control-sm" required minlength="6" maxlength="20" type="password" />
+            <div class="diverror" *ngIf="confsernha != usuario.ds_senha"  >
+              <label   class="text-danger">*Senhas não conferem.</label>
+            </div>
+          </div>
+        </div>
+      </div>
+       </div>
+       <p></p>
+
+    </div>
+  </div>
+</div>
+</div>
+</form>

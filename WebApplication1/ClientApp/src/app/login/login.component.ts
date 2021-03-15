@@ -27,7 +27,7 @@ public usuario: Usuario = new Usuario();
   async FazerLogin(){
 
     this.spiner.spiner = true;
-    if(this.usuario.ds_login.indexOf('@'))
+    if(this.usuario.ds_login && this.usuario.ds_senha)
     {
       let user:any = await this.authservice.fazerlogin(this.usuario)
       if(user){
@@ -42,9 +42,6 @@ public usuario: Usuario = new Usuario();
 
     }
     else{
-      this.MsgPrincipal = "Atenção! "; this.MsgDescritiva = " Digite um Email Valido"
-      this.error = true;
-      setTimeout(() => this.error = false, 20000);
       this.spiner.spiner = false;
     }
 
