@@ -32,6 +32,7 @@ export class TableEspecComponent implements OnInit {
   pagination:number=1;
   PaginaAnterior:number=1;
   Table:any=[];
+  ColdSpan:number = Headers.length + 1;
 
   constructor(private sanitized: DomSanitizer,private elRef: ElementRef) { }
 
@@ -43,10 +44,9 @@ export class TableEspecComponent implements OnInit {
   }
 
   ngOnChanges(changes): void {
-    debugger;
-    if(changes.data){
+      debugger;
       this.MontarTable();
-    }
+
     //this.MontarTable();
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
@@ -134,6 +134,9 @@ export class TableEspecComponent implements OnInit {
   }
 
   MontarTable(){
+    this.views =0;
+    this.total=0;
+    this.Table=[];
     this.datapaginada=[];
     this.paginas=[];
     this.DataPaginada();

@@ -26,12 +26,13 @@ import { TableEspecComponent } from './table-espec/table-espec.component';
 import { SubmoduloComponent } from './submodulo/submodulo.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { MessagensComponent } from './messagens/messagens.component';
+import { CadUsuarioComponent } from './cad-usuario/cad-usuario.component';
 
 
 registerLocaleData(localept, 'pt-BR');
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -47,7 +48,8 @@ registerLocaleData(localept, 'pt-BR');
     TableEspecComponent,
       SubmoduloComponent,
       UsuarioComponent,
-      MessagensComponent
+      MessagensComponent,
+      CadUsuarioComponent
    ],
   imports: [NgbModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,6 +58,7 @@ registerLocaleData(localept, 'pt-BR');
     RouterModule.forRoot([
       { path: '',component: ProcessosComponent, pathMatch: 'full' },
       { path: 'usuario',component: UsuarioComponent,  },
+      { path: 'cadusuario', component: CadUsuarioComponent},
       { path: 'fetch-data',  component: FetchDataComponent },
     ]),
     DataTablesModule
