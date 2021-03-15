@@ -12,15 +12,22 @@ export class CadUsuarioComponent implements OnInit {
   public usuario: Usuario = new Usuario;
   createForm :FormGroup;
   confsernha:string;
+  loaduser:boolean = false;
   constructor(private serviceusuario: UsuarioService) { }
 
   ngOnInit() {
+    const key = Object.keys(this.usuario);
   }
 
   onSubmit(){
+    debugger;
     //var json = JSON;
-    //const key = Object.keys(this.usuario);
-    this.serviceusuario.PostUsuario(this.usuario);
+    const key = Object.keys(this.usuario);
+    console.log(key)
+   /* this.loaduser= true;
+    this.serviceusuario.PostUsuario(this.usuario).toPromise().then(result =>{
+      this.loaduser = false;
+    });*/
     //console.log(key);
 
   }

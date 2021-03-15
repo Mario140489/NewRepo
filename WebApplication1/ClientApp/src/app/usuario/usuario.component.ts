@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { asapScheduler } from 'rxjs';
+import { Subject } from 'rxjs';
 import {Usuario} from '../Classes/Usuario';
 import {UsuarioService} from '../services/usuario.service';
 
@@ -14,7 +14,7 @@ export class UsuarioComponent implements OnInit {
   dados:any =["id_usuario","ds_nome"];
   loaduser:boolean = false;
   dataservico:any;
-
+  dtTrigger: Subject<any> = new Subject();
   constructor(private service:UsuarioService) { }
 
   async ngOnInit() {
@@ -34,6 +34,11 @@ export class UsuarioComponent implements OnInit {
     else{
       this.loaduser= false;
     }
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }

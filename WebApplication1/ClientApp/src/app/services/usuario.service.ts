@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Usuario } from '../Classes/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,12 @@ constructor(private http:HttpClient, @Inject('BASE_URL')baseUrl:string) {
  }
 
  GetUsuario(parans){
-   let nome:string = parans;
-   return this.http.get(this.rootURL + "api/Usuarios/" + nome);
+
+   return this.http.get(this.rootURL + "api/Usuarios/" + parans);
  }
 
  PostUsuario(data){
-   debugger;
-   return this.http.post(this.rootURL + "api/Usuarios/adicionar",data);
+   return this.http.post(this.rootURL + 'api/Usuarios/PostUsuario',data).pipe();
  }
 
 }

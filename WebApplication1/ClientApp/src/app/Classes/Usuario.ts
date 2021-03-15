@@ -1,9 +1,9 @@
 
 export class Usuario{
-    id_usuario:number;
-    ds_nome:string;
-    ds_senha:string;
-    ds_login:string;
-    ds_imagem:string;
-    do_inactive:string;
+    id_usuario:number = null;
+    ds_nome:string = null;
+    ds_senha:string = null;
+    ds_login:string = null ;
+    ds_imagem:string = null;
+    do_inactive:boolean = null;
 }
