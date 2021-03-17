@@ -11,6 +11,7 @@ using WebApplication1;
 using WebApplication1.Data;
 using WebApplication1.Model;
 using WebApplication1.Services;
+using WebApplication1.Bussines;
 
 namespace WebApplication1.Controllers
 {
@@ -37,11 +38,19 @@ namespace WebApplication1.Controllers
 
         // GET: api/Usuarios/5
         [HttpGet("{nome}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(string nome)
+        public async Task<ActionResult> GetUsuario(string nome)
         {
 
-                
-            var usuario = await _context.Usuario.Where(b => b.ds_nome.Contains(nome) && b.do_inactive == 'N').ToListAsync().ConfigureAwait(false);
+            var usuario = new List<Usuario>();
+            if (nome == "*")
+            {
+                 usuario = await _context.Usuario.ToListAsync().ConfigureAwait(true);
+            }
+            else
+            {
+                 usuario = await _context.Usuario.Where(b => b.ds_nome.Contains(nome)).ToListAsync().ConfigureAwait(false);
+            }
+           
 
             if (usuario == null)
             {
@@ -119,6 +128,13 @@ namespace WebApplication1.Controllers
         [HttpPost("PostUsuario")]
         public async Task<ActionResult> PostUsuario(Usuario usuario)
         {
+            ValidadorUsuario bussines = new ValidadorUsuario();
+            var result = bussines.ValidaUsuario(usuario);
+            if(result == null)
+            {   
+                return Ok( "Voçê deve preencher todos os dados Obrigarios");
+            }
+            usuario = (Usuario)result;
             _context.Usuario.Add(usuario);
             await _context.SaveChangesAsync().ConfigureAwait(true);
 

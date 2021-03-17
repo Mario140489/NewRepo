@@ -16,7 +16,6 @@ export class AuthService {
    async fazerlogin(usuario: Usuario){
       let user:any;
      await this.service.Login(usuario).toPromise().then( (result:any) =>{
-       debugger;
       if (result) {
         user = true;
         sessionStorage.setItem('user', result['ds_nome']);

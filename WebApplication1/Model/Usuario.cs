@@ -11,9 +11,13 @@ namespace WebApplication1.Model
     {
         [Key]
         public int id_usuario { get; set; }
+        //[Required(ErrorMessage ="Nome do Usuario é Obrigatorio")]
         public string ds_nome { get; set; }
+       // [Required(ErrorMessage = "Nome do Usuario é Obrigatorio")]
         public string ds_senha { get; set; }
+      //  [Required(ErrorMessage = "Senha do Usuario é Obrigatorio")]
         public string ds_login { get; set; }
+      //  [Required(ErrorMessage = "Login do Usuario é Obrigatorio")]
         public string ds_imagem { get; set; }
         public char do_inactive { get; set; }
         

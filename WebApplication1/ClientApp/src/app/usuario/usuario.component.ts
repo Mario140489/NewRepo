@@ -10,8 +10,8 @@ import {UsuarioService} from '../services/usuario.service';
 })
 export class UsuarioComponent implements OnInit {
   public usuario: Usuario = new Usuario();
-  data:any =["Id","Nome"];
-  dados:any =["id_usuario","ds_nome"];
+  data:any =["Id","Nome","inativo"];
+  dados:any =["id_usuario","ds_nome","do_inactive"];
   loaduser:boolean = false;
   dataservico:any;
   dtTrigger: Subject<any> = new Subject();

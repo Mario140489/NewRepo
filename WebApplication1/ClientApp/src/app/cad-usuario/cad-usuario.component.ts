@@ -16,20 +16,25 @@ export class CadUsuarioComponent implements OnInit {
   constructor(private serviceusuario: UsuarioService) { }
 
   ngOnInit() {
-    const key = Object.keys(this.usuario);
+
   }
 
   onSubmit(){
     debugger;
-    //var json = JSON;
-    const key = Object.keys(this.usuario);
-    console.log(key)
-   /* this.loaduser= true;
-    this.serviceusuario.PostUsuario(this.usuario).toPromise().then(result =>{
+    $("#liveToast").show()
+    this.loaduser= true;
+    this.serviceusuario.PostUsuario(this.usuario).toPromise().then((result:any) =>{
+      if(result && result.id_usuario){
+         alert('sucesso');
+      }else{
+        alert(result);
+      }
       this.loaduser = false;
-    });*/
-    //console.log(key);
-
+    }).catch(result => {
+      $("#liveToast").hide()
+      alert(result.error.text)
+      this.loaduser = false;
+    })
   }
 
 }
