@@ -4,7 +4,9 @@
   <div class="row">
     <div class="col-sm-3">  <h4 class="text-secondary">Usuário</h4>
       </div>
-      <div  class="col-sm-9 btn-direita"><button  type="submit" [disabled]="" class="btn btn-sm btn-primary"><span *ngIf="loaduser"
+      <div  class="col-sm-9 btn-direita">
+        <button type ="button" class="btn btn-sm btn-secondary mr-1" routerLink='/usuario' ><span><i class="fas fa-undo-alt"></i> Cancelar</span></button>
+        <button  type="submit" [disabled]="loaduser" class="btn btn-sm btn-primary"><span *ngIf="loaduser"
         class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         <span *ngIf="loaduser"  class="visually-hidden"> Salvando...</span><span *ngIf="loaduser == false" ><i class="fas fa-save"></i> Salvar</span> </button></div>
   </div>
@@ -81,3 +83,4 @@
 </div>
 </div>
 </form>
+<app-messagens></app-messagens>

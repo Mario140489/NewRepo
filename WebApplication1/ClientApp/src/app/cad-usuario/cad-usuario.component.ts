@@ -21,18 +21,17 @@ export class CadUsuarioComponent implements OnInit {
 
   onSubmit(){
     debugger;
-    $("#liveToast").show()
+
     this.loaduser= true;
     this.serviceusuario.PostUsuario(this.usuario).toPromise().then((result:any) =>{
       if(result && result.id_usuario){
-         alert('sucesso');
+        alert('sucesso');
       }else{
         alert(result);
       }
       this.loaduser = false;
     }).catch(result => {
-      $("#liveToast").hide()
-      alert(result.error.text)
+      //alert(result.error.text)
       this.loaduser = false;
     })
   }

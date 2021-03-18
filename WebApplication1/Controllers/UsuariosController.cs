@@ -65,7 +65,8 @@ namespace WebApplication1.Controllers
         {
 
             // string   user = JsonSerializer.Serialize(_context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList());
-            var user = _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList();
+            var user = await  _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha)
+                .ToListAsync();
             //var list_id_app = _context.crm_appvsusuario.Where(b => b.id_usuario == user[0].id_usuario).ToList();
 
             //string json = JsonSerializer.Serialize(user[0]);
@@ -128,8 +129,8 @@ namespace WebApplication1.Controllers
         [HttpPost("PostUsuario")]
         public async Task<ActionResult> PostUsuario(Usuario usuario)
         {
-            ValidadorUsuario bussines = new ValidadorUsuario();
-            var result = bussines.ValidaUsuario(usuario);
+           
+            var result = ValidadorUsuario.ValidaUsuario(usuario);
             if(result == null)
             {   
                 return Ok( "Voçê deve preencher todos os dados Obrigarios");
