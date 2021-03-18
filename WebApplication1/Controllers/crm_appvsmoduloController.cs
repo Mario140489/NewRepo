@@ -13,11 +13,11 @@ namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class crm_appvsmoduloController : ControllerBase
+    public class Crm_appvsmoduloController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public crm_appvsmoduloController(ApplicationDbContext context)
+        public Crm_appvsmoduloController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -26,20 +26,19 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<crm_modulo>>> Getcrm_appvsmodulo()
         {
-            return await _context.crm_modulo.ToListAsync();
+            return await _context.crm_modulo.ToListAsync().ConfigureAwait(false);
         }
 
         // GET: api/crm_appvsmodulo/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<crm_modulo>>> Getcrm_appvsmodulo(int id)
+        public ActionResult<IEnumerable<crm_modulo>> Getcrm_appvsmodulo(int id)
         {
             //var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
-            var crm_modulo =  (from appvcmodulo in _context.crm_appvsmodulo
-                                   join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo 
-                                         where appvcmodulo.id_app == id
-                                         select new {modulo}).ToList();
+            var crm_modulo = (from appvcmodulo in _context.crm_appvsmodulo
+                              join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo
+                              where appvcmodulo.id_app == id
+                              select new { modulo }).ToList();
             var modulos = new List<RetornoModulo>();
-            int i = 0;
             foreach (var sspmod in crm_modulo)
             {
                 //crm_modulo[i].modulo.crm_submodulos = _context.crm_submodulos.Where(b => b.id_modulo == sspmod.modulo.id_modulo).ToList();
@@ -48,14 +47,13 @@ namespace WebApplication1.Controllers
                     id_modulo = sspmod.modulo.id_modulo,
                     ds_modulo = sspmod.modulo.ds_modulo,
                     submodulos = _context.crm_submodulos.Where(b => b.id_modulo == sspmod.modulo.id_modulo).ToList()
-            });
+                });
             }
 
             if (modulos == null)
             {
                 return NotFound();
             }
-
 
             return Ok(modulos);
         }
@@ -66,7 +64,7 @@ namespace WebApplication1.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Putcrm_appvsmodulo(int id, crm_appvsmodulo crm_appvsmodulo)
         {
-            if (id != crm_appvsmodulo.id_appvsmodulo)
+            if (crm_appvsmodulo != null && id != crm_appvsmodulo.id_appvsmodulo)
             {
                 return BadRequest();
             }
@@ -75,18 +73,11 @@ namespace WebApplication1.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync().ConfigureAwait(false);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException) when (!Crm_appvsmoduloExists(id))
             {
-                if (!crm_appvsmoduloExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return NoContent();
@@ -99,7 +90,7 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult<crm_appvsmodulo>> Postcrm_appvsmodulo(crm_appvsmodulo crm_appvsmodulo)
         {
             _context.crm_appvsmodulo.Add(crm_appvsmodulo);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(false);
 
             return CreatedAtAction("Getcrm_appvsmodulo", new { id = crm_appvsmodulo.id_appvsmodulo }, crm_appvsmodulo);
         }
@@ -108,19 +99,19 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<crm_appvsmodulo>> Deletecrm_appvsmodulo(int id)
         {
-            var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
+            var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id).ConfigureAwait(false);
             if (crm_appvsmodulo == null)
             {
                 return NotFound();
             }
 
             _context.crm_appvsmodulo.Remove(crm_appvsmodulo);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(false);
 
             return crm_appvsmodulo;
         }
 
-        private bool crm_appvsmoduloExists(int id)
+        private bool Crm_appvsmoduloExists(int id)
         {
             return _context.crm_appvsmodulo.Any(e => e.id_appvsmodulo == id);
         }

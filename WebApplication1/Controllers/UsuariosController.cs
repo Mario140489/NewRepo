@@ -20,7 +20,6 @@ namespace WebApplication1.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        
 
         public UsuariosController(ApplicationDbContext context)
         {
@@ -34,13 +33,10 @@ namespace WebApplication1.Controllers
             return await _context.Usuario.ToListAsync().ConfigureAwait(true);
         }
 
-
-
         // GET: api/Usuarios/5
         [HttpGet("{nome}")]
         public async Task<ActionResult> GetUsuario(string nome)
         {
-
             var usuario = new List<Usuario>();
             if (nome == "*")
             {
@@ -48,9 +44,8 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                 usuario = await _context.Usuario.Where(b => b.ds_nome.Contains(nome)).ToListAsync().ConfigureAwait(false);
+                 usuario = await _context.Usuario.Where(b => b.ds_nome.IndexOf(nome, StringComparison.OrdinalIgnoreCase) != -1).ToListAsync().ConfigureAwait(false);
             }
-           
 
             if (usuario == null)
             {
@@ -61,9 +56,8 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> LoginAsync(Usuario usuario)
+        public ActionResult Login(Usuario usuario)
         {
-
             // string   user = JsonSerializer.Serialize(_context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList());
             var user = _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList();
             //var list_id_app = _context.crm_appvsusuario.Where(b => b.id_usuario == user[0].id_usuario).ToList();
@@ -72,22 +66,21 @@ namespace WebApplication1.Controllers
 
             //JObject json = JObject.Parse("{nome:" +user[0].ds_nome+", key:"+key+"}");
 
-
-            if (user.Count  == 0)
+            if (user.Count == 0)
             {
                 return null;
             }
             string key = Services.Criptografia.Cripitografar(user[0].ToString());
             Listaapk listapp = new Listaapk(_context);
-            
-            Login UsuairioLogado = new Login();
-            UsuairioLogado.ds_nome = user[0].ds_nome;
-            UsuairioLogado.key = key;
-            UsuairioLogado.apps = listapp.App(user[0].id_usuario);
+
+            Login UsuairioLogado = new Login
+            {
+                ds_nome = user[0].ds_nome,
+                key = key,
+                apps = listapp.App(user[0].id_usuario)
+            };
 
             return Ok(UsuairioLogado);
-
-
         }
 
         // PUT: api/Usuarios/5
@@ -107,16 +100,9 @@ namespace WebApplication1.Controllers
             {
                 await _context.SaveChangesAsync().ConfigureAwait(true);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException) when (!UsuarioExists(id))
             {
-                if (!UsuarioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return NoContent();
@@ -131,7 +117,7 @@ namespace WebApplication1.Controllers
             ValidadorUsuario bussines = new ValidadorUsuario();
             var result = bussines.ValidaUsuario(usuario);
             if(result == null)
-            {   
+            {
                 return Ok( "Voçê deve preencher todos os dados Obrigarios");
             }
             usuario = (Usuario)result;
@@ -145,7 +131,7 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Usuario>> DeleteUsuario(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
+            var usuario = await _context.Usuario.FindAsync(id).ConfigureAwait(false);
             if (usuario == null)
             {
                 return NotFound();
