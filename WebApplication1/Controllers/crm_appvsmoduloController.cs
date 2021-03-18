@@ -34,11 +34,13 @@ namespace WebApplication1.Controllers
         public ActionResult<IEnumerable<crm_modulo>> Getcrm_appvsmodulo(int id)
         {
             //var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
+
             var crm_modulo = (from appvcmodulo in _context.crm_appvsmodulo
                               join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo
                               where appvcmodulo.id_app == id
                               select new { modulo }).ToList();
             var modulos = new List<RetornoModulo>();
+
             foreach (var sspmod in crm_modulo)
             {
                 //crm_modulo[i].modulo.crm_submodulos = _context.crm_submodulos.Where(b => b.id_modulo == sspmod.modulo.id_modulo).ToList();

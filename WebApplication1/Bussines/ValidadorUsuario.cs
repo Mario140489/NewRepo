@@ -6,9 +6,9 @@ using WebApplication1.Model;
 
 namespace WebApplication1.Bussines
 {
-    public class ValidadorUsuario
+    public static class ValidadorUsuario
     {
-        public  object ValidaUsuario(Usuario usuario)
+        public static object ValidaUsuario(Usuario usuario)
         {
             
             if (usuario.ds_nome != null && usuario.ds_login != null && usuario.ds_senha != null)
