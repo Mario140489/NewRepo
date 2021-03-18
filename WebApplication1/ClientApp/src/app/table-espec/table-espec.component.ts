@@ -1,8 +1,7 @@
 
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef ,OnChanges} from '@angular/core';
-import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { DomSanitizer } from '@angular/platform-browser';
-import { data } from 'jquery';
+import {} from '../services/toast-service.service';
 
 @Component({
   selector: 'app-table-espec',

@@ -56,11 +56,12 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("Login")]
-        public ActionResult Login(Usuario usuario)
+        public async Task<ActionResult> LoginAsync(Usuario usuario)
         {
             // string   user = JsonSerializer.Serialize(_context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList());
             var user = await  _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha)
-                .ToListAsync();
+                .ToListAsync()
+                .ConfigureAwait(false);
             //var list_id_app = _context.crm_appvsusuario.Where(b => b.id_usuario == user[0].id_usuario).ToList();
 
             //string json = JsonSerializer.Serialize(user[0]);

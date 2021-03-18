@@ -17,7 +17,6 @@ export class NavMenuComponent {
 
   constructor(  private memorymodules: MemoryModulesService) { }
   ngOnInit() {
-    debugger;
    this.usuario =  sessionStorage.getItem('user');
    this.muntavariaveldinamica()
   }
@@ -25,7 +24,6 @@ export class NavMenuComponent {
 
   }
   SelectList(e){
-    debugger;
     let id:string = "#"+e+" span i";
     let mudarclasse = document.querySelector(id);
     let class1 = mudarclasse.className;

@@ -10,8 +10,7 @@ namespace WebApplication1.Bussines
     {
         public static object ValidaUsuario(Usuario usuario)
         {
-            
-            if (usuario.ds_nome != null && usuario.ds_login != null && usuario.ds_senha != null)
+            if (usuario?.ds_nome != null && usuario.ds_login != null && usuario.ds_senha != null)
             {
                 if (usuario.do_inactive == 0) { usuario.do_inactive = 'N'; }
                 return usuario;

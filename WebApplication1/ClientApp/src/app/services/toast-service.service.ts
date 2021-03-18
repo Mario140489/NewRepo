@@ -1,15 +1,17 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { MessagensComponent } from '../messagens/messagens.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToastServiceService {
 
-  constructor() { }
+  constructor(private msg:MessagensComponent) { }
   toasts: any[] = [];
 
-  show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
-    this.toasts.push({ textOrTpl, ...options });
+  show(data) {
+    this.msg.toast.push(data)
+    //this.toasts.push(data);
   }
 
   remove(toast) {
