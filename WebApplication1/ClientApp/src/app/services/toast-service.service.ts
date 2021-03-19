@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { MessagensComponent } from '../messagens/messagens.component';
 
+var mes = new MessagensComponent();
+
 @Injectable({
   providedIn: 'root'
 })
 export class ToastServiceService {
 
-  constructor(private msg:MessagensComponent) { }
+  constructor() { }
   toasts: any[] = [];
 
-  show(data) {
-    this.msg.toast.push(data)
-    //this.toasts.push(data);
+  show(data,option) {
+    debugger;
+    mes.show(data,option)
+   //this.msg.show(data,option);
   }
 
   remove(toast) {

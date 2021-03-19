@@ -120,7 +120,7 @@ namespace WebApplication1.Controllers
             var result = ValidadorUsuario.ValidaUsuario(usuario);
             if(result == null)
             {
-                return Ok( "Voçê deve preencher todos os dados Obrigarios");
+                return Ok( "Voçê deve preencher todos os dados Obrigarios.");
             }
             usuario = (Usuario)result;
             _context.Usuario.Add(usuario);

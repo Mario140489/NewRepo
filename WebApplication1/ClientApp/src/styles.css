@@ -9,6 +9,11 @@ body {
 .btn-direita{
   text-align: right !important;
 }
+.toast{
+  min-width: 350px !important;
+}
+
+
 
 .mg-10{
   margin-left: 18px;

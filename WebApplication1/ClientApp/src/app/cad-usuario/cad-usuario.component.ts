@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import {Usuario} from  '../Classes/Usuario';
-import {UsuarioService} from '../services/usuario.service';
-import {ToastServiceService} from '../services/toast-service.service';
+import { Usuario } from  '../Classes/Usuario';
+import { UsuarioService } from '../services/usuario.service';
+import { ToastServiceService } from '../services/toast-service.service';
 
 @Component({
   selector: 'app-cad-usuario',
@@ -14,7 +14,7 @@ export class CadUsuarioComponent implements OnInit {
   createForm :FormGroup;
   confsernha:string;
   loaduser:boolean = false;
-  constructor(private serviceusuario: UsuarioService, private servicemsg:ToastServiceService) { }
+  constructor(private serviceusuario: UsuarioService, private msg:ToastServiceService) { }
 
   ngOnInit() {
 
@@ -33,7 +33,7 @@ export class CadUsuarioComponent implements OnInit {
       this.loaduser = false;
     }).catch(result => {
 
-      this.servicemsg.show({messagem:"Erro ao inserir dados",class:"bg-danger"})
+       this.msg.show(result.error.text,{classe:"bg-danger"});
       //alert(result.error.text)
       this.loaduser = false;
     })
