@@ -21,4 +21,8 @@ constructor(private http:HttpClient, @Inject('BASE_URL')baseUrl:string) {
    return this.http.post(this.rootURL + 'api/Usuarios/PostUsuario',data).pipe();
  }
 
+ GetGrupoUsuarioAtivo(){
+  return this.http.get(this.rootURL +"api/crm_grupousuario/ativo/").pipe();
+}
+
 }

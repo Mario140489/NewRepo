@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,6 +25,7 @@ namespace WebApplication1.Data
         public DbSet<crm_modulo> crm_modulo { get; set; }
         public DbSet<crm_usuario> crm_usuario { get; set; }
         public DbSet<crm_submodulos> crm_submodulos { get; set; } 
+        public DbSet<crm_grupousuario> crm_grupousuario { get; set; }
 
     }
 }

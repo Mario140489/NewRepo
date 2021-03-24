@@ -5,6 +5,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { ToastServiceService } from '../services/toast-service.service';
 import { Subject } from 'rxjs';
 
+
 @Component({
   selector: 'app-cad-usuario',
   templateUrl: './cad-usuario.component.html',
@@ -18,12 +19,21 @@ export class CadUsuarioComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   data:any =["Id","Grupo Usuario"];
   dados:any =["id_grupousuario","ds_grupousuario"];
+  selectgrupousuario:any;
+  grupousuario:any;
 
   dataservico:any;
   constructor(private serviceusuario: UsuarioService, private msg:ToastServiceService) { }
 
   ngOnInit() {
+    this.CarregaGrupoUsuario();
+  }
 
+  CarregaGrupoUsuario(){
+    debugger;
+    this.serviceusuario.GetGrupoUsuarioAtivo().subscribe(retorno =>{
+       this.grupousuario = retorno;
+    })
   }
 
   onSubmit(f:NgForm){

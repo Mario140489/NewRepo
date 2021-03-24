@@ -102,7 +102,20 @@
           <div class="card-body">
             <div class='row'>
               <div  class="col-12">
-                <div class="d-flex flex-row-reverse bd-highlight"> <button class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Adicionar</button> </div>
+                <div class="row">
+                   <div class="form-group col-sm-3">
+                   <label>Grupos de Usuário</label>
+                   <select
+                    class="form-control form-control-sm">
+                    <option> Nenhuma opção selecionada</option>
+                    <option *ngFor="let grupousuario of grupousuario" [ngValue]="grupousuario.id_grupousuario" >{{grupousuario.ds_grupousuario}}</option>
+                   </select>
+                </div>
+                <div class="col-sm-3">
+                  <button class="btn btn-sm btn-success"
+                  style="margin-top: 23px"><i class="fas fa-plus"></i> Adicionar</button>
+                </div>
+                  </div>
                 <p></p>
                   <div>
                     <app-table-espec [HeaderTable]=data [HeaderData]=dados [DataTable]=dataservico></app-table-espec>
