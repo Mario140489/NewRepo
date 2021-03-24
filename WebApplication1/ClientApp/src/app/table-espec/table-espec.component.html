@@ -12,14 +12,14 @@
 <table  class=" table table-sm  table-striped table-hover">
   <thead class="bg-secondary text-white">
     <tr>
-      <th *ngFor="let header of header">{{header}}</th>
+      <th *ngFor="let header of HeaderTable">{{header}}</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngIf="Table.length == 0" ><td align="center" colSpan="20"><b>Nenhum Resultado Encontrado</b></td></tr>
     <tr *ngFor="let Table  of Table; let i = index" >
-     <td *ngFor="let dados of dados; let idx = index">{{Table[idx]}}</td>
+     <td *ngFor="let dados of HeaderData; let idx = index">{{Table[idx]}}</td>
      <td class="direita" ><span class="btn btn-primary btn-sm" ngbTooltip="Editar" (click)="EnventoEditar(this.Table)"><i class="fas fa-pen"></i></span>
      <span class="btn btn-danger ml-1 btn-sm"  ngbTooltip="Excluir" (click)="EnventoExcluir(this.Table)"><i class="fas fa-trash"></i></span></td>
     </tr>

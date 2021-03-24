@@ -12,7 +12,6 @@ export class ToastServiceService {
   toasts: any[] = [];
 
   show(data,option) {
-    debugger;
     mes.show(data,option)
    //this.msg.show(data,option);
   }

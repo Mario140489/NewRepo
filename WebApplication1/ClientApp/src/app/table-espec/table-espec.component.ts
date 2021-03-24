@@ -1,7 +1,8 @@
 
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef ,OnChanges} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import {} from '../services/toast-service.service';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-table-espec',
@@ -13,9 +14,9 @@ import {} from '../services/toast-service.service';
 
 export class TableEspecComponent implements OnInit {
   @Output() DadosRow:EventEmitter<any> = new EventEmitter<any>();
-  @Input() header:any = [];
-  @Input() data:any = [] ;
-  @Input() dados:any = [];
+  @Input() HeaderTable:any = [];
+  @Input() DataTable:any = [] ;
+  @Input() HeaderData:any = [];
   dataold:any =[];
   datapaginada:any=[];
   html:any ='';
@@ -32,18 +33,19 @@ export class TableEspecComponent implements OnInit {
   PaginaAnterior:number=1;
   Table:any=[];
   ColdSpan:number = Headers.length + 1;
+  dtTrigger: Subject<any> = new Subject();
 
   constructor(private sanitized: DomSanitizer,private elRef: ElementRef) { }
 
-  ngOnInit(): void {
-    debugger;
+  ngOnInit() {
+
     //this.DataPaginada();
     this.MontarTable();
 
   }
 
-  ngOnChanges(changes): void {
-      debugger;
+  ngOnChanges(changes) {
+
       this.MontarTable();
 
     //this.MontarTable();
@@ -53,20 +55,20 @@ export class TableEspecComponent implements OnInit {
   }
 
   MostrarRowsViewsTotal(){
-   this.total = this.data.length;
+   this.total = this.DataTable.length;
   }
 
   DataPaginada(){
-    if( this.data && this.data.length > 0){
+    if( this.DataTable && this.DataTable.length > 0){
 
       this.MontarPaginacao();
       let i = 0;
       let Rows= 0;
-       if(this.data.length > 5) {Rows = this.RowsSelected}else{ Rows =  this.data.length} ;
+       if(this.DataTable.length > 5) {Rows = this.RowsSelected}else{ Rows =  this.DataTable.length} ;
         for(let idx = 0; idx < this.datapaginada.length; idx++){
 
             for(i; i < Rows; i++){
-            this.datapaginada[idx].push(this.data[i])
+            this.datapaginada[idx].push(this.DataTable[i])
         }
          Rows = Rows + this.RowsSelected;
         }
@@ -81,12 +83,12 @@ export class TableEspecComponent implements OnInit {
   }
 
   PopularTabela(){
-    debugger;
-    if(this.data &&  this.data.length > 0){
+
+    if(this.DataTable &&  this.DataTable.length > 0){
       this.Table = [];
       for(let idx = 0 ;idx < this.datapaginada[this.PaginaAtiva-1].length; idx++){
         let DadosTable:any = [];
-        this.dados.forEach(element=> {
+        this.HeaderData.forEach(element=> {
           DadosTable.push(this.datapaginada[this.PaginaAtiva-1][idx][element]);
          });
          this.Table.push(DadosTable);
@@ -104,12 +106,12 @@ export class TableEspecComponent implements OnInit {
 
   MontarPaginacao(){
 
-    if(this.data &&  this.data.length > 0){
+    if(this.DataTable &&  this.DataTable.length > 0){
 
       let idx = 0;
     let i = 1;
     let pg = 0;
-    let contador:number = this.data.length
+    let contador:number = this.DataTable.length
     //if(this.data.length > this.MaximoPaginas){contador = this.MaximoPaginas;}
     while(idx < contador ){
       if(i < this.RowsSelected){this.paginas.push(pg++);}
@@ -163,7 +165,10 @@ export class TableEspecComponent implements OnInit {
   }
 
 
-
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
 
 
 }

@@ -38,9 +38,11 @@ export class NavMenuComponent {
   }
 
   muntavariaveldinamica(){
+    if(this.modulos && this.modulos.length >0){
     this.modulos.array.forEach(element => {
       this.submenu.add(false);
     });
+  }
   }
 
 

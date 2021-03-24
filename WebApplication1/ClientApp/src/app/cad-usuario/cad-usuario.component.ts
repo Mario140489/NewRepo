@@ -13,9 +13,13 @@ import { Subject } from 'rxjs';
 export class CadUsuarioComponent implements OnInit {
   public usuario: Usuario = new Usuario;
   createForm :FormGroup;
-  confsernha:string;
+  confirmasenha:string;
   loaduser:boolean = false;
   dtTrigger: Subject<any> = new Subject();
+  data:any =["Id","Grupo Usuario"];
+  dados:any =["id_grupousuario","ds_grupousuario"];
+
+  dataservico:any;
   constructor(private serviceusuario: UsuarioService, private msg:ToastServiceService) { }
 
   ngOnInit() {
