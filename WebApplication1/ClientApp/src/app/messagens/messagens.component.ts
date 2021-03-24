@@ -4,6 +4,7 @@ import {
   OnInit,
   SimpleChanges
 } from '@angular/core';
+import { Subject } from 'rxjs';
 
 
 
@@ -18,7 +19,7 @@ export class MessagensComponent implements OnInit {
   time: number = 5000;
   msg: string = "";
   classe: string = "bg-secondary"
-
+  dtTrigger: Subject<any> = new Subject();
   layput: string = `<div id="#id#" class="toast   #tipoalerta#" style="opacity: 0.9; color: white;" >
   <div class="toast-header">
     <strong class="mr-auto">SYS</strong>
@@ -52,7 +53,6 @@ export class MessagensComponent implements OnInit {
 
 
     messagem = messagem.replace('#msg#', this.msg);
-
     messagem = messagem.replace("#tipoalerta#", this.classe)
     let idfinal;
     for (let i = 0; i < 10; i++) {
@@ -99,6 +99,11 @@ export class MessagensComponent implements OnInit {
   close(this) {
     let id = this.id;
     document.getElementById(id).remove();
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }

@@ -16,6 +16,7 @@ export class AppComponent {
 
   }
     ngOnInit() {
+
       //this.router.navigate(['/']);
       this.usuario =  sessionStorage.getItem('user');
       if(this.usuario){

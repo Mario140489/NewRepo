@@ -28,7 +28,7 @@
 </div>
 <div class="row col-12" >
   <div class="col-6">
-    <ul class="pagination" *ngIf="paginas.length > 0" >
+    <ul class="pagination pagination-sm" *ngIf="paginas.length > 0" >
       <li class="page-item" [ngClass]="{'disabled': PaginaAtiva == 1}" (click)="Mudarpagina( PaginaAtiva - 1)" ><a class="page-link" >Anterior</a></li>
       <li *ngFor="let paginas of paginas;let i = index"  [ngClass]="{'active':PaginaAtiva == i+pagination}"   class="page-item"
       (click)="Mudarpagina(i + pagination)"><a class="page-link" >{{i + pagination}}</a></li>

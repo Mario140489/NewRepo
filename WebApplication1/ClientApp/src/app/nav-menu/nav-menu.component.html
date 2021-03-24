@@ -3,13 +3,13 @@
   <div class="modal-content">
     <nav class="navbar navbar-dark bg-secondary" >
       <a class="navbar-brand">{{sidebar}}</a>
-     <a href="#" data-toggle="modal" ngbTooltip="Esconder" data-target="#sidebar-left"> <span class="navbar-brand"  ><i class="fas fa-angle-double-left"></i></span></a>
+     <button class="btn btn-secondary" data-toggle="modal" ngbTooltip="Esconder" data-target="#sidebar-left"> <span><i class="fas fa-angle-double-left"></i></span></button>
     </nav>
     <div class="row">
       <div class="col-12">
         <div class="list-group" id="list-tab" role="tablist">
           <div *ngFor="let  mod of modulos, let i = index" >
-          <a id="id_modulo{{mod.id_modulo}}" (click)="SelectList('id_modulo'+mod.id_modulo);submenu[i]=!submenu[i]" [ngValue]="false"
+          <a id="id_modulo{{mod.id_modulo}}" (click)="SelectList('id_modulo'+mod.id_modulo);submenu[i]=!submenu[i]"
            class="list-group-item list-group-item-action" ><a style="position: absolute;">{{mod.ds_modulo}}</a>
             <span class="spanicon" ><i class="fas fa-angle-down"></i></span>
           </a>
@@ -27,7 +27,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Modulos</h5>
-          <button type="button" style="color: white;" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" style="color: white;" class="btn close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -41,18 +41,24 @@
     <nav class="navbar navbar-dark bg-secondary">
       <div class="row btn-group">
         &nbsp;
-      <btn href="#" *ngIf="toggled" style="font-size: 25px;" id="btnsidebar" class="text-light mr-1  ml-2"  ngbTooltip="Menu"
-      data-toggle="modal" data-target="#sidebar-left"><span><i class="fas fa-bars"></i></span></btn>
+      <button href="#" *ngIf="toggled" id="btnsidebar" class=" text-light btn btn-sm btn-secondary"  ngbTooltip="Menu"
+      data-toggle="modal" data-target="#sidebar-left"><span><i class="fas fa-bars"></i></span></button>
       &nbsp;<a class="navbar-brand ">SyS</a>
     </div>
       <div class="btn-group">
-        <a href="#"  class="nav-link text-light pointer" ngbTooltip="Menu Principal"  data-toggle="modal" data-target="#menuprincipal">
+        <button  class="btn btn-sm  btn-secondary text-light" ngbTooltip="Menu Principal"  data-toggle="modal" data-target="#menuprincipal">
           <span ><i class="fas fa-grip-horizontal"></i></span>
-        </a>
-        <a href="#"  class=" nav-link text-light tremetreme ">
-
-          <span><i class="far fa-user"></i> </span> <label class="ocultar ml-1">{{usuario}}</label>
-        </a>
+        </button>
+        <div class="btn-group">
+          <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span><i class="far fa-user"></i> </span> {{usuario}}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <button class="dropdown-item" type="button">Action</button>
+            <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button>
+          </div>
+        </div>
       </div>
     </nav>
 

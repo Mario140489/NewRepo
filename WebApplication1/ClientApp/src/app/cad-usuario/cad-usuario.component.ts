@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { Usuario } from  '../Classes/Usuario';
 import { UsuarioService } from '../services/usuario.service';
 import { ToastServiceService } from '../services/toast-service.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-cad-usuario',
@@ -14,21 +15,22 @@ export class CadUsuarioComponent implements OnInit {
   createForm :FormGroup;
   confsernha:string;
   loaduser:boolean = false;
+  dtTrigger: Subject<any> = new Subject();
   constructor(private serviceusuario: UsuarioService, private msg:ToastServiceService) { }
 
   ngOnInit() {
 
   }
 
-  onSubmit(){
-    debugger;
-
+  onSubmit(f:NgForm){
+    if(f.valid){
     this.loaduser= true;
     this.serviceusuario.PostUsuario(this.usuario).toPromise().then((result:any) =>{
       if(result && result.id_usuario){
-        alert('sucesso');
+        this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
+        f.resetForm();
       }else{
-        alert(result);
+        this.msg.show("Erro a o Salvar dados.",{classe:"bg-danger"});
       }
       this.loaduser = false;
     }).catch(result => {
@@ -37,6 +39,14 @@ export class CadUsuarioComponent implements OnInit {
       //alert(result.error.text)
       this.loaduser = false;
     })
+  }
+  else{
+    this.msg.show("Formulario Invalido",{classe:"bg-danger"});
+  }
+  }
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }
