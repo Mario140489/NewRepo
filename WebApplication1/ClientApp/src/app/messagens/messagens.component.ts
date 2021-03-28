@@ -41,7 +41,7 @@ export class MessagensComponent implements OnInit {
     //this.layput = this.layput.replace("#tipoalerta#", this.class)
     //this.layput = this.layput.replace('#msg#', this.msg);
    // document.getElementById('msg').innerHTML = this.layput;
-   // document.getElementById('btn-close').onclick = this.close
+    // document.getElementById('btn-close').onclick = this.close
   }
 
 

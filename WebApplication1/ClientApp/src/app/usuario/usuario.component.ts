@@ -16,7 +16,7 @@ export class UsuarioComponent implements OnInit {
   data:any =["Id","Nome","Inativo"];
   dados:any =["id_usuario","ds_nome","do_inactive"];
   loaduser:boolean = false;
-  dataservico:any;
+  dataservico:any=[];
   dtTrigger: Subject<any> = new Subject();
 
   constructor(private service:UsuarioService) { }
@@ -25,12 +25,17 @@ export class UsuarioComponent implements OnInit {
 
   }
 
+  teste(){
+    alert(2)
+  }
+
   async BuscarUsuario(){
+    debugger;
     this.loaduser= true;
     if(this.usuario.ds_nome){
      await this.service.GetUsuario(this.usuario.ds_nome).subscribe( result => {
-       this.dataservico = uteis.FormataTableInactive(result);
 
+      this.dataservico = uteis.FormataTableInactive(result);
        this.loaduser= false;
       },error =>{
         this.loaduser= false;
@@ -39,6 +44,10 @@ export class UsuarioComponent implements OnInit {
     else{
       this.loaduser= false;
     }
+  }
+
+  EditarUsuario(){
+    alert("teste");
   }
 
   ngOnDestroy(): void {

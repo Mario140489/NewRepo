@@ -1,0 +1,15 @@
+<table class="table table-sm">
+  <thead class="thead-dark bg-secondary">
+    <tr  >
+      <th *ngFor="let Header of DataHeader">{{Header}}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="DataTable.length == 0" ><td align="center" colSpan="20"><b>Nenhum Resultado Encontrado</b></td></tr>
+    <tr *ngFor="let item of DataTable">
+      {{teste(item)}}
+      <td style="text-align: end;"><button  class="btn btn-sm btn-primary btn-editar" (click)="teste(item)" ngbTooltip="Editar"><i class="fas fa-user-edit"></i></button></td>
+    </tr>
+  </tbody>
+</table>

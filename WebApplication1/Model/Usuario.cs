@@ -22,4 +22,10 @@ namespace WebApplication1.Model
         public char do_inactive { get; set; }
         
     }
+
+    public class ListUsuario{
+       public int id_usuario { get; set; }
+       public string ds_nome { get; set; }
+       public char do_inactive { get; set; }
+    }
 }

@@ -30,5 +30,13 @@ constructor() { }
 
   }
 
+  Incluirbtn(data){
+    if(data && data.length >0){
+      for(let i=0; i< data.length;i++){
+        data[i]['btn'] = `<button class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-user-edit"></i></button>`
+      }
+    }
+    return data;
+  }
 
 }

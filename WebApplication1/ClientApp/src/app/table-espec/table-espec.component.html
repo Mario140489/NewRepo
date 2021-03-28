@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-12">
     <div class="row">
@@ -20,8 +21,9 @@
     <tr *ngIf="Table.length == 0" ><td align="center" colSpan="20"><b>Nenhum Resultado Encontrado</b></td></tr>
     <tr *ngFor="let Table  of Table; let i = index" >
      <td *ngFor="let dados of HeaderData; let idx = index">{{Table[idx]}}</td>
-     <td class="direita" ><span class="btn btn-primary btn-sm" ngbTooltip="Editar" (click)="EnventoEditar(this.Table)"><i class="fas fa-pen"></i></span>
-     <span class="btn btn-danger ml-1 btn-sm"  ngbTooltip="Excluir" (click)="EnventoExcluir(this.Table)"><i class="fas fa-trash"></i></span></td>
+     <td>
+      <button   class="btn btn-sm btn-primary btn-editar"  ><i class="fas fa-user-edit"></i></button>
+    </td>
     </tr>
   </tbody>
 </table>
@@ -38,3 +40,4 @@
 <div align="right" class="col-6"><label>Mostrando {{views}} de {{total}} Registros</label></div>
 </div>
 </div>
+

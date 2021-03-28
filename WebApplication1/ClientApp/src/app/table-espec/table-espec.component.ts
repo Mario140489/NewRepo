@@ -37,23 +37,17 @@ export class TableEspecComponent implements OnInit {
 
   constructor(private sanitized: DomSanitizer,private elRef: ElementRef) { }
 
+
   ngOnInit() {
 
     //this.DataPaginada();
     this.MontarTable();
 
   }
-
-  ngOnChanges(changes) {
-
-      this.MontarTable();
-
-    //this.MontarTable();
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
+  ngDoCheck(){
+    this.MontarTable();
 
   }
-
   MostrarRowsViewsTotal(){
    this.total = this.DataTable.length;
   }
@@ -96,12 +90,13 @@ export class TableEspecComponent implements OnInit {
       }
       this.MostrarRowsViewsTotal();
     }
-
   }
 
-  teste(e){
-    debugger;
-  console.log(e);
+
+
+
+  teste(){
+    alert(1);
   }
 
   MontarPaginacao(){
@@ -141,6 +136,7 @@ export class TableEspecComponent implements OnInit {
     this.datapaginada=[];
     this.paginas=[];
     this.DataPaginada();
+
   }
 
   Mudarpagina(pagina){

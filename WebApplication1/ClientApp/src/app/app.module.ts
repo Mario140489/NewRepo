@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
-import {registerLocaleData} from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import localept from '@angular/common/locales/pt';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -27,6 +27,7 @@ import { SubmoduloComponent } from './submodulo/submodulo.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { MessagensComponent } from './messagens/messagens.component';
 import { CadUsuarioComponent } from './cad-usuario/cad-usuario.component';
+import { TableComponent } from './table/table.component';
 
 
 registerLocaleData(localept, 'pt-BR');
@@ -49,9 +50,10 @@ registerLocaleData(localept, 'pt-BR');
       SubmoduloComponent,
       UsuarioComponent,
       MessagensComponent,
-      CadUsuarioComponent
+      CadUsuarioComponent,
+      TableComponent
    ],
-  imports: [NgbModule,
+  imports: [NgbModule,CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,

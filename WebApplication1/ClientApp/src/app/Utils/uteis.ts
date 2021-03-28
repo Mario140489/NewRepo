@@ -19,4 +19,7 @@ export class uteis{
    }
    return vl
   }
+  AtualizaVariavel(data){
+    return data;
+  }
 }

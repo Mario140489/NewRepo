@@ -37,10 +37,16 @@ namespace WebApplication1.Controllers
         [HttpGet("{nome}")]
         public async Task<ActionResult> GetUsuario(string nome)
         {
-            var usuario = new List<Usuario>();
+            List<ListUsuario> usuario;
             if (nome == "*")
             {
-                 usuario = await _context.Usuario.ToListAsync().ConfigureAwait(true);
+                 usuario = await _context.Usuario.Select(i => new
+                 {
+                  id_usuario = i.id_usuario,
+                  ds_nome = i.ds_nome,
+                  do_inactive = i.do_inactive
+                 }).
+                 ToListAsync().ConfigureAwait(true);
             }
             else
             {
