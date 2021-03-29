@@ -54,5 +54,8 @@ export class UsuarioComponent implements OnInit {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
+  EventoRows(){
+
+  }
 
 }
