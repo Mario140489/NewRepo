@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { Usuario } from '../Classes/Usuario';
 import { UsuarioService } from '../services/usuario.service';
 import { UteisService } from '../services/uteis.service';
+import { Router } from '@angular/router';
 
 const uteis = new UteisService();
 
@@ -15,18 +16,34 @@ export class UsuarioComponent implements OnInit {
   public usuario: Usuario = new Usuario();
   data:any =["Id","Nome","Inativo"];
   dados:any =["id_usuario","ds_nome","do_inactive"];
+  BtnTable:any=[{
+    Id:"Editar",
+    Icone:'fas fa-user-edit',
+    Tooltip:"Editar Usuário",
+    BtnTexto:"",
+    Classe:"btn-primary",
+    NomeEvento:"Editar"
+  },{    Id:"Editar",
+  Icone:'fas fa-edit',
+  Tooltip:"teste",
+  BtnTexto:"",
+  Classe:"btn-success",
+  NomeEvento:"Editar"}]
   loaduser:boolean = false;
   dataservico:any=[];
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private service:UsuarioService) { }
+  constructor(private service:UsuarioService, private rota:Router) { }
 
   async ngOnInit() {
-
+   this.service.id_usuario=null;
   }
 
-  teste(){
-    alert(2)
+  PegarEventoFilho(event){
+    if(event.NomeEvento === "Editar"){
+      this.service.id_usuario = event.Colunas[0];
+      this.rota.navigate(['/cadusuario']);
+    }
   }
 
   async BuscarUsuario(){

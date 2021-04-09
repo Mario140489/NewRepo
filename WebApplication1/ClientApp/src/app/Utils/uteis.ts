@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable()
@@ -22,4 +23,10 @@ export class uteis{
   AtualizaVariavel(data){
     return data;
   }
+
+  load():void{
+    let element = document.body;
+    element.append(`<div class="load"></div>`);
+  }
+
 }

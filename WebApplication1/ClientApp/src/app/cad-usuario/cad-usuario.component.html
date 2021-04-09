@@ -59,8 +59,6 @@
                       <label class="text-danger">*Campo de nome tem que ter um nome valido.</label>
                     </div>
                   </div>
-                </div>
-                <div class="row">
                   <div class=" form-group col-sm-4">
                     <label>Login</label>
                     <input [(ngModel)]="usuario.ds_login" name="ds_login" #ds_login="ngModel" class="form-control form-control-sm" required
@@ -68,6 +66,11 @@
                     <div class="diverror" *ngIf="ds_login.invalid && (ds_login.dirty || ds_login.touched)">
                       <label class="text-danger">*Campo de Login tem que ter mais de 5 caracteres.</label>
                     </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class=" form-group col-sm-4">
+                    <label>Login</label>
                   </div>
                 </div>
                 <div class="row">
@@ -118,7 +121,7 @@
                   </div>
                 <p></p>
                   <div>
-                    <app-table-espec [HeaderTable]=data [HeaderData]=dados [DataTable]=dataservico></app-table-espec>
+                    <app-table  [DataTable]=dataservico [DataHeader]=data ></app-table>
                 </div>
 
               </div>

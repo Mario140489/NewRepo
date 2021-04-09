@@ -5,17 +5,25 @@ import { Usuario } from '../Classes/Usuario';
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class UsuarioService {
 rootURL: string;
+
+id_usuario = null;
 
 constructor(private http:HttpClient, @Inject('BASE_URL')baseUrl:string) {
   this.rootURL= baseUrl;
  }
 
  GetUsuario(parans){
-
-   return this.http.get(this.rootURL + "api/Usuarios/" + parans);
+   return this.http.get(this.rootURL + "api/Usuarios/nome/" + parans);
  }
+
+ GetUsuarioid(parans){
+  return this.http.get(this.rootURL + "api/Usuarios/" + parans).pipe();
+}
 
  PostUsuario(data){
    return this.http.post(this.rootURL + 'api/Usuarios/PostUsuario',data).pipe();

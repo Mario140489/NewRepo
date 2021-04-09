@@ -1,12 +1,15 @@
 import { UteisService } from './../services/uteis.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Usuario } from  '../Classes/Usuario';
 import { UsuarioService } from '../services/usuario.service';
 import { ToastServiceService } from '../services/toast-service.service';
-import { Subject, Subscriber } from 'rxjs';
+import { Subject, Observable, of} from 'rxjs';
+import { TableService } from '../services/table.service';
+import { TableComponent } from '../table/table.component';
 
 
+const uteis = new UteisService();
 
 @Component({
   selector: 'app-cad-usuario',
@@ -24,15 +27,35 @@ export class CadUsuarioComponent implements OnInit {
   selectgrupousuario:any;
   grupousuario:any;
   GrupoUsuarionew:any=[];
+  @ViewChild(TableComponent) child:TableComponent
 
   dataservico:any=[];
   constructor(private serviceusuario: UsuarioService, private msg:ToastServiceService,
-     private uteisservice:UteisService) {
+     private uteisservice:UteisService, private tbservice:TableService) {
 
      }
 
   ngOnInit() {
+
     this.CarregaGrupoUsuario();
+    this.CarregarUsuario();
+
+  }
+
+  CarregarUsuario(){
+    if(this.serviceusuario.id_usuario){
+      uteis.load();
+      this.serviceusuario.GetUsuarioid(this.serviceusuario.id_usuario).
+      subscribe((result:any) =>{
+      if(result){
+        this.usuario.id_usuario = result.id_usuario;
+        this.usuario.ds_nome = result.ds_nome;
+        this.usuario.ds_login = result.ds_login;
+        this.usuario.do_inactive = result.do_inactive;
+      }
+      uteis.removeload();
+      })
+   }
   }
 
   CarregaGrupoUsuario(){
@@ -65,6 +88,7 @@ export class CadUsuarioComponent implements OnInit {
   }
 
   onSave(){
+
     let salvar = true;
     let id:any = (<HTMLSelectElement>document.getElementById('grupousuario')).value;
     let grupo:any = (<HTMLSelectElement>document.getElementById('grupousuario')).selectedOptions;
@@ -83,7 +107,8 @@ export class CadUsuarioComponent implements OnInit {
       });
       if(salvar){
         this.GrupoUsuarionew.unshift(DataJson);
-        this.dataservico = this.GrupoUsuarionew;
+        this.dataservico =  this.GrupoUsuarionew;
+        this.child.CriarArrayTabela(this.dataservico);
       }
 
     }
@@ -93,9 +118,6 @@ export class CadUsuarioComponent implements OnInit {
 
   }
 
-    refleshtable(){
-
-    }
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event

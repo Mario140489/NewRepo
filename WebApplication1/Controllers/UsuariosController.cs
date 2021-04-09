@@ -34,7 +34,20 @@ namespace WebApplication1.Controllers
         }
 
         // GET: api/Usuarios/5
-        [HttpGet("{nome}")]
+       [HttpGet("{id}")]
+        public async Task<ActionResult<Usuario>> GetUsuario(int id)
+        {
+            var usuario = await _context.Usuario.FindAsync(id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            return usuario;
+        }
+
+        [HttpGet("nome/{nome}")]
         public async Task<ActionResult> GetUsuario(string nome)
         {
             Object usuario;

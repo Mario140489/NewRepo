@@ -16,7 +16,7 @@ import { Subject } from 'rxjs';
 export class MessagensComponent implements OnInit {
 
   toast = [];
-  time: number = 5000;
+  time: number = 3000;
   msg: string = "";
   classe: string = "bg-secondary"
   dtTrigger: Subject<any> = new Subject();
@@ -88,8 +88,9 @@ export class MessagensComponent implements OnInit {
 
     let messagemdata:any = this.mountmessage();
 
-    document.getElementById('msg').innerHTML = messagemdata.messagem;
-    document.getElementById(messagemdata.id).onclick = this.close;
+    $('#msg').append(messagemdata.messagem);
+    //document.getElementById('msg').innerHTML = messagemdata.messagem;
+    //document.getElementById(messagemdata.id).onclick = this.close;
 
     let id = messagemdata.id;
     setTimeout( () => {document.getElementById(id).remove();} , this.time)

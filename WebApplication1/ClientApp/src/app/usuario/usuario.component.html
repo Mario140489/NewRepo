@@ -24,8 +24,7 @@
          </div>
        </div>
        <p></p>
-      <app-table-espec [HeaderTable]=data [HeaderData]=dados [DataTable]=dataservico></app-table-espec>
-      <app-table  [DataTable]=dataservico [DataHeader]=data ></app-table>
+      <app-table  [DataTable]=dataservico [DataHeader]=data [DataBtn]=BtnTable (EventoBtnTable)="PegarEventoFilho($event)"></app-table>
     </div>
   </div>
 </div>

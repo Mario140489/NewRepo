@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.css']
 })
 
 export class TableComponent implements OnInit {
@@ -13,6 +13,8 @@ export class TableComponent implements OnInit {
   @Input() set DataTable(DataTable:any){
     this.CriarArrayTabela(DataTable);
   }
+  @Input() DataBtn:any=[];
+  @Output() EventoBtnTable = new EventEmitter();
   TotalRegistros:number = this._DataTable.length;
   Visualizadas:number= this._DataTable.length;
   Rows:any = [5,10,50,100];
@@ -28,42 +30,51 @@ export class TableComponent implements OnInit {
 
   }
 
+
+  calculopaginacao(data){
+    let dataorinal = data;
+    data = data/this.RowsSelected;
+    data =  parseInt(data);
+    data = data*this.RowsSelected == dataorinal.length? data:data+1;
+    return data;
+  }
+
+
+
   CriarArrayTabela(DataTable){
     this._DataTable = [];
     let temparray:any = [];
-    let contador:number = 0;
-    let index = 0;
-
+    let index:any = this.calculopaginacao(DataTable.length);
     if(DataTable && DataTable.length > 0){
       this._DataTableOriginal = DataTable;
-      this.Visualizadas = this.RowsSelected * (this.IndexActive + 1);
+
       this.TotalRegistros = DataTable.length;
-      DataTable.forEach(element => {
+      let ii =0;
 
-        if(contador < this.RowsSelected){
-          temparray.push(Object.values(element));
-          if(contador == (this.RowsSelected -1)){
-
-            this._DataTable[index] = temparray;
-            contador = 0;
-            index++;
-            temparray = [];
-
-          }
+      for(let i=1;i<=index;i++){
+        let verificador = (this.RowsSelected * i)< DataTable.length ? this.RowsSelected * i:DataTable.length
+        for(ii; ii < verificador ;ii++){
+          temparray.push(Object.values(DataTable[ii]));
         }
-
-        contador++;
-      });
+        this._DataTable.push(temparray);
+        temparray = [];
+      }
     }
   }
 
   EventoRows(){
-   alert(this.RowsSelected);
+   //alert(this.RowsSelected);
+   this.IndexActive = 0
    this.CriarArrayTabela(this._DataTableOriginal);
   }
 
-  teste(data){
-   alert('teste');
+  AcionareventoPai(data,evento){
+    let JsonrRetorno={
+      NomeEvento:evento,
+      Colunas:data
+    }
+    this.EventoBtnTable.emit(JsonrRetorno);
+
   }
 
 }

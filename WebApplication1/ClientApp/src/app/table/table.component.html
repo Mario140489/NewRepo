@@ -13,21 +13,30 @@
   <thead class=" bg-secondary text-white">
     <tr  >
       <th *ngFor="let Header of DataHeader">{{Header}}</th>
-      <th></th>
+      <th *ngIf="DataBtn.length > 0" ></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngIf="_DataTable.length == 0" ><td align="center" colSpan="20"><b>Nenhum Resultado Encontrado</b></td></tr>
     <tr *ngFor="let item of _DataTable[IndexActive]">
       <td *ngFor="let itemtd of item" >{{itemtd}}</td>
-      <td style="text-align: end;"><button  class="btn btn-sm btn-primary btn-editar" (click)="teste(item)" ngbTooltip="Editar"><i class="fas fa-user-edit"></i></button></td>
+      <td *ngIf="DataBtn.length > 0"   style="text-align: end;" ><button *ngFor="let btn of DataBtn" id="{{btn.Id}}"  class="btn btn-sm mr-1 {{btn.Classe}}" (click)="AcionareventoPai(item,btn.NomeEvento)"  ngbTooltip="{{btn.Tooltip}}"><i class="{{btn.Icone}}"></i> {{btn.BtnTexto}}</button></td>
     </tr>
   </tbody>
 </table>
 </div>
 <div class="row col-12" >
-<div class="col-6"></div>
-<div class="col-6" style="text-align: end;"><label>Mostrando {{Visualizadas}} de {{TotalRegistros}} Registros</label></div>
+<div class="col-6">
+  <ul class="pagination pagination-sm" *ngIf="_DataTable.length  > 0" >
+    <li class="page-item" [ngClass]="{'disabled': IndexActive+1 == 1}"  ><a class="page-link" >Anterior</a></li>
+    <li *ngFor="let paginas of _DataTable;let i = index"  class="page-item" (click)="IndexActive = i" [ngClass]="{'active':i+1 ==IndexActive+1 }"
+    ><a class="page-link" >{{i + 1}} </a></li>
+    <li class="page-item" [ngClass]="{'disabled': IndexActive+1 == _DataTable.length}"  ><a class="page-link" >Próxima</a></li>
+  </ul>
+</div>
+<div class="col-6" style="text-align: end;"><label>Mostrando
+   {{RowsSelected * (IndexActive +1)<= _DataTableOriginal.length?RowsSelected * (IndexActive +1):_DataTableOriginal.length}}
+    de {{TotalRegistros}} Registros</label></div>
 </div>
 </div>
 
