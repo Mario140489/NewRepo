@@ -27,6 +27,7 @@ export class CadUsuarioComponent implements OnInit {
   selectgrupousuario:any;
   grupousuario:any;
   GrupoUsuarionew:any=[];
+  ListDepartamento:any;
   @ViewChild(TableComponent) child:TableComponent
 
   dataservico:any=[];
@@ -35,25 +36,27 @@ export class CadUsuarioComponent implements OnInit {
 
      }
 
-  ngOnInit() {
-
-    this.CarregaGrupoUsuario();
-    this.CarregarUsuario();
-
+  async ngOnInit() {
+   uteis.load();
+   await this.CarregarDepartamento();
+   await this.CarregaGrupoUsuario();
+   await this.CarregarUsuario();
+   this.child.CriarArrayTabela(this.dataservico);
+   uteis.removeload();
   }
 
-  CarregarUsuario(){
+ async CarregarUsuario(){
     if(this.serviceusuario.id_usuario){
-      uteis.load();
-      this.serviceusuario.GetUsuarioid(this.serviceusuario.id_usuario).
-      subscribe((result:any) =>{
+     await this.serviceusuario.GetUsuarioid(this.serviceusuario.id_usuario).
+      then((result:any) =>{
       if(result){
         this.usuario.id_usuario = result.id_usuario;
         this.usuario.ds_nome = result.ds_nome;
+        this.usuario.id_departamento = result.id_departamento;
         this.usuario.ds_login = result.ds_login;
         this.usuario.do_inactive = result.do_inactive;
+        this.dataservico = result.departamentos;
       }
-      uteis.removeload();
       })
    }
   }
@@ -87,8 +90,13 @@ export class CadUsuarioComponent implements OnInit {
   }
   }
 
-  onSave(){
+ async CarregarDepartamento(){
+  await this.serviceusuario.GetDepartamento().then((result:any) => {
+      this.ListDepartamento = result;
+   })
+  }
 
+  onSave(){
     let salvar = true;
     let id:any = (<HTMLSelectElement>document.getElementById('grupousuario')).value;
     let grupo:any = (<HTMLSelectElement>document.getElementById('grupousuario')).selectedOptions;
@@ -107,7 +115,7 @@ export class CadUsuarioComponent implements OnInit {
       });
       if(salvar){
         this.GrupoUsuarionew.unshift(DataJson);
-        this.dataservico =  this.GrupoUsuarionew;
+        this.dataservico = this.dataservico.concat(this.GrupoUsuarionew);
         this.child.CriarArrayTabela(this.dataservico);
       }
 

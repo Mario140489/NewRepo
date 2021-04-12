@@ -23,43 +23,43 @@ namespace WebApplication1.Controllers
 
         // GET: api/crm_departamento
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<crm_grupousuario>>> Getcrm_grupousuario()
+        public async Task<ActionResult<IEnumerable<crm_departamento>>> Getcrm_departamento()
         {
-            return await _context.crm_grupousuario.ToListAsync();
+            return await _context.crm_departamento.ToListAsync();
         }
-
+        
         [HttpGet("combo")]
-        public async Task<ActionResult<IEnumerable<crm_grupousuario>>> Getcrm_grupousuarioCombo()
+        public async Task<ActionResult<IEnumerable<crm_departamento>>> Getcrm_departamentoAcitve()
         {
-            return await _context.crm_grupousuario.Where(b => b.do_inactive == 0).ToListAsync();
+            return await _context.crm_departamento.Where(b=> b.do_inactive == false).ToListAsync();
         }
 
         // GET: api/crm_departamento/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<crm_grupousuario>> Getcrm_grupousuario(int id)
+        public async Task<ActionResult<crm_departamento>> Getcrm_departamento(int id)
         {
-            var crm_grupousuario = await _context.crm_grupousuario.FindAsync(id);
+            var crm_departamento = await _context.crm_departamento.FindAsync(id);
 
-            if (crm_grupousuario == null)
+            if (crm_departamento == null)
             {
                 return NotFound();
             }
 
-            return crm_grupousuario;
+            return crm_departamento;
         }
 
         // PUT: api/crm_departamento/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putcrm_grupousuario(int id, crm_grupousuario crm_grupousuario)
+        public async Task<IActionResult> Putcrm_departamento(int id, crm_departamento crm_departamento)
         {
-            if (id != crm_grupousuario.id_grupousuario)
+            if (id != crm_departamento.id_departamento)
             {
                 return BadRequest();
             }
 
-            _context.Entry(crm_grupousuario).State = EntityState.Modified;
+            _context.Entry(crm_departamento).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace WebApplication1.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!crm_grupousuarioExists(id))
+                if (!crm_departamentoExists(id))
                 {
                     return NotFound();
                 }
@@ -84,33 +84,33 @@ namespace WebApplication1.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<crm_grupousuario>> Postcrm_grupousuario(crm_grupousuario crm_grupousuario)
+        public async Task<ActionResult<crm_departamento>> Postcrm_departamento(crm_departamento crm_departamento)
         {
-            _context.crm_grupousuario.Add(crm_grupousuario);
+            _context.crm_departamento.Add(crm_departamento);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getcrm_grupousuario", new { id = crm_grupousuario.id_grupousuario }, crm_grupousuario);
+            return CreatedAtAction("Getcrm_departamento", new { id = crm_departamento.id_departamento }, crm_departamento);
         }
 
         // DELETE: api/crm_departamento/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<crm_grupousuario>> Deletecrm_grupousuario(int id)
+        public async Task<ActionResult<crm_departamento>> Deletecrm_departamento(int id)
         {
-            var crm_grupousuario = await _context.crm_grupousuario.FindAsync(id);
-            if (crm_grupousuario == null)
+            var crm_departamento = await _context.crm_departamento.FindAsync(id);
+            if (crm_departamento == null)
             {
                 return NotFound();
             }
 
-            _context.crm_grupousuario.Remove(crm_grupousuario);
+            _context.crm_departamento.Remove(crm_departamento);
             await _context.SaveChangesAsync();
 
-            return crm_grupousuario;
+            return crm_departamento;
         }
 
-        private bool crm_grupousuarioExists(int id)
+        private bool crm_departamentoExists(int id)
         {
-            return _context.crm_grupousuario.Any(e => e.id_grupousuario == id);
+            return _context.crm_departamento.Any(e => e.id_departamento == id);
         }
     }
 }

@@ -29,6 +29,10 @@ public usuario: Usuario = new Usuario();
     this.spiner.spiner = true;
     if(this.usuario.ds_login && this.usuario.ds_senha)
     {
+      let jsondata={
+        ds_login : this.usuario.ds_login,
+        ds_senha : this.usuario.ds_senha
+      }
       let user:any = await this.authservice.fazerlogin(this.usuario)
       if(user){
         this.spiner.spiner = false;

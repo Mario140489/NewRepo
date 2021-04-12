@@ -43,8 +43,22 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-
-            return usuario;
+            var user = new ListUsuario();
+            user.id_usuario = usuario.id_usuario;
+            user.ds_nome = usuario.ds_nome;
+            user.ds_login = usuario.ds_login;
+            user.do_inactive = usuario.do_inactive;
+            user.id_departamento = usuario.id_departamento;
+            user.Departamentos = await _context.crm_usuariovsgrupo
+            .Join(_context.crm_grupousuario,
+                  t1 => t1.id_grupousuario,
+                  t2 => t2.id_grupousuario,(t1,t2) => new {t1,t2}).
+                  Select(x => new {
+                      x.t2.id_grupousuario,
+                      x.t2.ds_grupousuario
+                  }).ToListAsync();
+           // usuario = user;
+            return Ok(user);
         }
 
         [HttpGet("nome/{nome}")]
@@ -59,7 +73,6 @@ namespace WebApplication1.Controllers
                     ds_nome = i.ds_nome,
                     do_inactive = i.do_inactive
                 }).ToListAsync().ConfigureAwait(true);
-                
                 usuario = list;
             }
             else
@@ -84,15 +97,10 @@ namespace WebApplication1.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult> LoginAsync(Usuario usuario)
         {
-            // string   user = JsonSerializer.Serialize(_context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha).ToList());
-            var user = await  _context.Usuario.Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha)
+            var user = await  _context.Usuario
+                .Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha)
                 .ToListAsync()
                 .ConfigureAwait(false);
-            //var list_id_app = _context.crm_appvsusuario.Where(b => b.id_usuario == user[0].id_usuario).ToList();
-
-            //string json = JsonSerializer.Serialize(user[0]);
-
-            //JObject json = JObject.Parse("{nome:" +user[0].ds_nome+", key:"+key+"}");
 
             if (user.Count == 0)
             {

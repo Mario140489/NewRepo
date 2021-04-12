@@ -14,7 +14,7 @@ const uteis = new UteisService();
 })
 export class UsuarioComponent implements OnInit {
   public usuario: Usuario = new Usuario();
-  data:any =["Id","Nome","Inativo"];
+  data:any =["Id","Nome","Status"];
   dados:any =["id_usuario","ds_nome","do_inactive"];
   BtnTable:any=[{
     Id:"Editar",
@@ -23,12 +23,7 @@ export class UsuarioComponent implements OnInit {
     BtnTexto:"",
     Classe:"btn-primary",
     NomeEvento:"Editar"
-  },{    Id:"Editar",
-  Icone:'fas fa-edit',
-  Tooltip:"teste",
-  BtnTexto:"",
-  Classe:"btn-success",
-  NomeEvento:"Editar"}]
+  }]
   loaduser:boolean = false;
   dataservico:any=[];
   dtTrigger: Subject<any> = new Subject();

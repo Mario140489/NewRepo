@@ -9,7 +9,7 @@ constructor() { }
 
   FormataInactive(data){
 
-    data = data == 'N' || data == 0? 'Não' : data = data == 'Y' || data== 1 ? 'Sim': data;
+    data = data == 'N' || data == 0? 'Ativo' : data = data == 'Y' || data== 1 ? 'Inativo': data;
     return data;
 
   }
