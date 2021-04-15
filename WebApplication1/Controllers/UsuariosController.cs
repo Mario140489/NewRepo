@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
                   Select(x => new {
                       x.t2.id_grupousuario,
                       x.t2.ds_grupousuario
-                  }).ToListAsync();
+                  }).ToListAsync().ConfigureAwait(false);
            // usuario = user;
             return Ok(user);
         }
@@ -150,14 +150,10 @@ namespace WebApplication1.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost("PostUsuario")]
-        public async Task<object> PostUsuario(Object teste)
+        public async Task<ActionResult> PostUsuario(PostUsuario postUsuario)
         {
-            //ValueKind = Object : "{"ds_nome":"asdsad","ds_login":"asdsad","id_departamento":1,"ds_senha":"123456","grupousuario":[{"id_grupousuario":2,"ds_grupousuario":"teste"}]}"
-            
-            dynamic  oi = System.Text.Json.JsonSerializer.Serialize(teste);
-            var teste2 = JsonConvert.SerializeObject(oi);
-            var teste23 = teste2.ds_nome;
-            var usuario = new Usuario();
+
+            Usuario usuario =postUsuario.Usuario;
           
             var result = ValidadorUsuario.ValidaUsuario(usuario);
             if(result == null)
@@ -166,7 +162,15 @@ namespace WebApplication1.Controllers
             }
             usuario = (Usuario)result;
             _context.Usuario.Add(usuario);
-            await _context.SaveChangesAsync().ConfigureAwait(true);
+           
+
+            postUsuario.crm_grupousuario.ForEach(delegate (crm_grupousuario value){
+            crm_usuariovsgrupo crm_Usuariovsgrupo = new crm_usuariovsgrupo();
+            crm_Usuariovsgrupo.id_usuario = usuario.id_usuario;
+            crm_Usuariovsgrupo.id_grupousuario = value.id_grupousuario;
+            _context.crm_usuariovsgrupo.Add(crm_Usuariovsgrupo);
+            });
+            await _context.SaveChangesAsync().ConfigureAwait(false);
             return CreatedAtAction("GetUsuario", new { id = usuario.id_usuario }, usuario);
         }
 

@@ -71,8 +71,11 @@ export class CadUsuarioComponent implements OnInit {
     if(f.valid){
     this.loaduser= true;
     this.usuario.id_departamento = parseInt(this.usuario.id_departamento);
-    this.usuario['grupousuario']=this.GrupoUsuarionew;
-    this.serviceusuario.PostUsuario(this.usuario).toPromise().then((result:any) =>{
+    let jsondata = {
+      Usuario:this.usuario,
+      crm_grupousuario:this.GrupoUsuarionew
+    }
+    this.serviceusuario.PostUsuario(jsondata).toPromise().then((result:any) =>{
       if(result && result.id_usuario){
         this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
         f.resetForm();
