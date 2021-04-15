@@ -72,7 +72,6 @@
                   <div class=" form-group col-sm-4">
                     <label>Departamento</label>
                     <select class="form-control form-control-sm" name="id_departamento" [(ngModel)]="usuario.id_departamento" #id_departamento="ngModel" required>
-                      <option [selected]="usuario.id_departamento" value="" >Nenhuma Opção Selecionada</option>
                       <option *ngFor="let item of ListDepartamento" [selected]="usuario.id_departamento" value="{{item.id_departamento}}"  > {{item.ds_departamento}}</option>
                     </select>
                     <div class="diverror" *ngIf="id_departamento.invalid && (id_departamento.dirty || id_departamento.touched)">

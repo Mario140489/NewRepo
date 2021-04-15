@@ -12,6 +12,8 @@ using WebApplication1.Data;
 using WebApplication1.Model;
 using WebApplication1.Services;
 using WebApplication1.Bussines;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace WebApplication1.Controllers
 {
@@ -49,7 +51,7 @@ namespace WebApplication1.Controllers
             user.ds_login = usuario.ds_login;
             user.do_inactive = usuario.do_inactive;
             user.id_departamento = usuario.id_departamento;
-            user.Departamentos = await _context.crm_usuariovsgrupo
+            user.Departamentos = await _context.crm_usuariovsgrupo.Where(b => b.id_usuario == usuario.id_usuario)
             .Join(_context.crm_grupousuario,
                   t1 => t1.id_grupousuario,
                   t2 => t2.id_grupousuario,(t1,t2) => new {t1,t2}).
@@ -148,9 +150,15 @@ namespace WebApplication1.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost("PostUsuario")]
-        public async Task<ActionResult> PostUsuario(Usuario usuario)
+        public async Task<object> PostUsuario(Object teste)
         {
-           
+            //ValueKind = Object : "{"ds_nome":"asdsad","ds_login":"asdsad","id_departamento":1,"ds_senha":"123456","grupousuario":[{"id_grupousuario":2,"ds_grupousuario":"teste"}]}"
+            
+            dynamic  oi = System.Text.Json.JsonSerializer.Serialize(teste);
+            var teste2 = JsonConvert.SerializeObject(oi);
+            var teste23 = teste2.ds_nome;
+            var usuario = new Usuario();
+          
             var result = ValidadorUsuario.ValidaUsuario(usuario);
             if(result == null)
             {
@@ -159,7 +167,6 @@ namespace WebApplication1.Controllers
             usuario = (Usuario)result;
             _context.Usuario.Add(usuario);
             await _context.SaveChangesAsync().ConfigureAwait(true);
-
             return CreatedAtAction("GetUsuario", new { id = usuario.id_usuario }, usuario);
         }
 

@@ -70,6 +70,8 @@ export class CadUsuarioComponent implements OnInit {
   onSubmit(f:NgForm){
     if(f.valid){
     this.loaduser= true;
+    this.usuario.id_departamento = parseInt(this.usuario.id_departamento);
+    this.usuario['grupousuario']=this.GrupoUsuarionew;
     this.serviceusuario.PostUsuario(this.usuario).toPromise().then((result:any) =>{
       if(result && result.id_usuario){
         this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
@@ -79,14 +81,14 @@ export class CadUsuarioComponent implements OnInit {
       }
       this.loaduser = false;
     }).catch(result => {
-
+       debugger;
        this.msg.show(result.error.text,{classe:"bg-danger"});
       //alert(result.error.text)
       this.loaduser = false;
     })
   }
   else{
-    this.msg.show("Formulario Invalido",{classe:"bg-danger"});
+    this.msg.show("Formulario Invalido Preencha os Campos em vermelho",{classe:"bg-danger"});
   }
   }
 
@@ -98,7 +100,7 @@ export class CadUsuarioComponent implements OnInit {
 
   onSave(){
     let salvar = true;
-    let id:any = (<HTMLSelectElement>document.getElementById('grupousuario')).value;
+    let id:number = parseInt((<HTMLSelectElement>document.getElementById('grupousuario')).value);
     let grupo:any = (<HTMLSelectElement>document.getElementById('grupousuario')).selectedOptions;
     grupo = grupo[0].outerText;
     let DataJson:any ={
@@ -106,7 +108,6 @@ export class CadUsuarioComponent implements OnInit {
       ds_grupousuario:grupo
     }
     if(id>0){
-
       this.dataservico.forEach((element:any) => {
         if(element.id_grupousuario === id){
           salvar= false;
@@ -115,7 +116,7 @@ export class CadUsuarioComponent implements OnInit {
       });
       if(salvar){
         this.GrupoUsuarionew.unshift(DataJson);
-        this.dataservico = this.dataservico.concat(this.GrupoUsuarionew);
+        this.dataservico.unshift(DataJson)
         this.child.CriarArrayTabela(this.dataservico);
       }
 

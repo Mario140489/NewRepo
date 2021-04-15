@@ -28,6 +28,7 @@ namespace WebApplication1
             Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+         
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
