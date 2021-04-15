@@ -27,6 +27,14 @@ export class CadUsuarioComponent implements OnInit {
   selectgrupousuario:any;
   grupousuario:any;
   GrupoUsuarionew:any=[];
+  BtnTable:any=[{
+    Id:"Excluir",
+    Icone:"fas fa-trash",
+    Tooltip:"Excluir Grupo",
+    BtnTexto:"",
+    Classe:"btn-danger",
+    NomeEvento:"Excluir"
+  }]
   ListDepartamento:any;
   @ViewChild(TableComponent) child:TableComponent
 
@@ -75,20 +83,36 @@ export class CadUsuarioComponent implements OnInit {
       Usuario:this.usuario,
       crm_grupousuario:this.GrupoUsuarionew
     }
+    if(!this.usuario.id_usuario){
     this.serviceusuario.PostUsuario(jsondata).toPromise().then((result:any) =>{
-      if(result && result.id_usuario){
-        this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
-        f.resetForm();
-      }else{
-        this.msg.show("Erro a o Salvar dados.",{classe:"bg-danger"});
-      }
+         this.dataservico = [];
+         this.GrupoUsuarionew =[];
+         f.resetForm();
+         this.child.CriarArrayTabela(this.dataservico);
+         this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
+         (<any>$('#myTab a[href="#usuario"]')).tab('show');
       this.loaduser = false;
     }).catch(result => {
-       debugger;
        this.msg.show(result.error.text,{classe:"bg-danger"});
-      //alert(result.error.text)
-      this.loaduser = false;
+       this.child.CriarArrayTabela(this.dataservico);
+       this.loaduser = false;
     })
+  }
+  else{
+    this.serviceusuario.PutUsuario(jsondata).toPromise().then((result:any) =>{
+         this.dataservico = [];
+         this.GrupoUsuarionew =[];
+         f.resetForm();
+         this.child.CriarArrayTabela(this.dataservico);
+         this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
+         (<any>$('#myTab a[href="#usuario"]')).tab('show');
+         this.loaduser = false;
+    }).catch(result => {
+       this.msg.show(result.error.text,{classe:"bg-danger"});
+       this.child.CriarArrayTabela(this.dataservico);
+       this.loaduser = false;
+    })
+  }
   }
   else{
     this.msg.show("Formulario Invalido Preencha os Campos em vermelho",{classe:"bg-danger"});
@@ -99,6 +123,10 @@ export class CadUsuarioComponent implements OnInit {
   await this.serviceusuario.GetDepartamento().then((result:any) => {
       this.ListDepartamento = result;
    })
+  }
+
+  PegarEventoFilho(e){
+
   }
 
   onSave(){

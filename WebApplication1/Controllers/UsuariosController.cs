@@ -12,8 +12,6 @@ using WebApplication1.Data;
 using WebApplication1.Model;
 using WebApplication1.Services;
 using WebApplication1.Bussines;
-using System.Text.Json;
-using Newtonsoft.Json;
 
 namespace WebApplication1.Controllers
 {
@@ -125,8 +123,10 @@ namespace WebApplication1.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
+        public async Task<IActionResult> PutUsuario(int id, PostUsuario postUsuario)
         {
+            Usuario usuario = postUsuario.Usuario;
+
             if (usuario != null && id != usuario.id_usuario)
             {
                 return BadRequest();
@@ -137,13 +137,20 @@ namespace WebApplication1.Controllers
             try
             {
                 await _context.SaveChangesAsync().ConfigureAwait(true);
+                postUsuario.crm_grupousuario.ForEach(delegate (crm_grupousuario value){
+                crm_usuariovsgrupo crm_Usuariovsgrupo = new crm_usuariovsgrupo();
+                crm_Usuariovsgrupo.id_usuario = usuario.id_usuario;
+                crm_Usuariovsgrupo.id_grupousuario = value.id_grupousuario;
+                _context.crm_usuariovsgrupo.Add(crm_Usuariovsgrupo);
+                _context.SaveChanges();
+            });
             }
             catch (DbUpdateConcurrencyException) when (!UsuarioExists(id))
             {
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(usuario);
         }
 
         // POST: api/Usuarios
@@ -153,8 +160,8 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> PostUsuario(PostUsuario postUsuario)
         {
 
-            Usuario usuario =postUsuario.Usuario;
-          
+            Usuario usuario = postUsuario.Usuario;
+
             var result = ValidadorUsuario.ValidaUsuario(usuario);
             if(result == null)
             {
@@ -162,15 +169,15 @@ namespace WebApplication1.Controllers
             }
             usuario = (Usuario)result;
             _context.Usuario.Add(usuario);
-           
+            await _context.SaveChangesAsync().ConfigureAwait(false);
 
             postUsuario.crm_grupousuario.ForEach(delegate (crm_grupousuario value){
             crm_usuariovsgrupo crm_Usuariovsgrupo = new crm_usuariovsgrupo();
             crm_Usuariovsgrupo.id_usuario = usuario.id_usuario;
             crm_Usuariovsgrupo.id_grupousuario = value.id_grupousuario;
             _context.crm_usuariovsgrupo.Add(crm_Usuariovsgrupo);
+            _context.SaveChanges();
             });
-            await _context.SaveChangesAsync().ConfigureAwait(false);
             return CreatedAtAction("GetUsuario", new { id = usuario.id_usuario }, usuario);
         }
 

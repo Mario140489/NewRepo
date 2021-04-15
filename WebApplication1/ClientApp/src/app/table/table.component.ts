@@ -32,10 +32,11 @@ export class TableComponent implements OnInit {
 
 
   calculopaginacao(data){
+    debugger;
     let dataorinal = data;
     data = data/this.RowsSelected;
     data =  parseInt(data);
-    data = data*this.RowsSelected == dataorinal.length? data:data+1;
+    data = (data * this.RowsSelected) == dataorinal ? data:data+1;
     return data;
   }
 

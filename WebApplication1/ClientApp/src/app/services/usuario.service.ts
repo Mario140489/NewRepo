@@ -25,6 +25,10 @@ constructor(private http:HttpClient, @Inject('BASE_URL')baseUrl:string) {
   return this.http.get(this.rootURL + "api/Usuarios/" + parans).toPromise();
 }
 
+ PutUsuario(data){
+   return this.http.put(this.rootURL + "api/Usuarios/"+ data.Usuario.id_usuario, data).pipe();
+ }
+
  PostUsuario(data){
    return this.http.post(this.rootURL + 'api/Usuarios/PostUsuario',data).pipe();
  }
