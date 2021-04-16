@@ -18,11 +18,7 @@ import {uteis} from './Utils/uteis.js';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SpinerComponent } from './spiner/spiner.component';
 import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
-import { IncioagendamentoComponent } from './incioagendamento/incioagendamento.component';
-import { CadServicosComponent } from './cad-servicos/cad-servicos.component';
 import { AplicativosComponent } from './aplicativos/aplicativos.component';
-import { ProcessosComponent } from './processos/processos.component';
-import { TableEspecComponent } from './table-espec/table-espec.component';
 import { SubmoduloComponent } from './submodulo/submodulo.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { MessagensComponent } from './messagens/messagens.component';
@@ -42,11 +38,7 @@ registerLocaleData(localept, 'pt-BR');
     LoginComponent,
     SpinerComponent,
     ModalUsuarioComponent,
-    IncioagendamentoComponent,
-    CadServicosComponent,
     AplicativosComponent,
-    ProcessosComponent,
-    TableEspecComponent,
       SubmoduloComponent,
       UsuarioComponent,
       MessagensComponent,
@@ -58,7 +50,7 @@ registerLocaleData(localept, 'pt-BR');
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '',component: ProcessosComponent, pathMatch: 'full' },
+      { path: '',component: HomeComponent, pathMatch: 'full' },
       { path: 'usuario',component: UsuarioComponent,  },
       { path: 'cadusuario', component: CadUsuarioComponent},
       { path: 'fetch-data',  component: FetchDataComponent },

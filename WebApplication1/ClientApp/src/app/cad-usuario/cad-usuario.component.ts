@@ -125,8 +125,14 @@ export class CadUsuarioComponent implements OnInit {
    })
   }
 
-  PegarEventoFilho(e){
+  PegarEventoFilho(event){
+   console.log(event);
+   this.GrupoUsuarionew.forEach(element => {
 
+   });
+   this.dataservico.forEach(element => {
+    console.log(element);
+   });
   }
 
   onSave(){

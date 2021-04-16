@@ -32,7 +32,6 @@ export class TableComponent implements OnInit {
 
 
   calculopaginacao(data){
-    debugger;
     let dataorinal = data;
     data = data/this.RowsSelected;
     data =  parseInt(data);

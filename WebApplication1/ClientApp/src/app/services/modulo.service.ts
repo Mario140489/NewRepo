@@ -11,7 +11,6 @@ export class ModuloService {
   }
 
   getmodulo(parans){
-    debugger;
     return this.http.get(this.rootURL + 'api/crm_appvsmodulo/'+parans);
   }
 

@@ -42,7 +42,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   async BuscarUsuario(){
-    debugger;
+
     this.loaduser= true;
     if(this.usuario.ds_nome){
      await this.service.GetUsuario(this.usuario.ds_nome).subscribe( result => {

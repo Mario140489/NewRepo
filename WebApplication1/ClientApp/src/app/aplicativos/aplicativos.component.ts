@@ -22,7 +22,7 @@ export class AplicativosComponent implements OnInit {
   }
 
   monta_apps(){
-    debugger;
+
     let appppp:any = sessionStorage.getItem('apps');
     appppp = JSON.parse(appppp);
     this.apps = appppp;

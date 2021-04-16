@@ -11,8 +11,6 @@ export class SubmoduloComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    debugger;
-    console.log(JSON.stringify(this.submodulo));
   }
 
 }
