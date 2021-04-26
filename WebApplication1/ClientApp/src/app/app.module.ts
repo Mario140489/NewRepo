@@ -25,6 +25,7 @@ import { MessagensComponent } from './messagens/messagens.component';
 import { CadUsuarioComponent } from './cad-usuario/cad-usuario.component';
 import { TableComponent } from './table/table.component';
 import { GrupoUsuarioComponent } from './grupo-usuario/grupo-usuario.component';
+import { CadGrupousuarioComponent } from './cad-grupousuario/cad-grupousuario.component';
 
 
 registerLocaleData(localept, 'pt-BR');
@@ -45,7 +46,8 @@ registerLocaleData(localept, 'pt-BR');
       MessagensComponent,
       CadUsuarioComponent,
       TableComponent,
-      GrupoUsuarioComponent
+      GrupoUsuarioComponent,
+      CadGrupousuarioComponent
    ],
   imports: [NgbModule,CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,6 +58,7 @@ registerLocaleData(localept, 'pt-BR');
       { path: 'usuario',component: UsuarioComponent},
       { path: 'cadusuario', component: CadUsuarioComponent},
       { path: 'grupo',  component: GrupoUsuarioComponent },
+      { path: 'cadgrupo', component: CadGrupousuarioComponent}
     ]),
     DataTablesModule
   ],

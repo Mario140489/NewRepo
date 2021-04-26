@@ -35,17 +35,22 @@ namespace WebApplication1.Controllers
         }
 
         // GET: api/crm_grupousuario/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<crm_grupousuario>> Getcrm_grupousuario(int id)
-        {
-            var crm_grupousuario = await _context.crm_grupousuario.FindAsync(id);
+        [HttpGet("{name}")]
+        public async Task<ActionResult> Getcrm_grupousuario(string name)
+        {   
+            if(name == ""){
+            return  Ok(_context.crm_grupousuario.ToListAsync());
+            }
+
+            var crm_grupousuario = await _context.crm_grupousuario.Where(b =>
+             b.ds_grupousuario.IndexOf(name, StringComparison.OrdinalIgnoreCase) != -1).ToListAsync();
 
             if (crm_grupousuario == null)
             {
                 return NotFound();
             }
 
-            return crm_grupousuario;
+            return Ok(crm_grupousuario);
         }
 
         // PUT: api/crm_grupousuario/5
