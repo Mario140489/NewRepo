@@ -9,6 +9,7 @@ import { TableService } from '../services/table.service';
 import { TableComponent } from '../table/table.component';
 
 
+
 const uteis = new UteisService();
 
 @Component({
@@ -27,6 +28,7 @@ export class CadUsuarioComponent implements OnInit {
   selectgrupousuario:any;
   grupousuario:any;
   GrupoUsuarionew:any=[];
+  GrupoUsuarioDelete:any =[];
   BtnTable:any=[{
     Id:"Excluir",
     Icone:"fas fa-trash",
@@ -81,7 +83,8 @@ export class CadUsuarioComponent implements OnInit {
     this.usuario.id_departamento = parseInt(this.usuario.id_departamento);
     let jsondata = {
       Usuario:this.usuario,
-      crm_grupousuario:this.GrupoUsuarionew
+      crm_grupousuario:this.GrupoUsuarionew,
+      crm_grupousuariodelete:this.GrupoUsuarioDelete
     }
     if(!this.usuario.id_usuario){
     this.serviceusuario.PostUsuario(jsondata).toPromise().then((result:any) =>{
@@ -91,7 +94,7 @@ export class CadUsuarioComponent implements OnInit {
          this.child.CriarArrayTabela(this.dataservico);
          this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
          (<any>$('#myTab a[href="#usuario"]')).tab('show');
-      this.loaduser = false;
+         this.loaduser = false;
     }).catch(result => {
        this.msg.show(result.error.text,{classe:"bg-danger"});
        this.child.CriarArrayTabela(this.dataservico);
@@ -126,13 +129,26 @@ export class CadUsuarioComponent implements OnInit {
   }
 
   PegarEventoFilho(event){
-   console.log(event);
-   this.GrupoUsuarionew.forEach(element => {
+   let Index = 0;
+   let Index2 = 0;
 
-   });
    this.dataservico.forEach(element => {
-    console.log(element);
+    if(element.id_grupousuario == event.Colunas[0]){
+       this.GrupoUsuarioDelete.push(element);
+       this.dataservico.splice(Index2,1);
+    }
+    Index2++
+  });
+
+   this.GrupoUsuarionew.forEach(element => {
+     if(element.id_grupousuario == event.Colunas[0]){
+        this.GrupoUsuarionew.splice(Index,1);
+     }
+     Index++;
    });
+
+   this.child.CriarArrayTabela(this.dataservico);
+
   }
 
   onSave(){

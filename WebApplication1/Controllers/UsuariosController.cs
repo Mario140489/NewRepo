@@ -123,7 +123,7 @@ namespace WebApplication1.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, PostUsuario postUsuario)
+        public async Task<ActionResult> PutUsuario(int id, PostUsuario postUsuario)
         {
             Usuario usuario = postUsuario.Usuario;
 
@@ -135,8 +135,9 @@ namespace WebApplication1.Controllers
             _context.Entry(usuario).State = EntityState.Modified;
 
             try
-            {
+            {   
                 await _context.SaveChangesAsync().ConfigureAwait(true);
+                if(postUsuario?.crm_grupousuario.Count > 0){
                 postUsuario.crm_grupousuario.ForEach(delegate (crm_grupousuario value){
                 crm_usuariovsgrupo crm_Usuariovsgrupo = new crm_usuariovsgrupo();
                 crm_Usuariovsgrupo.id_usuario = usuario.id_usuario;
@@ -144,6 +145,17 @@ namespace WebApplication1.Controllers
                 _context.crm_usuariovsgrupo.Add(crm_Usuariovsgrupo);
                 _context.SaveChanges();
             });
+                }
+                if(postUsuario?.crm_grupousuariodelete.Count > 0){
+                postUsuario.crm_grupousuariodelete.ForEach(delegate (crm_grupousuario value){
+                var  crm_Usuariovsgrupo = _context.crm_usuariovsgrupo.Where(
+                    b => b.id_usuario == usuario.id_usuario &&
+                    b.id_grupousuario == value.id_grupousuario
+                ).First();
+                _context.crm_usuariovsgrupo.Remove(crm_Usuariovsgrupo);
+                _context.SaveChanges();
+                });
+                }
             }
             catch (DbUpdateConcurrencyException) when (!UsuarioExists(id))
             {

@@ -23,10 +23,10 @@ namespace WebApplication1.Model
         public int id_departamento { get;set; }
 
     }
-    
     public class PostUsuario{
       public Usuario Usuario { get; set; }
       public List<crm_grupousuario> crm_grupousuario {get;set;}
+      public List<crm_grupousuario>  crm_grupousuariodelete { get; set; }
     }
     public class ListUsuario{
       [Key]

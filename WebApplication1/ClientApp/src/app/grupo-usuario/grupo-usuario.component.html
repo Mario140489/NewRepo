@@ -1,0 +1,37 @@
+
+<p></p>
+<div class="bloco">
+<div>
+  <div class="row">
+    <div class="col-sm-3">  <h4 class="text-secondary">Grupo Usuário</h4>
+      </div>
+      <div  class="col-sm-9 btn-direita"><button routerLink='/cadusuario' type="button" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Novo</button></div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-header bg-secundary">
+      Pesquisar grupo usuário
+    </div>
+    <div class="card-body">
+       <div class='row'>
+         <div class="form-group col-sm-3">
+          <label>Nome do Grupo</label>
+          <input type="text"  name='ds_nome' class="form-control form-control-sm">
+         </div>
+         <div class="col-sm-2">
+          <button [disabled]="loaduser" type="submit"  class="btn btn-sm btn-primary" style="margin-top: 23px">  <span *ngIf="loaduser"  class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span *ngIf="loaduser"  class="visually-hidden"> Carregando...</span><span *ngIf="loaduser == false" ><i  class="fas fa-search"></i> Buscar</span> </button>
+         </div>
+       </div>
+       <p></p>
+      <app-table  [DataTable]=dataservico [DataHeader]=data [DataBtn]=BtnTable (EventoBtnTable)="PegarEventoFilho($event)"></app-table>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+

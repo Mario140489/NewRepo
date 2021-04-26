@@ -24,6 +24,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { MessagensComponent } from './messagens/messagens.component';
 import { CadUsuarioComponent } from './cad-usuario/cad-usuario.component';
 import { TableComponent } from './table/table.component';
+import { GrupoUsuarioComponent } from './grupo-usuario/grupo-usuario.component';
 
 
 registerLocaleData(localept, 'pt-BR');
@@ -43,7 +44,8 @@ registerLocaleData(localept, 'pt-BR');
       UsuarioComponent,
       MessagensComponent,
       CadUsuarioComponent,
-      TableComponent
+      TableComponent,
+      GrupoUsuarioComponent
    ],
   imports: [NgbModule,CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -51,9 +53,9 @@ registerLocaleData(localept, 'pt-BR');
     FormsModule,
     RouterModule.forRoot([
       { path: '',component: HomeComponent, pathMatch: 'full' },
-      { path: 'usuario',component: UsuarioComponent,  },
+      { path: 'usuario',component: UsuarioComponent},
       { path: 'cadusuario', component: CadUsuarioComponent},
-      { path: 'fetch-data',  component: FetchDataComponent },
+      { path: 'grupo',  component: GrupoUsuarioComponent },
     ]),
     DataTablesModule
   ],

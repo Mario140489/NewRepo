@@ -37,6 +37,11 @@ export class NavMenuComponent {
 
   }
 
+  logout(){
+    sessionStorage.clear();
+    window.location.reload();
+  }
+
   muntavariaveldinamica(){
     if(this.modulos && this.modulos.length >0){
     this.modulos.array.forEach(element => {
