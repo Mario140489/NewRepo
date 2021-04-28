@@ -3,10 +3,10 @@
     <div>
       <div class="row">
         <div class="col-sm-3">
-          <h4 class="text-secondary">Usuário</h4>
+          <h4 class="text-secondary">Grupo Usuario</h4>
         </div>
         <div class="col-sm-9 btn-direita">
-          <button type="button" class="btn btn-sm btn-secondary mr-1" routerLink='/usuario'><span><i
+          <button type="button" class="btn btn-sm btn-secondary mr-1" routerLink='/grupo'><span><i
                 class="fas fa-undo-alt"></i> Cancelar</span></button>
           <button type="submit" [disabled]="loaduser" class="btn btn-sm btn-primary"><span *ngIf="loaduser"
               class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -17,11 +17,11 @@
       <ul class="nav nav-tabs navtableespec" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <a class="nav-link active" id="usuario-tab" data-toggle="tab" href="#usuario" role="tab"
-            aria-controls="usuario" aria-selected="true">Usuário</a>
+            aria-controls="usuario" aria-selected="true">Grupo</a>
         </li>
         <li class="nav-item" role="presentation">
           <a class="nav-link" id="grupo-tab" data-toggle="tab" href="#grupo" role="tab" aria-controls="grupo"
-            aria-selected="false">Grupo usuário</a>
+            aria-selected="false">Acesso e Permições</a>
         </li>
       </ul>
 
@@ -36,7 +36,7 @@
                 <div class="row">
                   <div class=" form-group col-sm-2">
                     <label>Id</label>
-                    <input [(ngModel)]="usuario.id_usuario" name="id_usuario" class="form-control form-control-sm"
+                    <input  #id_grupousuario name="id_grupousuario" class="form-control form-control-sm"
                       type="number" disabled />
                   </div>
                   <div class=" col-sm-10 d-flex justify-content-end">
@@ -51,41 +51,11 @@
                 </div>
                 <div class="row">
                   <div class=" form-group col-sm-4">
-                    <label>Nome</label>
+                    <label>Descrição</label>
                     <input [(ngModel)]="usuario.ds_nome" name="ds_nome" #ds_name="ngModel" class="form-control form-control-sm" required
                       minlength="3" maxlength="200" type="text"  />
                     <div class="diverror" *ngIf="ds_name.invalid && (ds_name.dirty || ds_name.touched)">
                       <label class="text-danger">*Campo de nome tem que ter um nome valido.</label>
-                    </div>
-                  </div>
-                  <div class=" form-group col-sm-4">
-                    <label>Login</label>
-                    <input [(ngModel)]="usuario.ds_login" name="ds_login" #ds_login="ngModel" class="form-control form-control-sm" required
-                      minlength="4" maxlength="50" type="text" />
-                    <div class="diverror" *ngIf="ds_login.invalid && (ds_login.dirty || ds_login.touched)">
-                      <label class="text-danger">*Campo de Login tem que ter mais de 5 caracteres.</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class=" form-group col-sm-4">
-                    <label>Departamento</label>
-                    <select class="form-control form-control-sm" name="id_departamento" [(ngModel)]="usuario.id_departamento" #id_departamento="ngModel" required>
-                      <option *ngFor="let item of ListDepartamento" [selected]="usuario.id_departamento" value="{{item.id_departamento}}"  > {{item.ds_departamento}}</option>
-                    </select>
-                    <div class="diverror" *ngIf="id_departamento.invalid && (id_departamento.dirty || id_departamento.touched)">
-
-                      <label class="text-danger">*Departamento obrigatorio.</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class=" form-group col-sm-3">
-                    <label>Senha</label>
-                    <input [(ngModel)]="usuario.ds_senha" name="ds_senha" #ds_senha="ngModel" class="form-control form-control-sm" required
-                      minlength="6" maxlength="20" type="password" />
-                    <div class="diverror" *ngIf="ds_senha.invalid && (ds_senha.dirty || ds_senha.touched)">
-                      <label class="text-danger">*Campo de Login tem que ter mais de 6 caracteres.</label>
                     </div>
                   </div>
                 </div>
@@ -102,7 +72,7 @@
               <div  class="col-12">
                 <div class="row">
                    <div class="form-group col-sm-3">
-                   <label>Grupos de Usuário</label>
+                   <label>Indefinido</label>
                    <select
                     class="form-control form-control-sm" id="grupousuario">
                     <option value = 0> Nenhuma opção selecionada</option>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-cad-grupousuario',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadGrupousuarioComponent implements OnInit {
   loaduser:boolean = false;
+  createForm :FormGroup;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSubmit(f:NgForm){
+
   }
 
 }
