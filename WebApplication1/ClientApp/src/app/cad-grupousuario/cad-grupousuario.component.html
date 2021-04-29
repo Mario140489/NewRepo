@@ -80,17 +80,33 @@
                    </select>
                 </div>
                 <div class="col-sm-3">
-                  <button class="btn btn-sm btn-success" type="button"
+                  <button class="btn btn-sm btn-success" type="button" (click)="PopulaModeloModulos()"
                   style="margin-top: 23px"><i class="fas fa-plus" ></i> Vincular</button>
                 </div>
                   </div>
                 <p></p>
                   <div>
-                    <table>
-
-                    </table>
                 </div>
-
+                <table *ngFor="let item of Submodulos, let i = index"  class="table">
+                  <thead class=" bg-secondary text-white">
+                    <tr>
+                      <th colSpan="20" scope="col">{{item.ds_modulo}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item2 of Submodulos[i].submodulos" >
+                      <th scope="row">{{item2.ds_nome}}</th>
+                      <th>
+                        <div class="form-check">
+                        <input class="form-check-input"
+                          type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                          Permitir
+                        </label>
+                      </div></th>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
