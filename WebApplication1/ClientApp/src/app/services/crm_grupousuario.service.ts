@@ -15,4 +15,8 @@ GetGrupoUsuarioName(parans){
   return this.http.get(this.rootURL +"api/crm_grupousuario/" + parans).pipe();
 }
 
+GetApp(){
+  return this.http.get(this.rootURL +"api/Aplicativos").pipe();
+}
+
 }
