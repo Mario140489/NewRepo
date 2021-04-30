@@ -87,23 +87,23 @@
                 <p></p>
                   <div>
                 </div>
-                <table *ngFor="let item of Submodulos, let i = index"  class="table">
+                <table *ngFor="let item of Submodulos, let i = index"  class="table border">
                   <thead class=" bg-secondary text-white">
                     <tr>
-                      <th colSpan="20" scope="col">{{item.ds_modulo}}</th>
+                      <th colSpan="2" >{{item.ds_modulo}}</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let item2 of Submodulos[i].submodulos" >
-                      <th scope="row">{{item2.ds_nome}}</th>
-                      <th>
+                      <td style="width: 250px;">{{item2.ds_nome}}</td>
+                      <td>
                         <div class="form-check">
                         <input class="form-check-input"
                           type="checkbox" id="gridCheck">
                         <label class="form-check-label" for="gridCheck">
                           Permitir
                         </label>
-                      </div></th>
+                      </div></td>
                     </tr>
                   </tbody>
                 </table>
