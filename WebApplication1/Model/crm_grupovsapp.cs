@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Model
 {
-    public class crm_grupousuario
+    public class crm_grupovsapp
     {
-      [Key]
-      public int id_grupousuario { get; set; }
-      public string ds_grupousuario { get; set; }
-      public bool do_inactive { get; set; }
+        [Key]
+        public int id_grupovsapp { get; set; }
+        public int id_aplicativo { get; set; }
+        public int id_grupousuario { get; set; }
     }
 }

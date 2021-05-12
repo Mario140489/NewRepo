@@ -14,14 +14,15 @@ export class AuthService {
   constructor(private router: Router, private service: LoginService) { }
 
    async fazerlogin(usuario: Usuario){
+     debugger;
       let user:any;
      await this.service.Login(usuario).toPromise().then( (result:any) =>{
       if (result) {
         user = true;
+        sessionStorage.setItem('iduser', result['id_usuario']);
         sessionStorage.setItem('user', result['ds_nome']);
         sessionStorage.setItem('chv', result['key']);
-        sessionStorage.setItem('apps',JSON.stringify(result['apps']))
-        this.usuarioAutenticado = true;
+        sessionStorage.setItem('apps',JSON.stringify(result['apps']));
         this.Menu.emit(true);
         this.router.navigate(['/']);
 
@@ -34,7 +35,7 @@ export class AuthService {
       }
     }
 
-    ).catch( () =>{
+    ).catch( (result:any) =>{
       user = false;
       this.usuarioAutenticado = false;
       this.Menu.emit(false);

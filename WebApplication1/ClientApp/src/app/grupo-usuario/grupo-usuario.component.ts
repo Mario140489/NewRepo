@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Crm_grupousuarioService } from '../services/crm_grupousuario.service';
 import { ToastServiceService } from '../services/toast-service.service';
 import { UteisService } from '../services/uteis.service';
+import { Router } from '@angular/router';
+import { Crm_grupousuario } from '../Classes/crm_grupousuario';
+
 
 @Component({
   selector: 'app-grupo-usuario',
@@ -10,6 +13,7 @@ import { UteisService } from '../services/uteis.service';
 })
 export class GrupoUsuarioComponent implements OnInit {
   loaduser:boolean = false;
+  public grupo: Crm_grupousuario = new Crm_grupousuario;
   data:any =["Id","Nome","Status"];
   BtnTable:any=[{
     Id:"Editar",
@@ -20,13 +24,17 @@ export class GrupoUsuarioComponent implements OnInit {
     NomeEvento:"Editar"
   }]
   dataservico:any=[];
-  constructor(private servicegrupo:Crm_grupousuarioService, private Toast:ToastServiceService, private uteis:UteisService) { }
+  constructor(private servicegrupo:Crm_grupousuarioService,private rota:Router,
+     private Toast:ToastServiceService, private uteis:UteisService) { }
 
   ngOnInit() {
   }
 
   PegarEventoFilho(event){
-
+    if(event.NomeEvento === "Editar"){
+      this.servicegrupo.idgrupousuario = event.Colunas[0];
+      this.rota.navigate(['/cadgrupo']);
+    }
   }
 
   SearchGrupo(){

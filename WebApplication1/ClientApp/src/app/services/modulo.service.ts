@@ -11,7 +11,7 @@ export class ModuloService {
   }
 
   getmodulo(parans){
-    return this.http.get(this.rootURL + 'api/crm_appvsmodulo/'+parans);
+    return this.http.get(this.rootURL + 'api/crm_appvsmodulo/'+parans+"/1");
   }
 
 }

@@ -8,7 +8,7 @@
         <div class="col-sm-9 btn-direita">
           <button type="button" class="btn btn-sm btn-secondary mr-1" routerLink='/grupo'><span><i
                 class="fas fa-undo-alt"></i> Cancelar</span></button>
-          <button type="submit" [disabled]="loaduser" class="btn btn-sm btn-primary"><span *ngIf="loaduser"
+          <button type="submit" [disabled]="loaduser" class="btn btn-sm btn-primary" (click)="Salvar(f)"><span *ngIf="loaduser"
               class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             <span *ngIf="loaduser" class="visually-hidden"> Salvando...</span><span *ngIf="loaduser == false"><i
                 class="fas fa-save"></i> Salvar</span> </button></div>
@@ -95,7 +95,7 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let item2 of Submodulos[i].submodulos" >
-                      <td style="width: 250px;">{{item2.ds_nome}}</td>
+                      <td style="width: 250px;">{{item2.ds_nome}} <i class="text-secondary fas fa-arrow-right"></i></td>
                       <td>
                         <div class="form-check">
                         <input class="form-check-input"

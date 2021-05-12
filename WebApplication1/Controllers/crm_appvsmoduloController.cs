@@ -29,29 +29,60 @@ namespace WebApplication1.Controllers
             return await _context.crm_modulo.ToListAsync().ConfigureAwait(false);
         }
 
-        // GET: api/crm_appvsmodulo/5
-        [HttpGet("{id}")]
-        public ActionResult<IEnumerable<crm_modulo>> Getcrm_appvsmodulo(int id)
+        [HttpGet("get/{id}")]
+        public ActionResult Getpermissionmondulo(int id)
         {
-            //var crm_appvsmodulo = await _context.crm_appvsmodulo.FindAsync(id);
-
             var crm_modulo = (from appvcmodulo in _context.crm_appvsmodulo
                               join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo
                               where appvcmodulo.id_app == id
                               select new { modulo }).ToList();
-            var modulos = new List<RetornoModulo>();
 
+            var modulos = new List<RetornoModulo>();
             foreach (var sspmod in crm_modulo)
             {
-                //crm_modulo[i].modulo.crm_submodulos = _context.crm_submodulos.Where(b => b.id_modulo == sspmod.modulo.id_modulo).ToList();
                 modulos.Add(new RetornoModulo()
                 {
                     id_modulo = sspmod.modulo.id_modulo,
                     ds_modulo = sspmod.modulo.ds_modulo,
-                    submodulos = _context.crm_submodulos.Where(b => b.id_modulo == sspmod.modulo.id_modulo).ToList()
+                    submodulos = (from submodulo in _context.crm_submodulos
+                    join permissao in _context.crm_grupovspermisao on submodulo.id_submodulos equals permissao.id_submodulos
+                    where submodulo.id_modulo == sspmod.modulo.id_modulo
+                              select new {
+                        submodulo.id_submodulos,
+                        submodulo.ds_nome,
+                        permissao.do_permission
+                    }).ToList()
                 });
             }
+            if (modulos == null)
+            {
+                return NotFound();
+            }
 
+            return Ok(modulos);
+        }
+
+        // GET: api/crm_appvsmodulo/5
+        [HttpGet("{id}/{iduser}")]
+        public ActionResult<IEnumerable<crm_modulo>> Getcrm_appvsmodulo(int id,int iduser)
+        {
+            var crm_modulo = (from appvcmodulo in _context.crm_appvsmodulo
+                              join modulo in _context.crm_modulo on appvcmodulo.id_modulo equals modulo.id_modulo
+                              where appvcmodulo.id_app == id
+                              select new { modulo }).ToList();
+            //int[] teste = {1,2,3,4};
+            var modulos = new List<RetornoModulo>();
+            foreach (var sspmod in crm_modulo)
+            {
+                modulos.Add(new RetornoModulo()
+                {
+                    id_modulo = sspmod.modulo.id_modulo,
+                    ds_modulo = sspmod.modulo.ds_modulo,
+                    submodulos = _context.crm_submodulos.FromSqlRaw("SELECT DISTINCT crm_submodulos.id_submodulos,crm_submodulos.ds_caminho,crm_submodulos.ds_nome, crm_submodulos.id_modulo FROM crm_submodulos INNER JOIN" +
+" crm_grupovspermisao ON (crm_grupovspermisao.id_submodulos = crm_submodulos.id_submodulos)" +
+" WHERE id_modulo ="+sspmod.modulo.id_modulo+" AND do_permission =1 AND id_grupousuario IN (SELECT DISTINCT id_grupousuario FROM crm_usuariovsgrupo WHERE id_usuario = "+iduser+" )").ToList()
+                });
+            }
             if (modulos == null)
             {
                 return NotFound();
@@ -61,8 +92,6 @@ namespace WebApplication1.Controllers
         }
 
         // PUT: api/crm_appvsmodulo/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> Putcrm_appvsmodulo(int id, crm_appvsmodulo crm_appvsmodulo)
         {

@@ -7,6 +7,8 @@ import { Inject, Injectable } from '@angular/core';
 })
 export class Crm_grupousuarioService {
 rootURL: string;
+idgrupousuario:any;
+
 constructor(private http:HttpClient, @Inject('BASE_URL')baseUrl:string) {
   this.rootURL= baseUrl;
  }
@@ -20,7 +22,11 @@ GetApp(){
 }
 
 GetModulosIdAp(parans){
-  return this.http.get(this.rootURL +"api/crm_appvsmodulo/"+ parans).pipe();
+  return this.http.get(this.rootURL +"api/crm_appvsmodulo/get/"+ parans).pipe();
+}
+
+NewGrupo(parans){
+  return this.http.post(this.rootURL +"api/crm_grupousuario",parans).pipe();
 }
 
 }

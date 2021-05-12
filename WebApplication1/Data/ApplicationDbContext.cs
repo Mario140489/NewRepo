@@ -28,10 +28,7 @@ namespace WebApplication1.Data
         public DbSet<crm_grupousuario> crm_grupousuario { get; set; }
         public DbSet<WebApplication1.Model.crm_departamento> crm_departamento { get; set; }
         public DbSet<WebApplication1.Model.crm_usuariovsgrupo> crm_usuariovsgrupo { get; set; }
-
-        public static implicit operator ApplicationDbContext(int v)
-        {
-            throw new NotImplementedException();
-        }
+        public DbSet<WebApplication1.Model.crm_grupovsapp> crm_grupovsapp { get; set; }
+        public DbSet<WebApplication1.Model.crm_grupovspermisao> crm_grupovspermisao {get;set;}
     }
 }

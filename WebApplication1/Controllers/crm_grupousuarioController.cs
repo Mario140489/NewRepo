@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
         [HttpGet("ativo")]
         public async Task<ActionResult<IEnumerable<crm_grupousuario>>> getgrupousuario()
         {
-            return await _context.crm_grupousuario.Where(b => b.do_inactive == 'N').ToListAsync();
+            return await _context.crm_grupousuario.Where(b => b.do_inactive.Equals(false)).ToListAsync();
         }
 
         // GET: api/crm_grupousuario/5
