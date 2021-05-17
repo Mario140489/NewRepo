@@ -13,4 +13,9 @@ namespace WebApplication1.Model
       public string ds_grupousuario { get; set; }
       public bool do_inactive { get; set; }
     }
+
+    public class Postcrm_grupousuario{
+      public crm_grupousuario crm_grupousuario { get; set; }
+      public List<crm_grupovspermisao> crm_grupovspermisaos {get;set;}
+    }
 }

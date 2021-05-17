@@ -45,12 +45,10 @@ namespace WebApplication1.Controllers
                     id_modulo = sspmod.modulo.id_modulo,
                     ds_modulo = sspmod.modulo.ds_modulo,
                     submodulos = (from submodulo in _context.crm_submodulos
-                    join permissao in _context.crm_grupovspermisao on submodulo.id_submodulos equals permissao.id_submodulos
                     where submodulo.id_modulo == sspmod.modulo.id_modulo
                               select new {
                         submodulo.id_submodulos,
-                        submodulo.ds_nome,
-                        permissao.do_permission
+                        submodulo.ds_nome
                     }).ToList()
                 });
             }

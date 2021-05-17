@@ -29,4 +29,8 @@ NewGrupo(parans){
   return this.http.post(this.rootURL +"api/crm_grupousuario",parans).pipe();
 }
 
+GetGrupoUsuarioId(parans){
+  return this.http.get(this.rootURL +'api/crm_grupousuario/getid/'+parans).pipe();
+}
+
 }

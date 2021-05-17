@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormGroup, NgForm } from '@angular/forms';
 import { Crm_grupousuarioService } from "../services/crm_grupousuario.service";
@@ -18,12 +19,17 @@ export class CadGrupousuarioComponent implements OnInit {
   createForm :FormGroup;
   Modulos:any=[];
   Submodulos:any=[];
+  Permission:any=[];
   constructor(private service: Crm_grupousuarioService,private msg:ToastServiceService) { }
 
-  ngOnInit() {
-    uteis.load();
-    this.PopulaComboModulo();
-    uteis.removeload();
+  async ngOnInit() {
+    await uteis.load();
+    await this.PopulaComboModulo();
+    let id_grupo = this.service.idgrupousuario;
+    if(id_grupo){
+    await this.GetGrupoUsuario(id_grupo);
+    }
+    await uteis.removeload();
   }
 
   onSubmit(f:NgForm){
@@ -36,8 +42,17 @@ export class CadGrupousuarioComponent implements OnInit {
     });
   }
 
+   async GetGrupoUsuario(parans){
+
+    await  this.service.GetGrupoUsuarioId(parans).toPromise().then((result:any) => {
+      this._crm_grupousuario.do_inactive = result.do_inactive;
+      this._crm_grupousuario.ds_grupousuario = result.ds_grupousuario;
+      this._crm_grupousuario.id_grupousuario = result.id_grupousuario;
+    })
+
+   }
+
  async PopulaModeloModulos(){
-   debugger;
    uteis.load();
    let id:number = parseInt((<HTMLSelectElement>document.getElementById('grupousuario')).value);
    let iduser:any = sessionStorage.getItem('iduser');
@@ -49,16 +64,43 @@ export class CadGrupousuarioComponent implements OnInit {
 
   Salvar(f:NgForm){
    if(f.valid){
-     //this.loaduser = true;
-     this.service.NewGrupo(this._crm_grupousuario).toPromise().then(result =>{
+     this.loaduser = true;
+     let JsonData = {
+      crm_grupousuario:this._crm_grupousuario,
+      crm_grupovspermisaos:this.Permission
+     }
+     this.service.NewGrupo(JsonData).toPromise().then(result =>{
       this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
+      this.loaduser = false;
      }).catch(erro =>{
       this.msg.show(erro.error.text,{classe:"bg-danger"});
+      this.loaduser= false;
      })
 
    }else{
     this.msg.show("Formulario Invalido Preencha os Campos em vermelho",{classe:"bg-danger"});
    }
+  }
+
+  GetPermission(parans){
+    debugger;
+    let permission = (<HTMLInputElement>document.getElementById(parans.id_submodulos)).checked;
+    if(permission){
+      let JsonData={
+        do_permission:permission,
+        id_submodulos:parans.id_submodulos,
+      }
+      this.Permission.push(JsonData);
+    }
+    else{
+      let Index = 0
+      this.Permission.forEach(element => {
+        if(element.id_submodulos == parans,parans.id_submodulos){
+          this.Permission.splice(Index,1);
+        }
+        Index++
+      });
+    }
   }
 
 }

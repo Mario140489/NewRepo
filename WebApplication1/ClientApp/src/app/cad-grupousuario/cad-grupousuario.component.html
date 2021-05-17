@@ -98,8 +98,8 @@
                       <td style="width: 250px;">{{item2.ds_nome}} <i class="text-secondary fas fa-arrow-right"></i></td>
                       <td>
                         <div class="form-check">
-                        <input class="form-check-input"
-                          type="checkbox" id="gridCheck">
+                        <input class="form-check-input"   (click)="GetPermission(item2)"
+                          type="checkbox" id="{{item2.id_submodulos}}">
                         <label class="form-check-label" for="gridCheck">
                           Permitir
                         </label>
