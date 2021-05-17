@@ -45,9 +45,10 @@ export class CadGrupousuarioComponent implements OnInit {
    async GetGrupoUsuario(parans){
 
     await  this.service.GetGrupoUsuarioId(parans).toPromise().then((result:any) => {
-      this._crm_grupousuario.do_inactive = result.do_inactive;
-      this._crm_grupousuario.ds_grupousuario = result.ds_grupousuario;
-      this._crm_grupousuario.id_grupousuario = result.id_grupousuario;
+      this._crm_grupousuario.do_inactive = result.crm_grupousuario.do_inactive;
+      this._crm_grupousuario.ds_grupousuario = result.crm_grupousuario.ds_grupousuario;
+      this._crm_grupousuario.id_grupousuario = result.crm_grupousuario.id_grupousuario;
+      this.Submodulos = result.modulos
     })
 
    }

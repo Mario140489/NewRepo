@@ -64,19 +64,16 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
             var modulos = new List<RetornoModulo>();
-            var permission =  (from perm in _context.crm_grupovspermisao
-             join sub in _context.crm_submodulos on
-             perm.id_submodulos equals sub.id_submodulos
-             where perm.id_grupousuario == crm_grupousuario.id_grupousuario
-             select new {
-                 perm.id_submodulos,
-                 perm.do_permission,
-                 sub.id_modulo,
-                 sub.ds_nome
-             }
-            ).ToList();
+            var permission =  _context.crm_submodulos.Join(_context.crm_grupovspermisao,
+            t1 => t1.id_submodulos, t2 => t2.id_submodulos, (t1,t2) => new {t1,t2}).Where(b => b.t2.id_grupousuario == crm_grupousuario.id_grupousuario).Select( x => new {
+                x.t1.id_modulo,
+                x.t1.id_submodulos,
+                x.t1.ds_nome,
+                x.t2.do_permission,
+            }).ToList();
+            var teste = permission.GroupBy(p => p.id_modulo).Select(b => b.First());
             var listmodulos = new List<crm_modulo>();
-            foreach(var item in permission){
+            foreach(var item in teste){
              var _modulos = _context.crm_modulo.Find(item.id_modulo);
              listmodulos.Add(_modulos);
             }
@@ -86,16 +83,16 @@ namespace WebApplication1.Controllers
                 {
                     id_modulo = sspmod.id_modulo,
                     ds_modulo = sspmod.ds_modulo,
-                    submodulos = (from submodulo in _context.crm_submodulos
-                    where submodulo.id_modulo == sspmod.modulo.id_modulo
-                              select new {
-                        submodulo.id_submodulos,
-                        submodulo.ds_nome
-                    }).ToList()
+                    submodulos =permission.Where(b => b.id_modulo.Equals(sspmod.id_modulo)).ToList()
                 });
             }
 
-            return Ok(crm_grupousuario);
+            var GetCrm_Grupousuario = new GetCrm_Grupousuario();
+
+            GetCrm_Grupousuario.crm_grupousuario = crm_grupousuario;
+            GetCrm_Grupousuario.modulos = modulos;
+
+            return Ok(GetCrm_Grupousuario);
         }
 
 

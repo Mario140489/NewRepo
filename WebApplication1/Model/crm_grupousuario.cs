@@ -18,4 +18,9 @@ namespace WebApplication1.Model
       public crm_grupousuario crm_grupousuario { get; set; }
       public List<crm_grupovspermisao> crm_grupovspermisaos {get;set;}
     }
+
+    public class GetCrm_Grupousuario{
+      public crm_grupousuario crm_grupousuario { get; set; }
+      public object modulos {get;set;}
+    }
 }

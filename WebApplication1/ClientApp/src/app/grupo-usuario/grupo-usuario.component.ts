@@ -22,6 +22,13 @@ export class GrupoUsuarioComponent implements OnInit {
     BtnTexto:"",
     Classe:"btn-primary",
     NomeEvento:"Editar"
+  },{
+    Id:"Excluir",
+    Icone:'fas fa-trash-alt',
+    Tooltip:"Excluir Grupo",
+    BtnTexto:"",
+    Classe:"btn-danger",
+    NomeEvento:"Excluir"
   }]
   dataservico:any=[];
   constructor(private servicegrupo:Crm_grupousuarioService,private rota:Router,
