@@ -35,13 +35,25 @@ export class GrupoUsuarioComponent implements OnInit {
      private Toast:ToastServiceService, private uteis:UteisService) { }
 
   ngOnInit() {
+    this.servicegrupo.idgrupousuario = null;
   }
 
   PegarEventoFilho(event){
+
     if(event.NomeEvento === "Editar"){
       this.servicegrupo.idgrupousuario = event.Colunas[0];
       this.rota.navigate(['/cadgrupo']);
+    }else if(event.NomeEvento === "Excluir"){
+      if(window.confirm("Deseja realmente Excluir esse grupo de usuario?")){
+        this.servicegrupo.DeleteGrupoUsuario(event.Colunas[0]).toPromise().then(result =>{
+          this.dataservico = [];
+          this.Toast.show("Deleta com Sucesso",{classe:"bg-success"});
+        }).catch( error =>{
+          this.Toast.show( JSON.stringify(error),{classe:"bg-danger"});
+        })
+      };
     }
+
   }
 
   SearchGrupo(){
@@ -53,7 +65,7 @@ export class GrupoUsuarioComponent implements OnInit {
       this.loaduser =false;
     }).catch(error =>{
       console.log(error);
-      this.Toast.show(error,{classe:"bg-danger"});
+      this.Toast.show(JSON.stringify(error),{classe:"bg-danger"});
       this.loaduser =false;
     })
   }

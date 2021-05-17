@@ -42,6 +42,7 @@ export class TableComponent implements OnInit {
 
 
   CriarArrayTabela(DataTable){
+    this.IndexActive = 0;
     this._DataTable = [];
     let temparray:any = [];
     let index:any = this.calculopaginacao(DataTable.length);

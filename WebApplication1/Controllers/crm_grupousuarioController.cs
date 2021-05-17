@@ -155,6 +155,14 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<crm_grupousuario>> Deletecrm_grupousuario(int id)
         {
+            var permission = await _context.crm_grupovspermisao.Where(b => b.id_grupousuario == id).ToListAsync();
+            if(permission.Count > 0)
+            {
+                foreach(var i in permission){
+                    _context.crm_grupovspermisao.Remove(i);
+                    await _context.SaveChangesAsync();
+                }
+            }
             var crm_grupousuario = await _context.crm_grupousuario.FindAsync(id);
             if (crm_grupousuario == null)
             {

@@ -33,4 +33,8 @@ GetGrupoUsuarioId(parans){
   return this.http.get(this.rootURL +'api/crm_grupousuario/getid/'+parans).pipe();
 }
 
+DeleteGrupoUsuario(parans){
+  return this.http.delete(this.rootURL +"api/crm_grupousuario/"+ parans).pipe();
+}
+
 }

@@ -129,6 +129,7 @@ export class CadUsuarioComponent implements OnInit {
   }
 
   PegarEventoFilho(event){
+
    let Index = 0;
    let Index2 = 0;
 
