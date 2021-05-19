@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Model;
 using WebApplication1.ModelRetorno;
+using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
 {
@@ -155,6 +156,15 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<crm_grupousuario>> Deletecrm_grupousuario(int id)
         {
+            var VinculoPerson = await _context.crm_usuariovsgrupo.Where(b => b.id_grupousuario == id).ToListAsync();
+            if(VinculoPerson.Count > 0)
+            {
+                var erro = new RetornoError();
+                erro.status="error";
+                erro.message="Grupo não pode ser Excluido pois está vinculado ao algum usuario.";
+                return Ok(erro);
+                ;
+            }
             var permission = await _context.crm_grupovspermisao.Where(b => b.id_grupousuario == id).ToListAsync();
             if(permission.Count > 0)
             {

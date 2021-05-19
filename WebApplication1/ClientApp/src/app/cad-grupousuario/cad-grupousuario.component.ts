@@ -53,55 +53,64 @@ export class CadGrupousuarioComponent implements OnInit {
 
    }
 
+   PopulaPermission(data){
+     for(let i =0;i < data.length;i++){
+         let JsonData = {
+          id_submodulos : data[i].id_submodulos,
+          do_permission : data && data[i].do_permission?data[i].do_permission:false
+         }
+
+         this.Permission.push(JsonData);
+     }
+   }
+
  async PopulaModeloModulos(){
    uteis.load();
    let id:number = parseInt((<HTMLSelectElement>document.getElementById('grupousuario')).value);
    let iduser:any = sessionStorage.getItem('iduser');
-   await this.service.GetModulosIdAp(id).toPromise().then(result => {
+   await this.service.GetModulosIdAp(id).toPromise().then((result:any) => {
      this.Submodulos = result;
+     this.PopulaPermission(result[0].submodulos);
         });
     uteis.removeload();
   }
 
   Salvar(f:NgForm){
+
    if(f.valid){
      this.loaduser = true;
      let JsonData = {
       crm_grupousuario:this._crm_grupousuario,
       crm_grupovspermisaos:this.Permission
      }
-     this.service.NewGrupo(JsonData).toPromise().then(result =>{
-      this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
-      this.loaduser = false;
-     }).catch(erro =>{
-      this.msg.show(erro.error.text,{classe:"bg-danger"});
-      this.loaduser= false;
-     })
+     if(this._crm_grupousuario.id_grupousuario){
+
+     }
+     else{
+      this.service.NewGrupo(JsonData).toPromise().then(result =>{
+        this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
+        this.loaduser = false;
+       }).catch(erro =>{
+        this.msg.show(erro.error.text,{classe:"bg-danger"});
+        this.loaduser= false;
+       })
+     }
+
 
    }else{
     this.msg.show("Formulario Invalido Preencha os Campos em vermelho",{classe:"bg-danger"});
-   }
   }
-
+  }
   GetPermission(parans){
-    debugger;
+
     let permission = (<HTMLInputElement>document.getElementById(parans.id_submodulos)).checked;
-    if(permission){
-      let JsonData={
-        do_permission:permission,
-        id_submodulos:parans.id_submodulos,
-      }
-      this.Permission.push(JsonData);
-    }
-    else{
-      let Index = 0
-      this.Permission.forEach(element => {
-        if(element.id_submodulos == parans,parans.id_submodulos){
-          this.Permission.splice(Index,1);
+
+      for(let i =0 ; i < this.Permission.length; i++){
+        if(parans.id_submodulos == this.Permission[i].id_submodulos){
+           this.Permission[i].do_permission = permission;
         }
-        Index++
-      });
-    }
+      }
+
   }
 
 }

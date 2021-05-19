@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Crm_grupousuario } from '../Classes/crm_grupousuario';
 
 
+
 @Component({
   selector: 'app-grupo-usuario',
   templateUrl: './grupo-usuario.component.html',
@@ -39,17 +40,28 @@ export class GrupoUsuarioComponent implements OnInit {
   }
 
   PegarEventoFilho(event){
-
+     this.uteis.load();
     if(event.NomeEvento === "Editar"){
       this.servicegrupo.idgrupousuario = event.Colunas[0];
       this.rota.navigate(['/cadgrupo']);
     }else if(event.NomeEvento === "Excluir"){
       if(window.confirm("Deseja realmente Excluir esse grupo de usuario?")){
-        this.servicegrupo.DeleteGrupoUsuario(event.Colunas[0]).toPromise().then(result =>{
-          this.dataservico = [];
+        this.servicegrupo.DeleteGrupoUsuario(event.Colunas[0]).toPromise().then((result:any) =>{
+          if(result.status == "error"){
+            this.Toast.show( result.message,{classe:"bg-danger"});
+          }
+          else{
+            for(let i =0; i < this.dataservico.length ;i++){
+              if(this.dataservico[i].id_grupousuario == event.Colunas[0]){
+                this.dataservico.splice(i,1);
+              }
+          }
           this.Toast.show("Deleta com Sucesso",{classe:"bg-success"});
+          }
+          this.uteis.removeload();
         }).catch( error =>{
-          this.Toast.show( JSON.stringify(error),{classe:"bg-danger"});
+          this.Toast.show( error.message,{classe:"bg-danger"});
+          this.uteis.removeload();
         })
       };
     }
