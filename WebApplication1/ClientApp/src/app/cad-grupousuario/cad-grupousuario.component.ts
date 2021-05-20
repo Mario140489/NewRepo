@@ -5,6 +5,7 @@ import { Crm_grupousuarioService } from "../services/crm_grupousuario.service";
 import { Crm_grupousuario } from "../Classes/crm_grupousuario";
 import { UteisService } from './../services/uteis.service';
 import { ToastServiceService } from '../services/toast-service.service';
+import { Router } from '@angular/router';
 
 const uteis = new UteisService();
 @Component({
@@ -20,7 +21,8 @@ export class CadGrupousuarioComponent implements OnInit {
   Modulos:any=[];
   Submodulos:any=[];
   Permission:any=[];
-  constructor(private service: Crm_grupousuarioService,private msg:ToastServiceService) { }
+  constructor(private service: Crm_grupousuarioService,private msg:ToastServiceService,
+    private rota:Router) { }
 
   async ngOnInit() {
     await uteis.load();
@@ -43,12 +45,12 @@ export class CadGrupousuarioComponent implements OnInit {
   }
 
    async GetGrupoUsuario(parans){
-
+    debugger;
     await  this.service.GetGrupoUsuarioId(parans).toPromise().then((result:any) => {
       this._crm_grupousuario.do_inactive = result.crm_grupousuario.do_inactive;
       this._crm_grupousuario.ds_grupousuario = result.crm_grupousuario.ds_grupousuario;
       this._crm_grupousuario.id_grupousuario = result.crm_grupousuario.id_grupousuario;
-      this.Submodulos = result.modulos
+      this.Submodulos = result.modulos;
     })
 
    }
@@ -56,6 +58,7 @@ export class CadGrupousuarioComponent implements OnInit {
    PopulaPermission(data){
      for(let i =0;i < data.length;i++){
          let JsonData = {
+          id_grupovspermisao: data[i].id_grupovspermisao,
           id_submodulos : data[i].id_submodulos,
           do_permission : data && data[i].do_permission?data[i].do_permission:false
          }
@@ -85,11 +88,20 @@ export class CadGrupousuarioComponent implements OnInit {
      }
      if(this._crm_grupousuario.id_grupousuario){
 
+      this.service.UpdateGrupoUsuario(JsonData).toPromise().then(result =>{
+        this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
+        this.loaduser= false;
+        this.rota.navigate(['/grupo']);
+      }).catch(erro =>{
+        this.msg.show(erro.error.text,{classe:"bg-danger"});
+        this.loaduser= false;
+      })
      }
      else{
       this.service.NewGrupo(JsonData).toPromise().then(result =>{
         this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
         this.loaduser = false;
+        this.rota.navigate(['/grupo']);
        }).catch(erro =>{
         this.msg.show(erro.error.text,{classe:"bg-danger"});
         this.loaduser= false;

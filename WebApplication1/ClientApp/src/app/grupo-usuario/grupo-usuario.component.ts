@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Crm_grupousuarioService } from '../services/crm_grupousuario.service';
 import { ToastServiceService } from '../services/toast-service.service';
 import { UteisService } from '../services/uteis.service';
 import { Router } from '@angular/router';
 import { Crm_grupousuario } from '../Classes/crm_grupousuario';
+import { TableComponent } from '../table/table.component';
 
 
 
@@ -13,6 +14,7 @@ import { Crm_grupousuario } from '../Classes/crm_grupousuario';
   styleUrls: ['./grupo-usuario.component.css']
 })
 export class GrupoUsuarioComponent implements OnInit {
+  @ViewChild(TableComponent) child:TableComponent
   loaduser:boolean = false;
   public grupo: Crm_grupousuario = new Crm_grupousuario;
   data:any =["Id","Nome","Status"];
@@ -45,6 +47,7 @@ export class GrupoUsuarioComponent implements OnInit {
       this.servicegrupo.idgrupousuario = event.Colunas[0];
       this.rota.navigate(['/cadgrupo']);
     }else if(event.NomeEvento === "Excluir"){
+      debugger
       if(window.confirm("Deseja realmente Excluir esse grupo de usuario?")){
         this.servicegrupo.DeleteGrupoUsuario(event.Colunas[0]).toPromise().then((result:any) =>{
           if(result.status == "error"){
@@ -54,6 +57,7 @@ export class GrupoUsuarioComponent implements OnInit {
             for(let i =0; i < this.dataservico.length ;i++){
               if(this.dataservico[i].id_grupousuario == event.Colunas[0]){
                 this.dataservico.splice(i,1);
+                this.child.CriarArrayTabela(this.dataservico);
               }
           }
           this.Toast.show("Deleta com Sucesso",{classe:"bg-success"});
