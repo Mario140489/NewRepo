@@ -33,6 +33,7 @@ public usuario: Usuario = new Usuario();
         ds_login : this.usuario.ds_login,
         ds_senha : this.usuario.ds_senha
       }
+      debugger;
       let user:any = await this.authservice.fazerlogin(this.usuario)
       if(user){
         this.spiner.spiner = false;

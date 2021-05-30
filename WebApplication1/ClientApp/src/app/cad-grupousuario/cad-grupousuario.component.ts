@@ -51,6 +51,9 @@ export class CadGrupousuarioComponent implements OnInit {
       this._crm_grupousuario.ds_grupousuario = result.crm_grupousuario.ds_grupousuario;
       this._crm_grupousuario.id_grupousuario = result.crm_grupousuario.id_grupousuario;
       this.Submodulos = result.modulos;
+      this.Submodulos.forEach(element => {
+        this.PopulaPermission(element.submodulos);
+      });
     })
 
    }
@@ -58,6 +61,7 @@ export class CadGrupousuarioComponent implements OnInit {
    PopulaPermission(data){
      for(let i =0;i < data.length;i++){
          let JsonData = {
+          id_grupousuario:this._crm_grupousuario.id_grupousuario,
           id_grupovspermisao: data[i].id_grupovspermisao,
           id_submodulos : data[i].id_submodulos,
           do_permission : data && data[i].do_permission?data[i].do_permission:false
@@ -89,6 +93,7 @@ export class CadGrupousuarioComponent implements OnInit {
      if(this._crm_grupousuario.id_grupousuario){
 
       this.service.UpdateGrupoUsuario(JsonData).toPromise().then(result =>{
+        debugger;
         this.msg.show("Salvo com sucesso.",{classe:"bg-success"});
         this.loaduser= false;
         this.rota.navigate(['/grupo']);

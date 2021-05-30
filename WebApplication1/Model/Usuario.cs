@@ -21,6 +21,7 @@ namespace WebApplication1.Model
         public string ds_imagem { get; set; }
         public bool do_inactive { get; set; }
         public int id_departamento { get;set; }
+        public bool do_firstacess { get; set; }
 
     }
     public class PostUsuario{

@@ -71,6 +71,7 @@ namespace WebApplication1.Controllers
                 x.t1.id_submodulos,
                 x.t1.ds_nome,
                 x.t2.do_permission,
+                x.t2.id_grupovspermisao,
             }).ToList();
             var teste = permission.GroupBy(p => p.id_modulo).Select(b => b.First());
             var listmodulos = new List<crm_modulo>();
@@ -102,8 +103,15 @@ namespace WebApplication1.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putcrm_grupousuario(int id, crm_grupousuario crm_grupousuario)
+        public async Task<IActionResult> Putcrm_grupousuario(int id, Postcrm_grupousuario Postcrm_grupousuario)
         {
+            var crm_grupousuario = Postcrm_grupousuario.crm_grupousuario;
+            foreach(var i in Postcrm_grupousuario.crm_grupovspermisaos){
+                var crm_grupovspermisao = i;
+                crm_grupousuario.id_grupousuario = id;
+                _context.Entry(crm_grupovspermisao).State = EntityState.Modified;
+                  await _context.SaveChangesAsync();
+            }
             if (id != crm_grupousuario.id_grupousuario)
             {
                 return BadRequest();

@@ -7,4 +7,5 @@ export class Usuario{
     ds_login:string;
     ds_imagem:string;
     do_inactive:boolean;
+    do_firstacess:boolean;
 }

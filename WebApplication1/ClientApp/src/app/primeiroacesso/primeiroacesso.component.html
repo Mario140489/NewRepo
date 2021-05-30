@@ -1,0 +1,37 @@
+
+<div class="row" align="center" >
+  <div class="col-sm-12 fadeIn first bg-secondary text-ligth text-light" >
+    <h1 class="fadeIn second">SyS</h1>
+    <label class="fadeIn third">Facilitando sua Vida</label>
+ </div>
+ <div class="col-sm-12">
+ <div class="col-sm-3 col-md-4"></div>
+ <div align="center" class="col-sm-6 col-md-4 mt-5" >
+ <div class=" bloco col-sm-12 fadeInDown">
+    <ngb-alert class="fadeIn first" *ngIf="error" type="danger" (close)="error = false" >
+      <strong>{{MsgPrincipal}}</strong>{{MsgDescritiva}}
+    </ngb-alert>
+ <form>
+   <h2 class="text-secondary fadeIn first">Alterar Senha</h2>
+ <hr>
+ <div class="form-group fadeIn second">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" ><i class="fas fa-key"></i></span>
+    </div>
+    <input [(ngModel)]="usuario.ds_senha" name="ds_senha" required minlength="1"  type="password" autocomplete="off"
+    class="form-control form-control-lg " placeholder="Senha" />
+  </div>
+  </div>
+  <div class="diverror" *ngIf="usuario.ds_senha.length==0 ">
+   <label   class="text-danger">*Campo de senha Não pode ser vazio.</label>
+  </div>
+ <div>
+   <button type="submit" class="fadeIn fourth btn btn-primary btn-lg " (click)="SalvarSenha()" ><i class="fas fa-sign-in-alt"></i> Salvar</button>
+ </div>
+   </form>
+ </div>
+ </div>
+ <div class="col-sm-3 col-md-4"></div>
+   </div>
+ </div>

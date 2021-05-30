@@ -12,13 +12,15 @@ export class AppComponent {
   user:boolean = false;
   spiner:boolean = false;
   usuario ="";
+  firstacesso:any= false
   constructor(private authService: AuthService, private router:Router){
 
   }
     ngOnInit() {
-
+      debugger;
       //this.router.navigate(['/']);
       this.usuario =  sessionStorage.getItem('user');
+      this.firstacesso = sessionStorage.getItem('firstacess');
       if(this.usuario){
     this.user = true;
       }
@@ -26,6 +28,9 @@ export class AppComponent {
     this.authService.Menu.subscribe(
       user => this.user = user
     );
+    this.authService.firstacess.subscribe(
+      first => this.firstacesso = first
+    )
       }
   }
 

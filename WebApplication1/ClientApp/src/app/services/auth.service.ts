@@ -8,6 +8,8 @@ import { LoginService } from './login.service';
 export class AuthService {
 
   Menu = new EventEmitter<boolean>();
+  firstacess = new EventEmitter<boolean>();
+
   private usuarioAutenticado:boolean = false;
 
 
@@ -19,13 +21,12 @@ export class AuthService {
      await this.service.Login(usuario).toPromise().then( (result:any) =>{
       if (result) {
         user = true;
-        sessionStorage.setItem('iduser', result['id_usuario']);
+        sessionStorage.setItem('firstacess', result['do_firstacess']);
         sessionStorage.setItem('user', result['ds_nome']);
         sessionStorage.setItem('chv', result['key']);
         sessionStorage.setItem('apps',JSON.stringify(result['apps']));
         this.Menu.emit(true);
-        this.router.navigate(['/']);
-
+        this.firstacess.emit(result['do_firstacess']);
       }
       else {
         user = false;

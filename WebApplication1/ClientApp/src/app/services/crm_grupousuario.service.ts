@@ -38,7 +38,7 @@ DeleteGrupoUsuario(parans){
 }
 
 UpdateGrupoUsuario(parans){
-  return this.http.put(this.rootURL +"api/crm_grupousuario",parans).pipe();
+  return this.http.put(this.rootURL +"api/crm_grupousuario/"+parans.crm_grupousuario.id_grupousuario,parans).pipe();
 }
 
 }

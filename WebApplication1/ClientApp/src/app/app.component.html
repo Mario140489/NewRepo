@@ -1,4 +1,5 @@
-<app-nav-menu [hidden]="spiner" *ngIf="user"></app-nav-menu>
+<app-nav-menu [hidden]="spiner" *ngIf="user && !firstacesso"></app-nav-menu>
 <app-spiner *ngIf="spiner"></app-spiner>
 <app-login style="z-index: 1;" *ngIf="!user"></app-login>
+<app-primeiroacesso style="z-index: 1;" *ngIf="user && firstacesso"></app-primeiroacesso>
 <app-messagens></app-messagens>

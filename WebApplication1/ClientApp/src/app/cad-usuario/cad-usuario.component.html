@@ -80,7 +80,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div *ngIf="!this.primeiroacesso"  class="row">
+                  <div class=" form-group col-sm-3">
+                  <button type="button" (click)="this.primeiroacesso= true" class="btn btn-sm btn-primary">Trocar senha</button>
+                  </div>
+                </div>
+                <div *ngIf="this.primeiroacesso" >
+                <div  class="row">
                   <div class=" form-group col-sm-3">
                     <label>Senha</label>
                     <input [(ngModel)]="usuario.ds_senha" name="ds_senha" #ds_senha="ngModel" class="form-control form-control-sm" required
@@ -90,16 +96,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div  class="row">
                   <div class=" form-group col-sm-3">
                     <label>Cofirmar senha</label>
                     <input [(ngModel)]="confirmasenha" name="confsernha" #confsernha="ngModel" class="form-control form-control-sm" required
                       minlength="6" maxlength="20" type="password" />
                     <div class="diverror" *ngIf="(confsernha.value != ds_senha.value) && (ds_senha.dirty || ds_senha.touched)">
-
                       <label class="text-danger">*Senhas não conferem.</label>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>

@@ -98,7 +98,7 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> LoginAsync(Usuario usuario)
         {
             var user = await  _context.Usuario
-                .Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha)
+                .Where(b => b.ds_login == usuario.ds_login && b.ds_senha == usuario.ds_senha && b.do_inactive == false)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
@@ -112,6 +112,7 @@ namespace WebApplication1.Controllers
             Login UsuairioLogado = new Login
             {
                 ds_nome = user[0].ds_nome,
+                do_firstacess =user[0].do_firstacess,
                 key = key,
                 apps = listapp.App(user[0].id_usuario)
             };

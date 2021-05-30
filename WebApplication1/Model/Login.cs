@@ -8,6 +8,7 @@ namespace WebApplication1.Model
     public class Login
     {
         public string ds_nome { get; set; }
+        public bool do_firstacess { get; set; }
         public string key { get; set; }
         public object apps { get; set; }
     }

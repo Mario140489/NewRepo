@@ -29,6 +29,7 @@ export class CadUsuarioComponent implements OnInit {
   grupousuario:any;
   GrupoUsuarionew:any=[];
   GrupoUsuarioDelete:any =[];
+  primeiroacesso:boolean=true;
   BtnTable:any=[{
     Id:"Excluir",
     Icone:"fas fa-trash",
@@ -47,11 +48,15 @@ export class CadUsuarioComponent implements OnInit {
      }
 
   async ngOnInit() {
+
    uteis.load();
+
    await this.CarregarDepartamento();
    await this.CarregaGrupoUsuario();
    await this.CarregarUsuario();
+   this.primeiroacesso = this.usuario.id_usuario?false:true;
    this.child.CriarArrayTabela(this.dataservico);
+
    uteis.removeload();
   }
 
@@ -87,6 +92,7 @@ export class CadUsuarioComponent implements OnInit {
       crm_grupousuariodelete:this.GrupoUsuarioDelete
     }
     if(!this.usuario.id_usuario){
+      jsondata.Usuario.do_firstacess = this.primeiroacesso;
     this.serviceusuario.PostUsuario(jsondata).toPromise().then((result:any) =>{
          this.dataservico = [];
          this.GrupoUsuarionew =[];
@@ -102,6 +108,7 @@ export class CadUsuarioComponent implements OnInit {
     })
   }
   else{
+    jsondata.Usuario.do_firstacess = true;
     this.serviceusuario.PutUsuario(jsondata).toPromise().then((result:any) =>{
          this.dataservico = [];
          this.GrupoUsuarionew =[];
