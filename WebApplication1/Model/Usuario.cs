@@ -38,4 +38,9 @@ namespace WebApplication1.Model
        public object Departamentos {get;set;}
        public bool do_inactive { get; set; }
     }
+
+    public class TrocarSenha{
+      public string newsenha {get;set;}
+      public string data {get;set;}
+    }
 }

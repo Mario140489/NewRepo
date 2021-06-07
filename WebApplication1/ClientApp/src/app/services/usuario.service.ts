@@ -35,9 +35,14 @@ constructor(private http:HttpClient, @Inject('BASE_URL')baseUrl:string) {
 
  GetGrupoUsuarioAtivo(){
   return this.http.get(this.rootURL +"api/crm_grupousuario/ativo/").pipe();
-}
+ }
+
  GetDepartamento(){
    return this.http.get(this.rootURL +"api/crm_departamento/combo/").toPromise();
+ }
+
+ TrocarSenha(data){
+   return this.http.post(this.rootURL +"api/Usuarios/trocadesenha",data).toPromise();
  }
 
 }

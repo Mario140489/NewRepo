@@ -12,6 +12,7 @@ using WebApplication1.Data;
 using WebApplication1.Model;
 using WebApplication1.Services;
 using WebApplication1.Bussines;
+using Newtonsoft.Json;
 
 namespace WebApplication1.Controllers
 {
@@ -94,6 +95,31 @@ namespace WebApplication1.Controllers
             return Ok(usuario);
         }
 
+         [HttpPost("trocadesenha")]
+        public async Task<ActionResult> trocadesenha(TrocarSenha trocarSenha)
+        {
+            string user = Services.Criptografia.decripitografar(trocarSenha.data);
+            Usuario usuario = JsonConvert.DeserializeObject<Usuario>(user);
+           
+            if(usuario.id_usuario > 0){
+                usuario.ds_senha = trocarSenha.newsenha;
+                usuario.do_firstacess = false;
+                _context.Entry(usuario).State = EntityState.Modified;
+                _context.SaveChanges();
+                var sucesso = new RetornoSucesso();
+                sucesso.status="sucess";
+                sucesso.message="senha trocada com sucesso";
+                return Ok(sucesso);
+               
+            }else{
+                var error = new RetornoError();
+                error.status = "error";
+                error.message = "Erro ao trocar senha";
+                return Ok(error);
+            }
+            
+        }
+
         [HttpPost("Login")]
         public async Task<ActionResult> LoginAsync(Usuario usuario)
         {
@@ -106,7 +132,8 @@ namespace WebApplication1.Controllers
             {
                 return null;
             }
-            string key = Services.Criptografia.Cripitografar(user[0].ToString());
+            string userstring = JsonConvert.SerializeObject(user[0]);
+            string key = Services.Criptografia.Cripitografar(userstring);
             Listaapk listapp = new Listaapk(_context);
 
             Login UsuairioLogado = new Login

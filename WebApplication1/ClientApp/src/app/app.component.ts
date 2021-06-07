@@ -18,11 +18,13 @@ export class AppComponent {
   }
     ngOnInit() {
       debugger;
-      //this.router.navigate(['/']);
       this.usuario =  sessionStorage.getItem('user');
       this.firstacesso = sessionStorage.getItem('firstacess');
       if(this.usuario){
-    this.user = true;
+       this.user = true;
+      }
+      if(this.firstacesso == 'false'){
+        this.firstacesso = false;
       }
       else{
     this.authService.Menu.subscribe(
