@@ -27,12 +27,13 @@ import { TableComponent } from './table/table.component';
 import { GrupoUsuarioComponent } from './grupo-usuario/grupo-usuario.component';
 import { CadGrupousuarioComponent } from './cad-grupousuario/cad-grupousuario.component';
 import { PrimeiroacessoComponent } from './primeiroacesso/primeiroacesso.component';
+import { CentrodecustoComponent } from './centrodecusto/centrodecusto.component';
 
 
 registerLocaleData(localept, 'pt-BR');
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -49,7 +50,8 @@ registerLocaleData(localept, 'pt-BR');
       TableComponent,
       GrupoUsuarioComponent,
       CadGrupousuarioComponent,
-      PrimeiroacessoComponent
+      PrimeiroacessoComponent,
+      CentrodecustoComponent
    ],
   imports: [NgbModule,CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

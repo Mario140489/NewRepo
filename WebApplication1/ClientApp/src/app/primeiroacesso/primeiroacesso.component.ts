@@ -23,7 +23,6 @@ export class PrimeiroacessoComponent implements OnInit {
   }
 
  async ValidarSenha(data){
-   debugger;
     let erro =false;
     let msg =`Senha é necessário no minimo 8 caracteres,
     1 letra maiuscula, 1 número e 1 caractere especial.`
@@ -53,8 +52,6 @@ export class PrimeiroacessoComponent implements OnInit {
       if(result.status = "sucess"){
         sessionStorage.setItem('firstacess','false');
         location.reload();
-        this.firstacess.emit(false);
-
       }else{
         location.reload();
       }
