@@ -30,5 +30,7 @@ namespace WebApplication1.Data
         public DbSet<WebApplication1.Model.crm_usuariovsgrupo> crm_usuariovsgrupo { get; set; }
         public DbSet<WebApplication1.Model.crm_grupovsapp> crm_grupovsapp { get; set; }
         public DbSet<WebApplication1.Model.crm_grupovspermisao> crm_grupovspermisao {get;set;}
+        public DbSet<WebApplication1.Model.crm_planodecontas> crm_planodecontas { get; set; }
+        public DbSet<WebApplication1.Model.crm_maskplanodecontas> crm_maskplanodecontas { get; set; }
     }
 }

@@ -1,3 +1,30 @@
-<p>
-  centrodecusto works!
-</p>
+<p></p>
+<div class="bloco">
+<div>
+  <div class="row">
+    <div class="col-sm-3">  <h4 class="text-secondary">Centro de Custo</h4>
+      </div>
+      <div  class="col-sm-9 btn-direita"><button routerLink='/cadcentrodecusto' type="button" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Novo</button></div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-header bg-secundary">
+      Pesquisar Centro de Custo
+    </div>
+    <div class="card-body">
+       <div class='row'>
+         <div class="form-group col-sm-3">
+          <label>Nome Centro de Custo</label>
+          <input type="text"  id="nameplano" class="form-control form-control-sm">
+         </div>
+         <div class="col-sm-2">
+          <button [disabled]="loaduser" type="button" (click)="GetPlano()" class="btn btn-sm btn-primary" style="margin-top: 23px">  <span *ngIf="loaduser"  class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span *ngIf="loaduser"  class="visually-hidden"> Carregando...</span><span *ngIf="loaduser == false" ><i  class="fas fa-search"></i> Buscar</span> </button>
+         </div>
+       </div>
+       <p></p>
+      <app-table  [DataTable]=dataservico [DataHeader]=data [DataBtn]=BtnTable (EventoBtnTable)="PegarEventoFilho($event)"></app-table>
+    </div>
+  </div>
+</div>
+</div>

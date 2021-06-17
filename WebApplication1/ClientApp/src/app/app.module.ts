@@ -28,15 +28,16 @@ import { GrupoUsuarioComponent } from './grupo-usuario/grupo-usuario.component';
 import { CadGrupousuarioComponent } from './cad-grupousuario/cad-grupousuario.component';
 import { PrimeiroacessoComponent } from './primeiroacesso/primeiroacesso.component';
 import { CentrodecustoComponent } from './centrodecusto/centrodecusto.component';
-
+import { CadPlanodecontasComponent } from './cad-planodecontas/cad-planodecontas.component';
+import { NgxMaskModule} from 'ngx-mask'
 
 registerLocaleData(localept, 'pt-BR');
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
-    NavMenuComponent,
     HomeComponent,
+    NavMenuComponent,
     CounterComponent,
     FetchDataComponent,
     LoginComponent,
@@ -51,7 +52,8 @@ registerLocaleData(localept, 'pt-BR');
       GrupoUsuarioComponent,
       CadGrupousuarioComponent,
       PrimeiroacessoComponent,
-      CentrodecustoComponent
+      CentrodecustoComponent,
+      CadPlanodecontasComponent
    ],
   imports: [NgbModule,CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -62,9 +64,12 @@ registerLocaleData(localept, 'pt-BR');
       { path: 'usuario',component: UsuarioComponent},
       { path: 'cadusuario', component: CadUsuarioComponent},
       { path: 'grupo',  component: GrupoUsuarioComponent },
-      { path: 'cadgrupo', component: CadGrupousuarioComponent}
+      { path: 'cadgrupo', component: CadGrupousuarioComponent},
+      { path: 'centrodecusto', component:CentrodecustoComponent},
+      { path: 'cadcentrodecusto', component:CadPlanodecontasComponent}
     ]),
-    DataTablesModule
+    DataTablesModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [AuthService,uteis],
   bootstrap: [AppComponent]

@@ -14,9 +14,9 @@ import { TableComponent } from '../table/table.component';
   styleUrls: ['./grupo-usuario.component.css']
 })
 export class GrupoUsuarioComponent implements OnInit {
+  public grupo: Crm_grupousuario = new Crm_grupousuario;
   @ViewChild(TableComponent) child:TableComponent
   loaduser:boolean = false;
-  public grupo: Crm_grupousuario = new Crm_grupousuario;
   data:any =["Id","Nome","Status"];
   BtnTable:any=[{
     Id:"Editar",

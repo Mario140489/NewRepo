@@ -35,7 +35,7 @@ export class CadGrupousuarioComponent implements OnInit {
   }
 
   onSubmit(f:NgForm){
-
+    debugger;
   }
 
  async PopulaComboModulo(){
@@ -45,7 +45,6 @@ export class CadGrupousuarioComponent implements OnInit {
   }
 
    async GetGrupoUsuario(parans){
-    debugger;
     await  this.service.GetGrupoUsuarioId(parans).toPromise().then((result:any) => {
       this._crm_grupousuario.do_inactive = result.crm_grupousuario.do_inactive;
       this._crm_grupousuario.ds_grupousuario = result.crm_grupousuario.ds_grupousuario;
