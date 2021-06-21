@@ -17,18 +17,18 @@
       <ul class="nav nav-tabs navtableespec" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <a class="nav-link active" id="usuario-tab" data-toggle="tab" href="#usuario" role="tab"
-            aria-controls="usuario" aria-selected="true">Mascaras para contas</a>
+            aria-controls="usuario" aria-selected="true">Plano de Contas</a>
         </li>
         <li class="nav-item" role="presentation">
           <a class="nav-link" id="grupo-tab" data-toggle="tab" href="#grupo" role="tab" aria-controls="grupo"
-            aria-selected="false">Contas Filhas</a>
+            aria-selected="false">Contas</a>
         </li>
       </ul>
 
       <div class="tab-content mt-1" id="myTabContent">
         <div class="card tab-pane fade show active" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
           <div class="card-header bg-secundary">
-            Cadastrar Mascaras para contas
+            Plano de Contas
           </div>
           <div class="card-body">
             <div class='row'>
@@ -61,21 +61,35 @@
                 </div>
                 <div class="row">
                   <div class=" form-group col-sm-4">
-                    <label>Digitos Chave Nv.{{niveis[0]}}</label>
-                    <input type="number" name="ds_keymaster" #ds_keymaster class="form-control form-control-sm" required
-                      min="1"/>
-                    <div class="diverror" *ngIf="false">
-                      <label class="text-danger">*Campo de Descrição tem que ter uma descrição valida.</label>
+                    <label>Digitos Chave Nv.{{array.length +1}}</label>
+                    <input id="digitokey" (keyup)="onKey()" minlength="1" type="text" name="digitos" #digitos class="form-control form-control-sm" required
+                     />
+                    <div class="diverror" *ngIf="errorkey">
+                      <label class="text-danger">*Valor tem que ser maior que 1.</label>
                     </div>
                   </div>
                   <div class=" form-group col-sm-4">
-                    <div>
-                      <label>Exemplo Chave Nv.{{niveis[0]}}</label>
-                    </div>
-                    <div>
-                      <label>Digitos Chave Nv.{{niveis[0]}}</label>
-                    </div>
+                   <Button type="button" (click)="AddMack()" class="btn btn-sm btn-primary mt-4"><i class="fas fa-plus"></i></Button>
                   </div>
+                </div>
+                <p></p>
+                <div class="row">
+                 <table class="table table-sm">
+                 <thead>
+                  <tr>
+                  <th scope="col">Nivel</th>
+                  <th scope="col">Exemplo</th>
+                  <th scope="col">Tipo</th>
+                  </tr>
+                 </thead>
+                 <tbody>
+                   <tr *ngFor="let item of array let i = index"  >
+                     <td> {{item.nv}} </td>
+                     <td> {{item.digitos}} </td>
+                     <td> {{item.type}} </td>
+                   </tr>
+                 </tbody>
+                 </table>
                 </div>
               </div>
             </div>
@@ -83,12 +97,14 @@
         </div>
         <div class="card tab-pane fade" id="grupo" role="tabpanel" aria-labelledby="grupo-tab">
           <div class="card-header bg-secundary">
-            Contas Filhas
+            Contas
           </div>
           <div class="card-body">
             <div class='row'>
               <div  class="col-12">
-
+               <div class=" col-sm-4">
+                 <button (click)="AddConta()" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Adicionar</button>
+               </div>
               </div>
             </div>
           </div>
