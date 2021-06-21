@@ -18,6 +18,7 @@ export class CadPlanodecontasComponent implements OnInit {
   niveis:any = [1];
   exemplomask;
   createForm :FormGroup;
+  arraycontas = [];
   constructor(private msg:ToastServiceService,) { }
 
   ngOnInit() {
@@ -47,17 +48,30 @@ export class CadPlanodecontasComponent implements OnInit {
      }
      (<HTMLSelectElement>document.getElementById('digitokey')).value= keydigito
   }
+  CriaEstrutura(){
+    let jsondata ={}
+    for(let i = 0; i < this.array.length;i++){
+     jsondata["contas"]={
+       nv:this.array[i].nv,
+       descricao:"",
+       key:this.array[i].digitos + 1
+     };
+     this.arraycontas.push(jsondata);
+    }
+  }
+  AddContas(){
 
+  }
   AddMack(){
    let keydigito = (<HTMLSelectElement>document.getElementById('digitokey')).value;
    if(keydigito){
-    (<HTMLSelectElement>document.getElementById('digitokey')).value = keydigito +'.'
     this.errorkey = false;
    let JsonData = {
     nv: this.array.length +1,
-    digitos: keydigito,
+    digitos: (this.array.length != 0? this.array[this.array.length -1].digitos +"." :"")   +keydigito,
    }
    this.array.push(JsonData);
+
    if(this.array.length){
      for(let i =0 ;i< this.array.length;i++){
         if((this.array.length) == this.array[i].nv){
@@ -71,6 +85,7 @@ export class CadPlanodecontasComponent implements OnInit {
   }else{
     this.errorkey = true;
   }
+  (<HTMLSelectElement>document.getElementById('digitokey')).value = "";
   }
 
   AddConta(){

@@ -103,8 +103,13 @@
             <div class='row'>
               <div  class="col-12">
                <div class=" col-sm-4">
-                 <button (click)="AddConta()" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Adicionar</button>
+                 <button (click)="CriaEstrutura()" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Adicionar</button>
                </div>
+               <p></p>
+               <div *ngFor="let item of arraycontas"  >
+                <a>Nivel: {{item.contas.nv}}</a> --->
+                <a>Key: {{item.contas.key}}</a>
+              </div>
               </div>
             </div>
           </div>

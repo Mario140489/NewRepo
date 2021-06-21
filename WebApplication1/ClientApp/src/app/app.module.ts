@@ -13,7 +13,6 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
-import {RouterGuardService} from './services/router-guard.service';
 import {uteis} from './Utils/uteis.js';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SpinerComponent } from './spiner/spiner.component';
