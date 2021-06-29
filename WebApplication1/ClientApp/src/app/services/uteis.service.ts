@@ -14,6 +14,16 @@ constructor() { }
 
   }
 
+  HtmlElementbyId(data){
+   return (<HTMLSelectElement>document.getElementById(data));
+  }
+
+  AceitarApenasNumeros(data){
+
+      return data = data.replace(/\D/g,"");
+
+  }
+
   FormataTableInactive(data){
     debugger;
     if(data && data.length > 0){

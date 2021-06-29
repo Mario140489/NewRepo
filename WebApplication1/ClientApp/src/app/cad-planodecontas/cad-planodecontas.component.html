@@ -61,7 +61,7 @@
                 </div>
                 <div class="row">
                   <div class=" form-group col-sm-4">
-                    <label>Digitos Chave Nv.{{array.length +1}}</label>
+                    <label>Digitos Chave</label>
                     <input id="digitokey" (keyup)="onKey()" minlength="1" type="text" name="digitos" #digitos class="form-control form-control-sm" required
                      />
                     <div class="diverror" *ngIf="errorkey">
@@ -103,12 +103,14 @@
             <div class='row'>
               <div  class="col-12">
                <div class=" col-sm-4">
-                 <button (click)="CriaEstrutura()" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Adicionar</button>
+                 <button  (click)="OpenModal($event)" id='1'  class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Adicionar</button>
                </div>
                <p></p>
                <div *ngFor="let item of arraycontas"  >
-                <a>Nivel: {{item.contas.nv}}</a> --->
-                <a>Key: {{item.contas.key}}</a>
+                <a>Nivel: {{item.contas.nv}}</a> -->
+                <a>Key: {{item.contas.key}}</a> -->
+                <input id={{item.contas.key}}  placeholder="nome da conta" />
+                <button class="btn btn-sm btn-primary ml-1"><i class="fas fa-plus"></i></button>
               </div>
               </div>
             </div>
@@ -119,6 +121,42 @@
   </div>
 </form>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Conta</h5>
+        <button type="button" style="color: white;" class="btn close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="form-conta" #formconta="ngForm" >
+        <div class="form-group col-4">
+        <label>Conta Pai</label>
+        <input class="form-control form-control-sm" id="contapai" name="contapai" #contapai disabled="disabled" ngModel />
+        </div>
+        <div class="form-group col-12">
+          <label>Chave da conta</label>
+          <input type="text" class="form-control form-control-sm" minlength="{{this.maskactive}}" maxlength="{{this.maskactive}}" id="chaveconta" name="chaveconta" (keyup)="apenasnumeros($event)"  #chaveconta required ngModel />
+        </div>
+        <div class="form-group col-12">
+          <label>Descrição</label>
+          <input class="form-control form-control-sm" id="descconta" name="descconta" #descconta required ngModel />
+        </div>
+        <div class="form-group col-12">
+          <label>Tipo de conta</label>
+          <input type="text" disabled class="form-control form-control-sm" id="tipoconta" name="tipoconta" #tipoconta  ngModel />
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-sairmodal" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-sign-out-alt"></i> Sair</button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="AddContas(formconta)" ><i class="fas fa-save"></i> Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
