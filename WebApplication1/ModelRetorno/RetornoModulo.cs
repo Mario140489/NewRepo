@@ -11,9 +11,6 @@ namespace WebApplication1.ModelRetorno
         public string ds_modulo { get; set; }
         public object submodulos { get; set; }
 
-        public static implicit operator List<object>(RetornoModulo v)
-        {
-            throw new NotImplementedException();
-        }
+        public static implicit operator List<object>(RetornoModulo v) => throw new NotImplementedException();
     }
 }

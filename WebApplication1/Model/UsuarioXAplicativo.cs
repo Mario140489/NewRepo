@@ -11,7 +11,7 @@ namespace WebApplication1.Model
         [Key]
         public int id_usuarioxaplicativo { get; set; }
         public int id_usuario { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario usuario { get; set; }
         public int id_aplicativo { get; set; }
         public virtual Aplicativos Aplicativos { get; set; }
     }

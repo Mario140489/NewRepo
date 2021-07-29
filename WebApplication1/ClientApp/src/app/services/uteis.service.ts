@@ -24,8 +24,39 @@ constructor() { }
 
   }
 
+  JsonClear(data){
+   let array = Object.keys(data)
+     for(let i = 0 ; i < array.length ; i++){
+      data[array[i]] = null;
+     }
+  }
+
+
+
+  Mask(data:any,mask:any){
+    let retorno = "";
+    let indexmask:any = [];
+    let index =0;
+    for(let idx =0;idx < mask.length; idx++ ){
+      if(mask[idx] != 0 && mask[idx] != '#'){
+        indexmask.push(idx);
+      }
+    }
+    for(let i = 0 ;i < data.length;i++){
+      let vl = i+index;
+      let teste = indexmask.indexOf(vl);
+       if(teste != -1){
+         retorno = retorno +'.'+ data[i];
+         index = index + 1;
+       }
+       else{
+         retorno = retorno + data[i];
+       }
+    }
+    return retorno;
+  }
+
   FormataTableInactive(data){
-    debugger;
     if(data && data.length > 0){
 
       for(let i = 0; i < data.length; i++){

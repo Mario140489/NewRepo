@@ -1,3 +1,4 @@
+import { uteis } from './../Utils/uteis';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Mask } from '../Classes/mask';
@@ -12,7 +13,15 @@ import { UteisService } from '../services/uteis.service';
 
 export class CadPlanodecontasComponent implements OnInit {
   public mask = new Mask();
-  maskactive:any=0;
+  conta = {
+    contapai:null,
+    chaveconta:null,
+    descconta:"",
+    tipoconta:""
+  };
+  desccontapai:string="";
+  ultimodigito=".";
+  maskactive:any="";
   loader:boolean=false;
   Jsonmask={datamask:[]};
   errorkey:boolean = false;
@@ -30,7 +39,7 @@ export class CadPlanodecontasComponent implements OnInit {
   }
 
   onSubmit(parans:NgForm){
-    debugger
+
   }
 
   VerificadorTipeMask(){
@@ -40,22 +49,65 @@ export class CadPlanodecontasComponent implements OnInit {
   CriaMarcaraExemplo(){
 
   }
+
+  buscakey(parans:any){
+    let key:any =[]
+   for(let i =0 ; i<(parans.length -1);i++){
+    key.push(parans[i]);
+   }
+   key = key.toString();
+   key = key.replaceAll(",",".");
+   return key;
+  }
+
+  GetFather(args:any){
+   this.conta.tipoconta= "";
+   this.conta.contapai = "";
+   this.utei.HtmlElementbyId('desccontapai').value = "";
+   let parans = args.split('.');
+   parans = this.buscakey(parans);
+   this.arraycontas.forEach(result =>{
+     if(parans == result['chaveconta']){
+       this.conta.contapai = result['chaveconta']
+       this.utei.HtmlElementbyId('desccontapai').value = result['descconta'];
+     }
+   })
+   let teste = this.Jsonmask['datamask'];
+   this.conta.tipoconta = this.maskactive == args.length? "Analitico":"Sintetico";
+  }
+
+  verificatipodeconta(parans){
+    if(this.arraycontas.length > 0){
+     return true;
+    }
+    else{
+      let key = parans.indexOf('.')
+      if(key == -1){
+       return true;
+      }
+      this.msg.show("É preciso criar uma conta Pai antes!",{classe:"bg-danger"});
+      return false;
+    }
+  }
+
   apenasnumeros(e){
-    let id = e.target.id
-    let data =  this.utei.HtmlElementbyId(id);
-    data.value = this.utei.AceitarApenasNumeros(data.value);
+    let data =  this.conta.chaveconta
+    data = this.utei.AceitarApenasNumeros(data);
+    data = this.utei.Mask(data,this.array[this.array.length -1].digitos)
+    this.conta.chaveconta = data
+    this.GetFather(data);
    }
 
-  onKey(){
-    debugger;
+  onKey(e){
      let keydigito:any = (<HTMLSelectElement>document.getElementById('digitokey')).value;
      let teste = keydigito[keydigito.length -1]
-     if(teste != "0" && teste !="."){
+     if(teste != "0" && teste !="." || e.key == this.ultimodigito && this.ultimodigito == "."){
      keydigito=keydigito.substr(0,(keydigito.length - 1));
-
      }
+     this.ultimodigito=e.key;
      (<HTMLSelectElement>document.getElementById('digitokey')).value= keydigito
   }
+
   CriaEstrutura(){
     let jsondata:any ={}
       let key = this.array[0].digitos;
@@ -66,24 +118,47 @@ export class CadPlanodecontasComponent implements OnInit {
        key:key
      };
      this.arraycontas.push(jsondata);
-
   }
 
   AddMaskModal(parans){
-   let idx = parans - 1;
-   this.maskactive = this.array[idx].length;
-   this.tipoconta = parans < this.array.length?"Sintetico":"Analitico"
-   this.utei.HtmlElementbyId("tipoconta").value = this.tipoconta;
+    let digitos = this.array[this.array.length -1].digitos
+    this.maskactive = digitos.length;
   }
 
-  teste(){
-    alert("asda");
+  Contador(parans){
+    let contador:number = 0;
+    for(let i = 0 ; i<parans.length ;i++){
+       if(parans[i] =="."){
+         contador = contador + 1;
+       }
+    }
+    return contador;
+  }
+
+  DeleteConta(e){
+    let id = e.currentTarget.id;
+   if(e.currentTarget.name){
+
+   }
+   else{
+    this.RemoveConta(id);
+   }
+
+  }
+
+  RemoveConta(parans){
+    for(let i = 0; i< this.arraycontas.length; i++){
+      if(parans == this.arraycontas[i].chaveconta){
+        this.arraycontas.splice(i,1)
+      }
+    }
   }
 
   OpenModal(e){
     let id = e.currentTarget.id;
     if(this.array.length > 0){
       this.AddMaskModal(id);
+      id > 0? this.conta.contapai = id:"";
       (<any>$("#exampleModal")).modal("toggle");
     }
     else{
@@ -91,15 +166,75 @@ export class CadPlanodecontasComponent implements OnInit {
     }
   }
 
-  AddContas(f){
-    debugger;
-    console.log(f);
+  VerificaContaInclusa(parans){
+   let result = false;
+   this.arraycontas.forEach((valor,i)=>{
+    if(valor.chaveconta == parans.chaveconta){
+      result = true;
+      this.msg.show("Conta com essa chave já inclusa! tente outra numeração para essa chave",{classe:"bg-danger"});
+    }
+   });
+   return result;
+  }
+
+  validadorconta(){
+    let mask = this.array[0].length;
+    if(mask < this.conta.chaveconta && !this.conta.contapai){
+      this.msg.show("Necessario cadastrar conta pai!",{classe:"bg-danger"})
+      return  false;
+    }
+    return true
+  }
+
+  AddContas(f:NgForm){
+
+    if(this.conta.chaveconta != "0" && this.conta.descconta &&
+     this.verificatipodeconta(this.conta.chaveconta) &&
+     this.validadorconta())
+    {
+    let DataJson = {
+      contapai:this.conta.contapai,
+      chaveconta:this.conta.chaveconta,
+      descconta:this.conta.descconta,
+      tipoconta:this.conta.tipoconta
+    };
+    if(!this.VerificaContaInclusa(DataJson)){
+      this.arraycontas.push(DataJson);
+      this.arraycontas.sort((x,y)=>{
+        let teste = x.chaveconta == y.chaveconta? 0: x.chaveconta > y.chaveconta ?1:-1;
+       return teste;
+      });
+      this.utei.HtmlElementbyId("btn-sairmodal").click();
+      this.utei.JsonClear(this.conta);
+    }
+    }else{
+      if(this.conta.chaveconta ==0){
+        this.msg.show("Campo chave tem ser maior que 0.",{classe:"bg-danger"})
+      }
+      if(this.conta.descconta == ""){
+        this.msg.show("Campo decrição não pode ser vazio.",{classe:"bg-danger"})
+      }
+    }
+  }
+
+  RedefinicaoMask(){
+    let result:boolean = true;
+    if(this.arraycontas.length > 0){
+      result = window.confirm("Deseja relamente restar as mascaras");
+    }
+    return result;
   }
 
   AddMack(){
-    this.array=[];
    let keydigito = (<HTMLSelectElement>document.getElementById('digitokey')).value;
-   if(keydigito){
+   if(keydigito && this.RedefinicaoMask()){
+    this.ultimodigito ="."
+    if(keydigito[keydigito.length -1]==".")
+    {
+      keydigito=keydigito.substr(0,(keydigito.length - 1));
+    }
+    this.array=[];
+    this.arraycontas= [];
     let niveis = keydigito.split('.');
     this.errorkey = false;
 

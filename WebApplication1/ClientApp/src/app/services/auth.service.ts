@@ -19,10 +19,12 @@ export class AuthService {
      debugger;
       let user:any;
      await this.service.Login(usuario).toPromise().then( (result:any) =>{
+       debugger;
       if (result) {
         user = true;
         sessionStorage.setItem('firstacess', result['do_firstacess']);
         sessionStorage.setItem('user', result['ds_nome']);
+        //sessionStorage.setItem('user', "admin");
         sessionStorage.setItem('chv', result['key']);
         sessionStorage.setItem('apps',JSON.stringify(result['apps']));
         this.Menu.emit(true);
